@@ -1075,15 +1075,13 @@
       const startY = window.pageYOffset;
       const distance = targetY - startY;
       const absDist = Math.abs(distance);
-      // 500ms (short hop) -> 1000ms (full page). A bit shorter than the
-      // symmetric S-curve since we're removing the slow ease-in phase.
-      const duration = Math.min(1000, Math.max(500, absDist * 0.7));
+      // 280ms (short hop) -> 600ms (full page). Snappy.
+      const duration = Math.min(600, Math.max(280, absDist * 0.45));
       const startTime = performance.now();
-      // easeOutQuint — asymmetric ramp: moderate-fast start (no laggy
-      // ease-in), then a long, graceful deceleration into the target.
-      // No slow build-up — the page starts moving immediately and just
-      // gradually slows as it lands.
-      const ease = t => 1 - Math.pow(1 - t, 5);
+      // easeOutExpo — page launches at full speed instantly and then
+      // exponentially decelerates into a soft landing. No ease-in phase
+      // at all; the scroll feels reactive to the tap.
+      const ease = t => t === 1 ? 1 : 1 - Math.pow(2, -10 * t);
       function step(now) {
         const elapsed = now - startTime;
         const t = Math.min(elapsed / duration, 1);
