@@ -1075,12 +1075,15 @@
       const startY = window.pageYOffset;
       const distance = targetY - startY;
       const absDist = Math.abs(distance);
-      // Ramp 600ms (short hop) -> 1200ms (full page). Longer durations give
-      // the S-curve room to breathe so the ease-in and ease-out feel deliberate.
-      const duration = Math.min(1200, Math.max(600, absDist * 0.85));
+      // 500ms (short hop) -> 1000ms (full page). A bit shorter than the
+      // symmetric S-curve since we're removing the slow ease-in phase.
+      const duration = Math.min(1000, Math.max(500, absDist * 0.7));
       const startTime = performance.now();
-      // easeInOutCubic — symmetric S-curve. Slow start, fast middle, slow finish.
-      const ease = t => t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+      // easeOutQuint — asymmetric ramp: moderate-fast start (no laggy
+      // ease-in), then a long, graceful deceleration into the target.
+      // No slow build-up — the page starts moving immediately and just
+      // gradually slows as it lands.
+      const ease = t => 1 - Math.pow(1 - t, 5);
       function step(now) {
         const elapsed = now - startTime;
         const t = Math.min(elapsed / duration, 1);
