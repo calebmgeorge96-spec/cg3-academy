@@ -1,0 +1,83 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 900" width="1200" height="900">
+  <defs>
+    <style type="text/css"><![CDATA[
+      @import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,700;9..144,900&amp;family=Inter:wght@400;500;600;700&amp;display=swap');
+      .h1 { font-family: 'Fraunces', serif; font-weight: 900; fill: #0E1613; }
+      .h2 { font-family: 'Inter', sans-serif; font-weight: 700; fill: #0E1613; letter-spacing: 0.14em; }
+      .label { font-family: 'Inter', sans-serif; font-weight: 600; fill: #0E1613; letter-spacing: 0.10em; }
+      .hex  { font-family: 'Inter', sans-serif; font-weight: 500; fill: #0E1613; opacity: 0.75; }
+      .hex-l { font-family: 'Inter', sans-serif; font-weight: 500; fill: #F3EDE0; opacity: 0.90; }
+      .label-l { font-family: 'Inter', sans-serif; font-weight: 600; fill: #F3EDE0; letter-spacing: 0.10em; }
+      .rule { font-family: 'Inter', sans-serif; font-weight: 400; fill: #0E1613; opacity: 0.6; }
+      .spec-serif { font-family: 'Fraunces', serif; fill: #0E1613; }
+      .spec-sans  { font-family: 'Inter', sans-serif; fill: #0E1613; }
+    ]]></style>
+  </defs>
+
+  <!-- Cream background -->
+  <rect width="1200" height="900" fill="#F3EDE0"/>
+
+  <!-- Header -->
+  <text x="60" y="80" class="h2" font-size="12">CG3 ACADEMY · BRAND SYSTEM</text>
+  <text x="60" y="140" class="h1" font-size="56">Palette &amp; Type</text>
+
+  <!-- Palette -->
+  <g transform="translate(60 200)">
+    <text class="h2" font-size="12">COLOR SYSTEM</text>
+
+    <!-- Swatches -->
+    <g transform="translate(0 30)">
+      <!-- Pitch Black -->
+      <rect x="0"   y="0" width="260" height="180" fill="#0E1613"/>
+      <text x="20" y="30" class="label-l" font-size="11">PITCH BLACK</text>
+      <text x="20" y="150" class="hex-l" font-size="13">#0E1613</text>
+      <text x="20" y="170" class="hex-l" font-size="10">R14 · G22 · B19</text>
+
+      <!-- Evergreen -->
+      <rect x="270" y="0" width="260" height="180" fill="#0F3A2E"/>
+      <text x="290" y="30" class="label-l" font-size="11">EVERGREEN</text>
+      <text x="290" y="150" class="hex-l" font-size="13">#0F3A2E</text>
+      <text x="290" y="170" class="hex-l" font-size="10">R15 · G58 · B46</text>
+
+      <!-- Cream -->
+      <rect x="540" y="0" width="260" height="180" fill="#F3EDE0" stroke="#0E1613" stroke-width="0.5" opacity="1"/>
+      <rect x="540" y="0" width="260" height="180" fill="none" stroke="#0E1613" stroke-width="0.5"/>
+      <text x="560" y="30" class="label" font-size="11">CREAM</text>
+      <text x="560" y="150" class="hex" font-size="13">#F3EDE0</text>
+      <text x="560" y="170" class="hex" font-size="10">R243 · G237 · B224</text>
+
+      <!-- Champion Gold -->
+      <rect x="810" y="0" width="150" height="180" fill="#C9A24A"/>
+      <text x="826" y="30" class="label" font-size="11">GOLD</text>
+      <text x="826" y="150" class="hex" font-size="13">#C9A24A</text>
+      <text x="826" y="170" class="hex" font-size="10">R201·G162·B74</text>
+
+      <!-- Stone -->
+      <rect x="970" y="0" width="150" height="180" fill="#8A8378"/>
+      <text x="986" y="30" class="label-l" font-size="11">STONE</text>
+      <text x="986" y="150" class="hex-l" font-size="13">#8A8378</text>
+      <text x="986" y="170" class="hex-l" font-size="10">R138·G131·B120</text>
+    </g>
+  </g>
+
+  <!-- Typography -->
+  <g transform="translate(60 460)">
+    <text class="h2" font-size="12">TYPOGRAPHY</text>
+
+    <!-- Display specimen -->
+    <g transform="translate(0 30)">
+      <text class="h2" font-size="10">DISPLAY · FRAUNCES</text>
+      <text y="60"  class="spec-serif" font-size="76" font-weight="900">Train like it matters.</text>
+      <text y="110" class="spec-serif" font-size="26" font-weight="400" font-style="italic">Weights used: Black 900, Regular 400 · Serif · Warm</text>
+    </g>
+
+    <!-- Sans specimen -->
+    <g transform="translate(0 200)">
+      <text class="h2" font-size="10">TEXT &amp; UI · INTER</text>
+      <text y="42" class="spec-sans" font-size="28" font-weight="700">Premium 1-on-1 soccer coaching for all levels.</text>
+      <text y="80" class="spec-sans" font-size="15" font-weight="400">Body copy uses Inter at 16/26. Clear, modern, low-friction.</text>
+      <text y="104" class="spec-sans" font-size="15" font-weight="400">Reserve Fraunces for headlines and the monogram — Inter carries everything else.</text>
+      <text y="145" class="spec-sans" font-size="12" font-weight="600" letter-spacing="0.14em">CAPS · LABELS · BUTTONS · METADATA</text>
+    </g>
+  </g>
+</svg>
