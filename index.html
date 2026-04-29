@@ -911,31 +911,29 @@
             <h3 style="font-family:'Fraunces',serif;font-weight:900;font-size:26px;color:#F5F5F3;margin-bottom:6px;letter-spacing:-0.01em;">Book a Session</h3>
             <p style="font-family:'Inter',sans-serif;font-size:14px;color:#939393;margin-bottom:32px;">Fill out the form and Caleb will reach out within 24 hours to confirm your spot.</p>
 
-            <div data-fs-success style="display:none;text-align:center;padding:40px 20px;">
+            <div id="form-success" style="display:none;text-align:center;padding:40px 20px;">
               <div style="font-family:'Fraunces',serif;font-weight:900;font-size:28px;color:#C9A24A;margin-bottom:12px;">Message Sent.</div>
               <p style="font-family:'Inter',sans-serif;font-size:15px;color:rgba(245,245,243,0.55);">Caleb will be in touch within 24 hours.</p>
             </div>
-            <div data-fs-error style="display:none;font-family:'Inter',sans-serif;font-size:13px;color:#e05c5c;margin-bottom:12px;text-align:center;"></div>
 
             <form id="contact-form" style="display:flex;flex-direction:column;gap:16px;">
               <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
                 <div>
                   <label style="display:block;font-family:'Inter',sans-serif;font-size:10px;font-weight:700;letter-spacing:0.14em;color:#939393;text-transform:uppercase;margin-bottom:8px;">First Name</label>
-                  <input type="text" name="first_name" placeholder="John" class="form-input" data-fs-field required />
+                  <input type="text" name="first_name" placeholder="John" class="form-input" required />
                 </div>
                 <div>
                   <label style="display:block;font-family:'Inter',sans-serif;font-size:10px;font-weight:700;letter-spacing:0.14em;color:#939393;text-transform:uppercase;margin-bottom:8px;">Last Name</label>
-                  <input type="text" name="last_name" placeholder="Smith" class="form-input" data-fs-field required />
+                  <input type="text" name="last_name" placeholder="Smith" class="form-input" required />
                 </div>
               </div>
               <div>
                 <label style="display:block;font-family:'Inter',sans-serif;font-size:10px;font-weight:700;letter-spacing:0.14em;color:#939393;text-transform:uppercase;margin-bottom:8px;">Email</label>
-                <input type="email" name="email" placeholder="you@example.com" class="form-input" data-fs-field required />
-                <span data-fs-error="email" style="font-family:'Inter',sans-serif;font-size:12px;color:#e05c5c;"></span>
+                <input type="email" name="email" placeholder="you@example.com" class="form-input" required />
               </div>
               <div>
                 <label style="display:block;font-family:'Inter',sans-serif;font-size:10px;font-weight:700;letter-spacing:0.14em;color:#939393;text-transform:uppercase;margin-bottom:8px;">I'm Interested In</label>
-                <select name="interested_in" class="form-input" data-fs-field required style="cursor:pointer;">
+                <select name="interested_in" class="form-input" required style="cursor:pointer;">
                   <option value="" disabled selected>Select an option...</option>
                   <optgroup label="1-on-1 Training">
                     <option value="1on1-single">Single Session — $85</option>
@@ -953,9 +951,10 @@
               </div>
               <div>
                 <label style="display:block;font-family:'Inter',sans-serif;font-size:10px;font-weight:700;letter-spacing:0.14em;color:#939393;text-transform:uppercase;margin-bottom:8px;">Message</label>
-                <textarea name="message" placeholder="Tell me about your goals, age, position, and experience level..." class="form-input" data-fs-field rows="4" style="resize:vertical;" required></textarea>
+                <textarea name="message" placeholder="Tell me about your goals, age, position, and experience level..." class="form-input" rows="4" style="resize:vertical;" required></textarea>
               </div>
-              <button type="submit" data-fs-submit-btn class="btn-primary" style="width:100%;text-align:center;margin-top:4px;padding:18px 32px;font-size:12px;">Request My Spot</button>
+              <div id="form-error" style="display:none;font-family:'Inter',sans-serif;font-size:13px;color:#e05c5c;text-align:center;"></div>
+              <button type="submit" id="form-submit-btn" class="btn-primary" style="width:100%;text-align:center;margin-top:4px;padding:18px 32px;font-size:12px;">Request My Spot</button>
               <p style="font-family:'Inter',sans-serif;font-size:11px;color:rgba(245,245,243,0.3);text-align:center;">No commitment required. Caleb will reach out to confirm availability and location.</p>
             </form>
           </div>
@@ -1071,11 +1070,38 @@
       });
     }
 
-    // Formspree
-    window.formspree = window.formspree || function () { (formspree.q = formspree.q || []).push(arguments); };
-    formspree('initForm', { formElement: '#contact-form', formId: 'mdayqwyl' });
+    // Formspree fetch submission
+    document.getElementById('contact-form').addEventListener('submit', async function(e) {
+      e.preventDefault();
+      const btn = document.getElementById('form-submit-btn');
+      const errorDiv = document.getElementById('form-error');
+      btn.disabled = true;
+      btn.textContent = 'Sending...';
+      errorDiv.style.display = 'none';
+      try {
+        const response = await fetch('https://formspree.io/f/mdayqwyl', {
+          method: 'POST',
+          body: new FormData(this),
+          headers: { 'Accept': 'application/json' }
+        });
+        if (response.ok) {
+          document.getElementById('contact-form').style.display = 'none';
+          document.getElementById('form-success').style.display = 'block';
+        } else {
+          const data = await response.json();
+          errorDiv.textContent = data.errors ? data.errors.map(e => e.message).join(', ') : 'Something went wrong. Please try again.';
+          errorDiv.style.display = 'block';
+          btn.disabled = false;
+          btn.textContent = 'Request My Spot';
+        }
+      } catch(err) {
+        errorDiv.textContent = 'Network error. Please check your connection and try again.';
+        errorDiv.style.display = 'block';
+        btn.disabled = false;
+        btn.textContent = 'Request My Spot';
+      }
+    });
   </script>
-  <script src="https://unpkg.com/@formspree/ajax@1" defer></script>
 
 </body>
 </html>
