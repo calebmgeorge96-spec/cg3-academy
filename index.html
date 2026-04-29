@@ -86,7 +86,7 @@
     }
     .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(201,162,74,0.45), 0 2px 8px rgba(0,0,0,0.5); }
     .btn-primary:hover::after { transform: translateX(0); }
-    .btn-primary:active { transform: translateY(0); }
+    .btn-primary:active { transform: scale(0.97); background: #b8923f; transition: transform 0.08s ease, background 0.08s ease; }
 
     .btn-outline {
       display: inline-block; padding: 13px 32px;
@@ -98,7 +98,7 @@
       text-decoration: none;
     }
     .btn-outline:hover { border-color: #C9A24A; color: #C9A24A; transform: translateY(-2px); }
-    .btn-outline:active { transform: translateY(0); }
+    .btn-outline:active { transform: scale(0.97); border-color: #C9A24A; color: #C9A24A; transition: transform 0.08s ease, border-color 0.08s ease, color 0.08s ease; }
 
     .card-elevated {
       background: #222222;
@@ -200,13 +200,21 @@
     ::-webkit-scrollbar-thumb { background: #939393; border-radius: 3px; }
     ::-webkit-scrollbar-thumb:hover { background: #C9A24A; }
 
-    #fab { position:fixed;bottom:max(56px, calc(28px + env(safe-area-inset-bottom)));right:24px;z-index:200;display:flex;flex-direction:column;align-items:flex-end;gap:12px; }
-    #fab-btn { height:44px;padding:0 20px;border-radius:24px;background:#C9A24A;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 24px rgba(0,0,0,0.45);transition:background 0.2s;position:relative; }
+    /* Kill mobile tap delay + give every interactive element a fast touch response */
+    a, button, .btn-primary, .pkg-tab, [role="button"], input[type="submit"] {
+      touch-action: manipulation;
+      -webkit-tap-highlight-color: rgba(201,162,74,0.18);
+    }
+
+    #fab { position:fixed;bottom:max(56px, calc(28px + env(safe-area-inset-bottom)));right:24px;z-index:200;display:flex;flex-direction:column;align-items:flex-end;gap:12px;touch-action:manipulation; }
+    #fab-btn { height:44px;padding:0 20px;border-radius:24px;background:#C9A24A;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 24px rgba(0,0,0,0.45);transition:background 0.15s, transform 0.1s;position:relative;touch-action:manipulation;-webkit-tap-highlight-color:transparent; }
     #fab-btn:hover { background:#d4af5a; }
+    #fab-btn:active { transform:scale(0.96); background:#b8923f; }
     #fab-btn.open #fab-label { opacity:0; }
     #fab-btn.open #fab-close { opacity:1; }
-    #fab-menu { display:flex;flex-direction:column;align-items:flex-end;gap:10px;pointer-events:none;opacity:0;transform:translateY(12px) scale(0.96);transform-origin:bottom right;transition:opacity 0.3s cubic-bezier(0.22,1,0.36,1),transform 0.3s cubic-bezier(0.22,1,0.36,1); }
+    #fab-menu { display:flex;flex-direction:column;align-items:flex-end;gap:10px;pointer-events:none;opacity:0;transform:translateY(12px) scale(0.96);transform-origin:bottom right;transition:opacity 0.18s cubic-bezier(0.22,1,0.36,1),transform 0.18s cubic-bezier(0.22,1,0.36,1); }
     #fab-menu.open { pointer-events:auto;opacity:1;transform:translateY(0) scale(1); }
+    #fab-menu a:active { transform:scale(0.97);opacity:0.85; }
 
     /* Mobile sticky CTA */
     #sticky-cta {
