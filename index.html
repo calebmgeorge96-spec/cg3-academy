@@ -75,9 +75,10 @@
       font-family: 'Inter', sans-serif; font-weight: 700; font-size: 12px;
       letter-spacing: 0.14em; text-transform: uppercase;
       border: none; cursor: pointer; position: relative; overflow: hidden;
-      transition: transform 0.2s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.2s ease;
+      transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
       box-shadow: 0 4px 20px rgba(201,162,74,0.3), 0 1px 4px rgba(0,0,0,0.4);
       text-decoration: none;
+      will-change: transform;
     }
     .btn-primary::after {
       content: ''; position: absolute; inset: 0;
@@ -96,8 +97,9 @@
       font-family: 'Inter', sans-serif; font-weight: 600; font-size: 12px;
       letter-spacing: 0.14em; text-transform: uppercase;
       border: 1px solid rgba(245,245,243,0.35); cursor: pointer;
-      transition: border-color 0.2s ease, color 0.2s ease, transform 0.2s cubic-bezier(0.34,1.56,0.64,1);
+      transition: border-color 0.15s ease, color 0.15s ease, transform 0.15s ease, background 0.15s ease;
       text-decoration: none;
+      will-change: transform;
     }
     @media (hover: hover) {
       .btn-outline:hover { border-color: #C9A24A; color: #C9A24A; transform: translateY(-2px); }
@@ -208,6 +210,15 @@
     a, button, .btn-primary, .pkg-tab, [role="button"], input[type="submit"] {
       touch-action: manipulation;
       -webkit-tap-highlight-color: rgba(201,162,74,0.18);
+    }
+
+    /* Mobile perf: backdrop-filter blur is the #1 cause of scroll jank on iOS Safari.
+       Replace with a solid bg on small screens. Also shorten fade-up animations so
+       they don't pile up while the page is scrolling between sections. */
+    @media (max-width: 768px) {
+      #nav.scrolled { backdrop-filter: none; -webkit-backdrop-filter: none; background: rgba(0,0,0,0.97); }
+      .fade-up { transition: opacity 0.4s ease, transform 0.4s ease; }
+      a[href^="#"], .btn-primary, .btn-outline { -webkit-tap-highlight-color: transparent; }
     }
 
     #fab { position:fixed;bottom:max(56px, calc(28px + env(safe-area-inset-bottom)));right:24px;z-index:200;display:flex;flex-direction:column;align-items:flex-end;gap:12px;touch-action:manipulation; }
@@ -1056,13 +1067,17 @@
       }
     }, { passive: true });
 
-    // Fast custom smooth scroll for all in-page anchor links (~400ms instead of native ~800ms+)
-    function fastScrollTo(targetY, duration = 420) {
+    // Fast custom smooth scroll. Distance-aware duration: short hops are quick,
+    // long page jumps cap out at ~360ms so they never feel laggy.
+    function fastScrollTo(targetY) {
       const startY = window.pageYOffset;
       const distance = targetY - startY;
+      const absDist = Math.abs(distance);
+      // Duration scales with distance but capped: 180ms min, 360ms max
+      const duration = Math.min(360, Math.max(180, absDist * 0.35));
       const startTime = performance.now();
-      // easeOutCubic for snappy feel
-      const ease = t => 1 - Math.pow(1 - t, 3);
+      // easeOutQuart — punchy, no overshoot
+      const ease = t => 1 - Math.pow(1 - t, 4);
       function step(now) {
         const elapsed = now - startTime;
         const t = Math.min(elapsed / duration, 1);
@@ -1079,7 +1094,7 @@
         if (!target) return;
         e.preventDefault();
         const y = target.getBoundingClientRect().top + window.pageYOffset - 20;
-        fastScrollTo(y, 420);
+        fastScrollTo(y);
       });
     });
 
