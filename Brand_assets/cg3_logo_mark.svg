@@ -1,0 +1,81 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 480">
+  <defs>
+    <!-- Shield background -->
+    <radialGradient id="markBg" cx="200" cy="166" r="260" gradientUnits="userSpaceOnUse">
+      <stop offset="0%"   stop-color="#181818"/>
+      <stop offset="100%" stop-color="#040404"/>
+    </radialGradient>
+
+    <!-- Gold border + text gradient -->
+    <linearGradient id="markGold" x1="0" y1="42" x2="0" y2="454" gradientUnits="userSpaceOnUse">
+      <stop offset="0%"   stop-color="#EDD060"/>
+      <stop offset="60%"  stop-color="#D4AF37"/>
+      <stop offset="100%" stop-color="#7A6520"/>
+    </linearGradient>
+
+    <!-- CG3 face gradient (recentered for icon use) -->
+    <linearGradient id="markFace" x1="0" y1="190" x2="0" y2="320" gradientUnits="userSpaceOnUse">
+      <stop offset="0%"   stop-color="#EDD060"/>
+      <stop offset="60%"  stop-color="#D4AF37"/>
+      <stop offset="100%" stop-color="#7A6520"/>
+    </linearGradient>
+
+    <!-- Shield highlight -->
+    <linearGradient id="markHighlight" x1="0" y1="42" x2="0" y2="270" gradientUnits="userSpaceOnUse">
+      <stop offset="0%"   stop-color="#FFFFFF" stop-opacity="0.13"/>
+      <stop offset="100%" stop-color="#FFFFFF" stop-opacity="0"/>
+    </linearGradient>
+
+    <!-- Glow for CG3 -->
+    <filter id="markGlow" x="-12%" y="-12%" width="124%" height="124%">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="3" result="blur"/>
+      <feFlood flood-color="#D4AF37" flood-opacity="0.3" result="gc"/>
+      <feComposite in="gc" in2="blur" operator="in" result="glow"/>
+      <feMerge>
+        <feMergeNode in="glow"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+
+    <!-- Shield drop shadow -->
+    <filter id="markShadow" x="-20%" y="-10%" width="140%" height="135%">
+      <feGaussianBlur stdDeviation="14"/>
+    </filter>
+
+    <!-- Shield ambient glow -->
+    <filter id="markAmbient" x="-30%" y="-25%" width="160%" height="155%">
+      <feGaussianBlur stdDeviation="20"/>
+    </filter>
+  </defs>
+
+  <!-- ── SHIELD ── -->
+  <!-- Ambient gold glow -->
+  <path d="M 58,42 Q 50,42 50,50 L 50,268 C 50,386 112,436 200,454 C 288,436 350,386 350,268 L 350,50 Q 350,42 342,42 Z"
+        fill="#D4AF37" opacity="0.22" filter="url(#markAmbient)"/>
+  <!-- Drop shadow -->
+  <path d="M 58,42 Q 50,42 50,50 L 50,268 C 50,386 112,436 200,454 C 288,436 350,386 350,268 L 350,50 Q 350,42 342,42 Z"
+        fill="#000000" opacity="0.8" filter="url(#markShadow)" transform="translate(0,14)"/>
+  <!-- 3D bevel layers -->
+  <path d="M 58,42 Q 50,42 50,50 L 50,268 C 50,386 112,436 200,454 C 288,436 350,386 350,268 L 350,50 Q 350,42 342,42 Z" transform="translate(5,5)" fill="#0C0A02"/>
+  <path d="M 58,42 Q 50,42 50,50 L 50,268 C 50,386 112,436 200,454 C 288,436 350,386 350,268 L 350,50 Q 350,42 342,42 Z" transform="translate(4,4)" fill="#181406"/>
+  <path d="M 58,42 Q 50,42 50,50 L 50,268 C 50,386 112,436 200,454 C 288,436 350,386 350,268 L 350,50 Q 350,42 342,42 Z" transform="translate(3,3)" fill="#281E08"/>
+  <path d="M 58,42 Q 50,42 50,50 L 50,268 C 50,386 112,436 200,454 C 288,436 350,386 350,268 L 350,50 Q 350,42 342,42 Z" transform="translate(2,2)" fill="#3C2E0E"/>
+  <path d="M 58,42 Q 50,42 50,50 L 50,268 C 50,386 112,436 200,454 C 288,436 350,386 350,268 L 350,50 Q 350,42 342,42 Z" transform="translate(1,1)" fill="#524018"/>
+  <!-- Shield face -->
+  <path d="M 58,42 Q 50,42 50,50 L 50,268 C 50,386 112,436 200,454 C 288,436 350,386 350,268 L 350,50 Q 350,42 342,42 Z" fill="url(#markBg)"/>
+  <!-- Outer gold border -->
+  <path d="M 58,42 Q 50,42 50,50 L 50,268 C 50,386 112,436 200,454 C 288,436 350,386 350,268 L 350,50 Q 350,42 342,42 Z" fill="none" stroke="url(#markGold)" stroke-width="3"/>
+  <!-- Inner thin gold border -->
+  <path d="M 68,54 Q 62,54 62,60 L 62,268 C 62,376 118,423 200,440 C 282,423 338,376 338,268 L 338,60 Q 338,54 332,54 Z" fill="none" stroke="url(#markGold)" stroke-width="0.85" opacity="0.55"/>
+  <!-- Specular highlight -->
+  <path d="M 58,42 Q 50,42 50,50 L 50,268 C 50,386 112,436 200,454 C 288,436 350,386 350,268 L 350,50 Q 350,42 342,42 Z" fill="url(#markHighlight)"/>
+
+  <!-- ── CG3 (centered + larger for icon use) ── -->
+  <text x="200" y="305" transform="translate(6,6)" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="170" font-weight="900" fill="#0C0A02" text-anchor="middle">CG3</text>
+  <text x="200" y="305" transform="translate(5,5)" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="170" font-weight="900" fill="#181306" text-anchor="middle">CG3</text>
+  <text x="200" y="305" transform="translate(4,4)" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="170" font-weight="900" fill="#261E08" text-anchor="middle">CG3</text>
+  <text x="200" y="305" transform="translate(3,3)" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="170" font-weight="900" fill="#3C2E0C" text-anchor="middle">CG3</text>
+  <text x="200" y="305" transform="translate(2,2)" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="170" font-weight="900" fill="#544018" text-anchor="middle">CG3</text>
+  <text x="200" y="305" transform="translate(1,1)" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="170" font-weight="900" fill="#7A6020" text-anchor="middle">CG3</text>
+  <text x="200" y="305" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="170" font-weight="900" fill="url(#markFace)" stroke="#EDD060" stroke-width="1.2" stroke-linejoin="round" filter="url(#markGlow)" text-anchor="middle">CG3</text>
+</svg>
