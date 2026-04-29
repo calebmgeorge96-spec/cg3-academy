@@ -14,7 +14,7 @@
     </linearGradient>
 
     <!-- CG3 face gradient (recentered for icon use) -->
-    <linearGradient id="markFace" x1="0" y1="190" x2="0" y2="320" gradientUnits="userSpaceOnUse">
+    <linearGradient id="markFace" x1="0" y1="155" x2="0" y2="270" gradientUnits="userSpaceOnUse">
       <stop offset="0%"   stop-color="#EDD060"/>
       <stop offset="60%"  stop-color="#D4AF37"/>
       <stop offset="100%" stop-color="#7A6520"/>
@@ -71,11 +71,10 @@
   <path d="M 58,42 Q 50,42 50,50 L 50,268 C 50,386 112,436 200,454 C 288,436 350,386 350,268 L 350,50 Q 350,42 342,42 Z" fill="url(#markHighlight)"/>
 
   <!-- ── CG3 (centered + larger for icon use) ── -->
-  <text x="200" y="305" transform="translate(6,6)" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="170" font-weight="900" fill="#0C0A02" text-anchor="middle">CG3</text>
-  <text x="200" y="305" transform="translate(5,5)" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="170" font-weight="900" fill="#181306" text-anchor="middle">CG3</text>
-  <text x="200" y="305" transform="translate(4,4)" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="170" font-weight="900" fill="#261E08" text-anchor="middle">CG3</text>
-  <text x="200" y="305" transform="translate(3,3)" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="170" font-weight="900" fill="#3C2E0C" text-anchor="middle">CG3</text>
-  <text x="200" y="305" transform="translate(2,2)" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="170" font-weight="900" fill="#544018" text-anchor="middle">CG3</text>
-  <text x="200" y="305" transform="translate(1,1)" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="170" font-weight="900" fill="#7A6020" text-anchor="middle">CG3</text>
-  <text x="200" y="305" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="170" font-weight="900" fill="url(#markFace)" stroke="#EDD060" stroke-width="1.2" stroke-linejoin="round" filter="url(#markGlow)" text-anchor="middle">CG3</text>
+  <text x="200" y="265" transform="translate(5,5)" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="138" font-weight="900" fill="#0C0A02" text-anchor="middle">CG3</text>
+  <text x="200" y="265" transform="translate(4,4)" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="138" font-weight="900" fill="#181306" text-anchor="middle">CG3</text>
+  <text x="200" y="265" transform="translate(3,3)" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="138" font-weight="900" fill="#261E08" text-anchor="middle">CG3</text>
+  <text x="200" y="265" transform="translate(2,2)" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="138" font-weight="900" fill="#3C2E0C" text-anchor="middle">CG3</text>
+  <text x="200" y="265" transform="translate(1,1)" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="138" font-weight="900" fill="#544018" text-anchor="middle">CG3</text>
+  <text x="200" y="265" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="138" font-weight="900" fill="url(#markFace)" stroke="#EDD060" stroke-width="1" stroke-linejoin="round" filter="url(#markGlow)" text-anchor="middle">CG3</text>
 </svg>
