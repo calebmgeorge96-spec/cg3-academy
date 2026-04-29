@@ -1,0 +1,102 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 480">
+  <defs>
+    <!-- Shield background -->
+    <radialGradient id="shieldBg" cx="200" cy="166" r="260" gradientUnits="userSpaceOnUse">
+      <stop offset="0%"   stop-color="#181818"/>
+      <stop offset="100%" stop-color="#040404"/>
+    </radialGradient>
+
+    <!-- Border + text gradient: same gold family across everything -->
+    <linearGradient id="goldBorder" x1="0" y1="42" x2="0" y2="454" gradientUnits="userSpaceOnUse">
+      <stop offset="0%"   stop-color="#EDD060"/>
+      <stop offset="60%"  stop-color="#D4AF37"/>
+      <stop offset="100%" stop-color="#7A6520"/>
+    </linearGradient>
+
+    <!-- CG3 face gradient (font-size 118, baseline y=248) -->
+    <linearGradient id="steelFace" x1="0" y1="163" x2="0" y2="248" gradientUnits="userSpaceOnUse">
+      <stop offset="0%"   stop-color="#EDD060"/>
+      <stop offset="60%"  stop-color="#D4AF37"/>
+      <stop offset="100%" stop-color="#7A6520"/>
+    </linearGradient>
+
+    <!-- Shield face specular highlight -->
+    <linearGradient id="shieldHighlight" x1="0" y1="42" x2="0" y2="270" gradientUnits="userSpaceOnUse">
+      <stop offset="0%"   stop-color="#FFFFFF" stop-opacity="0.13"/>
+      <stop offset="100%" stop-color="#FFFFFF" stop-opacity="0"/>
+    </linearGradient>
+
+    <!-- Large glow for CG3 -->
+    <filter id="goldEdgeGlow" x="-12%" y="-12%" width="124%" height="124%">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="3" result="blur"/>
+      <feFlood flood-color="#D4AF37" flood-opacity="0.3" result="gc"/>
+      <feComposite in="gc" in2="blur" operator="in" result="glow"/>
+      <feMerge>
+        <feMergeNode in="glow"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+
+    <!-- Subtle glow for small text -->
+    <filter id="textGlow" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="1.5" result="blur"/>
+      <feFlood flood-color="#D4AF37" flood-opacity="0.6" result="gc"/>
+      <feComposite in="gc" in2="blur" operator="in" result="glow"/>
+      <feMerge>
+        <feMergeNode in="glow"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+
+    <!-- Shield drop shadow -->
+    <filter id="shieldShadow" x="-20%" y="-10%" width="140%" height="135%">
+      <feGaussianBlur stdDeviation="14"/>
+    </filter>
+
+    <!-- Shield ambient glow -->
+    <filter id="shieldGlow" x="-30%" y="-25%" width="160%" height="155%">
+      <feGaussianBlur stdDeviation="20"/>
+    </filter>
+  </defs>
+
+  <!-- ── SHIELD ── -->
+  <path d="M 58,42 Q 50,42 50,50 L 50,268 C 50,386 112,436 200,454 C 288,436 350,386 350,268 L 350,50 Q 350,42 342,42 Z"
+        fill="#D4AF37" opacity="0.22" filter="url(#shieldGlow)"/>
+  <path d="M 58,42 Q 50,42 50,50 L 50,268 C 50,386 112,436 200,454 C 288,436 350,386 350,268 L 350,50 Q 350,42 342,42 Z"
+        fill="#000000" opacity="0.8" filter="url(#shieldShadow)" transform="translate(0,14)"/>
+  <path d="M 58,42 Q 50,42 50,50 L 50,268 C 50,386 112,436 200,454 C 288,436 350,386 350,268 L 350,50 Q 350,42 342,42 Z" transform="translate(5,5)" fill="#0C0A02"/>
+  <path d="M 58,42 Q 50,42 50,50 L 50,268 C 50,386 112,436 200,454 C 288,436 350,386 350,268 L 350,50 Q 350,42 342,42 Z" transform="translate(4,4)" fill="#181406"/>
+  <path d="M 58,42 Q 50,42 50,50 L 50,268 C 50,386 112,436 200,454 C 288,436 350,386 350,268 L 350,50 Q 350,42 342,42 Z" transform="translate(3,3)" fill="#281E08"/>
+  <path d="M 58,42 Q 50,42 50,50 L 50,268 C 50,386 112,436 200,454 C 288,436 350,386 350,268 L 350,50 Q 350,42 342,42 Z" transform="translate(2,2)" fill="#3C2E0E"/>
+  <path d="M 58,42 Q 50,42 50,50 L 50,268 C 50,386 112,436 200,454 C 288,436 350,386 350,268 L 350,50 Q 350,42 342,42 Z" transform="translate(1,1)" fill="#524018"/>
+  <path d="M 58,42 Q 50,42 50,50 L 50,268 C 50,386 112,436 200,454 C 288,436 350,386 350,268 L 350,50 Q 350,42 342,42 Z" fill="url(#shieldBg)"/>
+  <path d="M 58,42 Q 50,42 50,50 L 50,268 C 50,386 112,436 200,454 C 288,436 350,386 350,268 L 350,50 Q 350,42 342,42 Z" fill="none" stroke="url(#goldBorder)" stroke-width="2.5"/>
+  <path d="M 68,54 Q 62,54 62,60 L 62,268 C 62,376 118,423 200,440 C 282,423 338,376 338,268 L 338,60 Q 338,54 332,54 Z" fill="none" stroke="url(#goldBorder)" stroke-width="0.75" opacity="0.5"/>
+  <path d="M 58,42 Q 50,42 50,50 L 50,268 C 50,386 112,436 200,454 C 288,436 350,386 350,268 L 350,50 Q 350,42 342,42 Z" fill="url(#shieldHighlight)"/>
+
+  <!-- ── TEXT ── -->
+
+  <!-- ACADEMY (letter-spacing offset +3.25) -->
+  <text x="203.25" y="100" transform="translate(2,2)" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="12" font-weight="300" letter-spacing="6.5" fill="#0C0A02" text-anchor="middle">ACADEMY</text>
+  <text x="203.25" y="100" transform="translate(1,1)" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="12" font-weight="300" letter-spacing="6.5" fill="#3C2E0C" text-anchor="middle">ACADEMY</text>
+  <text x="203.25" y="100" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="12" font-weight="300" letter-spacing="6.5" fill="url(#goldBorder)" filter="url(#textGlow)" text-anchor="middle">ACADEMY</text>
+
+  <!-- CG3 (font-size 118, 6-layer extrusion) -->
+  <text x="200" y="248" transform="translate(6,6)" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="118" font-weight="900" fill="#0C0A02" text-anchor="middle">CG3</text>
+  <text x="200" y="248" transform="translate(5,5)" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="118" font-weight="900" fill="#181306" text-anchor="middle">CG3</text>
+  <text x="200" y="248" transform="translate(4,4)" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="118" font-weight="900" fill="#261E08" text-anchor="middle">CG3</text>
+  <text x="200" y="248" transform="translate(3,3)" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="118" font-weight="900" fill="#3C2E0C" text-anchor="middle">CG3</text>
+  <text x="200" y="248" transform="translate(2,2)" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="118" font-weight="900" fill="#544018" text-anchor="middle">CG3</text>
+  <text x="200" y="248" transform="translate(1,1)" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="118" font-weight="900" fill="#7A6020" text-anchor="middle">CG3</text>
+  <text x="200" y="248" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="118" font-weight="900" fill="url(#steelFace)" stroke="#EDD060" stroke-width="1" stroke-linejoin="round" filter="url(#goldEdgeGlow)" text-anchor="middle">CG3</text>
+
+  <!-- PRIVATE · SOCCER · COACHING (letter-spacing offset +1.75) -->
+  <text x="201.75" y="320" transform="translate(2,2)" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="9.5" font-weight="400" letter-spacing="3.5" fill="#0C0A02" text-anchor="middle">PRIVATE · SOCCER · COACHING</text>
+  <text x="201.75" y="320" transform="translate(1,1)" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="9.5" font-weight="400" letter-spacing="3.5" fill="#3C2E0C" text-anchor="middle">PRIVATE · SOCCER · COACHING</text>
+  <text x="201.75" y="320" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="9.5" font-weight="400" letter-spacing="3.5" fill="url(#goldBorder)" filter="url(#textGlow)" text-anchor="middle">PRIVATE · SOCCER · COACHING</text>
+
+  <!-- TAMPA BAY · EST 2023 (letter-spacing offset +1.5) -->
+  <text x="201.5" y="348" transform="translate(2,2)" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="8.5" font-weight="300" letter-spacing="3" fill="#0C0A02" text-anchor="middle">TAMPA BAY · EST 2023</text>
+  <text x="201.5" y="348" transform="translate(1,1)" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="8.5" font-weight="300" letter-spacing="3" fill="#3C2E0C" text-anchor="middle">TAMPA BAY · EST 2023</text>
+  <text x="201.5" y="348" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="8.5" font-weight="300" letter-spacing="3" fill="url(#goldBorder)" filter="url(#textGlow)" text-anchor="middle">TAMPA BAY · EST 2023</text>
+</svg>
