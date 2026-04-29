@@ -1067,17 +1067,20 @@
       }
     }, { passive: true });
 
-    // Fast custom smooth scroll. Distance-aware duration: short hops are quick,
-    // long page jumps cap out at ~360ms so they never feel laggy.
+    // Speed-ramp scroll: smooth ease IN -> coast -> smooth ease OUT.
+    // Uses easeInOutCubic which gives a true S-curve — no instant jolt at the
+    // start, no abrupt stop at the end. Distance-aware duration keeps short
+    // jumps from feeling sluggish while still letting full-page scrolls breathe.
     function fastScrollTo(targetY) {
       const startY = window.pageYOffset;
       const distance = targetY - startY;
       const absDist = Math.abs(distance);
-      // Duration scales with distance but capped: 180ms min, 360ms max
-      const duration = Math.min(360, Math.max(180, absDist * 0.35));
+      // Ramp 380ms (very short) -> 750ms (full page). The longer the trip,
+      // the longer the speed-up + coast + slow-down phases.
+      const duration = Math.min(750, Math.max(380, absDist * 0.55));
       const startTime = performance.now();
-      // easeOutQuart — punchy, no overshoot
-      const ease = t => 1 - Math.pow(1 - t, 4);
+      // easeInOutCubic — symmetric S-curve. Slow start, fast middle, slow finish.
+      const ease = t => t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
       function step(now) {
         const elapsed = now - startTime;
         const t = Math.min(elapsed / duration, 1);
@@ -1093,6 +1096,8 @@
         const target = document.querySelector(href);
         if (!target) return;
         e.preventDefault();
+        // Kick off scroll on the SAME frame as the click — no waiting for
+        // the button's :active animation to finish.
         const y = target.getBoundingClientRect().top + window.pageYOffset - 20;
         fastScrollTo(y);
       });
