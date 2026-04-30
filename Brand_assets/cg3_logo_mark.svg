@@ -28,7 +28,7 @@
 
     <!-- Glow for CG3 -->
     <filter id="markGlow" x="-12%" y="-12%" width="124%" height="124%">
-      <feGaussianBlur in="SourceAlpha" stdDeviation="3" result="blur"/>
+      <feGaussianBlur in="SourceAlpha" stdDeviation="1.5" result="blur"/>
       <feFlood flood-color="#D4AF37" flood-opacity="0.3" result="gc"/>
       <feComposite in="gc" in2="blur" operator="in" result="glow"/>
       <feMerge>
@@ -49,17 +49,9 @@
   </defs>
 
   <!-- ── SHIELD ── -->
-  <!-- Ambient gold glow -->
-  <path d="M 58,42 Q 50,42 50,50 L 50,268 C 50,386 112,436 200,454 C 288,436 350,386 350,268 L 350,50 Q 350,42 342,42 Z"
-        fill="#D4AF37" opacity="0.22" filter="url(#markAmbient)"/>
-  <!-- Drop shadow -->
-  <path d="M 58,42 Q 50,42 50,50 L 50,268 C 50,386 112,436 200,454 C 288,436 350,386 350,268 L 350,50 Q 350,42 342,42 Z"
-        fill="#000000" opacity="0.8" filter="url(#markShadow)" transform="translate(0,14)"/>
-  <!-- 3D bevel layers -->
-  <path d="M 58,42 Q 50,42 50,50 L 50,268 C 50,386 112,436 200,454 C 288,436 350,386 350,268 L 350,50 Q 350,42 342,42 Z" transform="translate(5,5)" fill="#0C0A02"/>
-  <path d="M 58,42 Q 50,42 50,50 L 50,268 C 50,386 112,436 200,454 C 288,436 350,386 350,268 L 350,50 Q 350,42 342,42 Z" transform="translate(4,4)" fill="#181406"/>
-  <path d="M 58,42 Q 50,42 50,50 L 50,268 C 50,386 112,436 200,454 C 288,436 350,386 350,268 L 350,50 Q 350,42 342,42 Z" transform="translate(3,3)" fill="#281E08"/>
-  <path d="M 58,42 Q 50,42 50,50 L 50,268 C 50,386 112,436 200,454 C 288,436 350,386 350,268 L 350,50 Q 350,42 342,42 Z" transform="translate(2,2)" fill="#3C2E0E"/>
+  <!-- 3D bevel layers (reduced to 3 for crispness at small sizes) -->
+  <path d="M 58,42 Q 50,42 50,50 L 50,268 C 50,386 112,436 200,454 C 288,436 350,386 350,268 L 350,50 Q 350,42 342,42 Z" transform="translate(3,3)" fill="#0C0A02"/>
+  <path d="M 58,42 Q 50,42 50,50 L 50,268 C 50,386 112,436 200,454 C 288,436 350,386 350,268 L 350,50 Q 350,42 342,42 Z" transform="translate(2,2)" fill="#281E08"/>
   <path d="M 58,42 Q 50,42 50,50 L 50,268 C 50,386 112,436 200,454 C 288,436 350,386 350,268 L 350,50 Q 350,42 342,42 Z" transform="translate(1,1)" fill="#524018"/>
   <!-- Shield face -->
   <path d="M 58,42 Q 50,42 50,50 L 50,268 C 50,386 112,436 200,454 C 288,436 350,386 350,268 L 350,50 Q 350,42 342,42 Z" fill="url(#markBg)"/>
