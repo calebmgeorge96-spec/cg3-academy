@@ -891,10 +891,10 @@
   ══════════════════════════════════════ -->
   <section id="booking" style="background:#0A0A0A;padding:120px 0;">
     <div style="max-width:1280px;margin:0 auto;padding:0 40px;">
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:start;" class="booking-grid">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:stretch;" class="booking-grid">
 
         <!-- LEFT COLUMN: heading + details (stacked naturally on desktop) -->
-        <div class="booking-left fade-up">
+        <div class="booking-left fade-up" style="display:flex;flex-direction:column;">
 
           <div class="booking-intro">
             <div class="gold-rule"></div>
@@ -907,7 +907,7 @@
             </p>
           </div>
 
-          <div class="booking-details">
+          <div class="booking-details" style="display:flex;flex-direction:column;flex:1;">
             <div style="background:#1C1C1C;border:1px solid rgba(201,162,74,0.2);padding:20px 24px;margin-bottom:36px;margin-top:36px;display:flex;align-items:center;gap:14px;">
               <span class="urgency-dot" style="flex-shrink:0;"></span>
               <div>
@@ -944,7 +944,7 @@
                 </div>
               </div>
             </div>
-            <div class="photo-treatment" style="height:300px;">
+            <div class="photo-treatment" style="flex:1;min-height:200px;">
               <img src="CG3%20Assets/Pictures/IMG_1635.JPG" alt="Caleb FGCU defending" style="object-position:center 15%;" />
             </div>
           </div>
