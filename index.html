@@ -952,8 +952,8 @@
         </div>
 
         <!-- RIGHT COLUMN: booking form -->
-        <div class="booking-form fade-up" data-delay="150">
-          <div class="card-elevated" style="padding:44px;">
+        <div class="booking-form fade-up" data-delay="150" style="display:flex;flex-direction:column;">
+          <div class="card-elevated" style="padding:44px;flex:1;display:flex;flex-direction:column;">
             <h3 style="font-family:'Fraunces',serif;font-weight:900;font-size:26px;color:#F5F5F3;margin-bottom:6px;letter-spacing:-0.01em;">Book a Session</h3>
             <p style="font-family:'Inter',sans-serif;font-size:14px;color:#939393;margin-bottom:32px;">Fill out the form and Caleb will reach out within 24 hours to confirm your spot.</p>
 
@@ -962,7 +962,7 @@
               <p style="font-family:'Inter',sans-serif;font-size:15px;color:rgba(245,245,243,0.55);">Caleb will be in touch within 24 hours.</p>
             </div>
 
-            <form id="contact-form" action="https://formspree.io/f/meevyrnw" method="POST" style="display:flex;flex-direction:column;gap:16px;">
+            <form id="contact-form" action="https://formspree.io/f/meevyrnw" method="POST" style="display:flex;flex-direction:column;gap:16px;flex:1;">
               <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
                 <div>
                   <label style="display:block;font-family:'Inter',sans-serif;font-size:10px;font-weight:700;letter-spacing:0.14em;color:#939393;text-transform:uppercase;margin-bottom:8px;">First Name</label>
@@ -1000,9 +1000,9 @@
                 <input type="tel" name="phone" placeholder="Best number to reach you" class="form-input" autocomplete="tel" maxlength="30" />
               </div>
               <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px;opacity:0;height:0;width:0;" aria-hidden="true" />
-              <div>
+              <div style="display:flex;flex-direction:column;flex:1;">
                 <label style="display:block;font-family:'Inter',sans-serif;font-size:10px;font-weight:700;letter-spacing:0.14em;color:#939393;text-transform:uppercase;margin-bottom:8px;">Message</label>
-                <textarea name="message" placeholder="Tell me about your goals, age, position, and experience level..." class="form-input" rows="4" style="resize:vertical;" minlength="10" maxlength="1200" required></textarea>
+                <textarea name="message" placeholder="Tell me about your goals, age, position, and experience level..." class="form-input" rows="4" style="resize:vertical;flex:1;min-height:100px;" minlength="10" maxlength="1200" required></textarea>
               </div>
               <div id="form-error" style="display:none;font-family:'Inter',sans-serif;font-size:13px;color:#e05c5c;text-align:center;"></div>
               <button type="submit" id="form-submit-btn" class="btn-primary" style="width:100%;text-align:center;margin-top:4px;padding:18px 32px;font-size:12px;">Request My Spot</button>
