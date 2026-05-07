@@ -963,11 +963,13 @@
         <!-- 2: Form — order 2 on mobile, right col on desktop -->
         <div class="booking-form fade-up" data-delay="150" style="display:flex;flex-direction:column;">
           <div class="card-elevated" style="padding:44px;flex:1;display:flex;flex-direction:column;">
-            <h3 style="font-family:'Fraunces',serif;font-weight:900;font-size:26px;color:#F5F5F3;margin-bottom:6px;letter-spacing:-0.01em;">Book a Session</h3>
-            <p style="font-family:'Inter',sans-serif;font-size:14px;color:#939393;margin-bottom:32px;">Fill out the form and Caleb will reach out within 24 hours to confirm your spot.</p>
+            <div id="form-header">
+              <h3 style="font-family:'Fraunces',serif;font-weight:900;font-size:26px;color:#F5F5F3;margin-bottom:6px;letter-spacing:-0.01em;">Book a Session</h3>
+              <p style="font-family:'Inter',sans-serif;font-size:14px;color:#939393;margin-bottom:32px;">Fill out the form and Caleb will reach out within 24 hours to confirm your spot.</p>
+            </div>
 
-            <div id="form-success" style="display:none;text-align:center;padding:40px 20px;">
-              <div style="font-family:'Fraunces',serif;font-weight:900;font-size:28px;color:#C9A24A;margin-bottom:12px;">Message Sent.</div>
+            <div id="form-success" style="display:none;flex:1;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:40px 20px;">
+              <div style="font-family:'Fraunces',serif;font-weight:900;font-size:32px;color:#C9A24A;margin-bottom:14px;">Message Sent.</div>
               <p style="font-family:'Inter',sans-serif;font-size:15px;color:rgba(245,245,243,0.55);">Caleb will be in touch within 24 hours.</p>
             </div>
 
@@ -1108,6 +1110,7 @@
     const submitBtn = $('#form-submit-btn');
     const formError = $('#form-error');
     const formSuccess = $('#form-success');
+    const formHeader = $('#form-header');
 
     function onScroll() {
       const scrolled = window.scrollY > 60;
@@ -1249,7 +1252,8 @@
           if (response.ok) {
             contactForm.reset();
             contactForm.style.display = 'none';
-            if (formSuccess) formSuccess.style.display = 'block';
+            if (formHeader) formHeader.style.display = 'none';
+            if (formSuccess) formSuccess.style.display = 'flex';
             return;
           }
 
