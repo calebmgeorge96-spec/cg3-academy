@@ -136,7 +136,8 @@
   </script>
   <style>
     *, *::before, *::after { box-sizing: border-box; }
-    html { scroll-behavior: smooth; overflow-x: hidden; max-width: 100%; }
+    /* No CSS smooth scrolling: in-page links use the script's own scroller (fastScrollTo), and the two fought each other */
+    html { overflow-x: hidden; max-width: 100%; }
     body { background: #0A0A0A; color: #F5F5F3; font-family: 'Inter', sans-serif; overflow-x: hidden; width: 100%; max-width: 100%; }
 
     body::before {
@@ -279,6 +280,8 @@
     .form-input::placeholder { color: #939393; }
     /* Form result messages take focus after a submit (so they are read out); no ring on these non-interactive targets */
     #form-success:focus, #form-error:focus { outline: none; }
+    /* Sections that receive focus from in-page links (tabindex=-1 set by script): no ring on the whole section */
+    [tabindex="-1"]:focus { outline: none; }
 
     .nav-link {
       position: relative; font-size: 11px; font-weight: 600;
@@ -1153,6 +1156,9 @@
         event.preventDefault();
         const y = target.getBoundingClientRect().top + window.pageYOffset - 20;
         fastScrollTo(y);
+        // Move keyboard focus with the scroll, so the next Tab continues from the target, not from the link
+        if (!target.hasAttribute('tabindex')) target.setAttribute('tabindex', '-1');
+        target.focus({ preventScroll: true });
       });
     });
 
