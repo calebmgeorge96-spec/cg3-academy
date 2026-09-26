@@ -37,35 +37,40 @@ Nothing on the site may reference, name, imply or link to the third-party academ
 
 | # | Tier | Audit finding → task | Status | Commit | Note |
 |---|------|----------------------|--------|--------|------|
-| 0 | Section 0 | Map repo, capability check, confirm stack, create PROGRESS.md | Done | (this commit) | Stack corrected: static HTML on GitHub Pages, not Astro/Vercel. |
-| 0.1 | 🔴 Hard constraint | Remove the photo showing the third-party academy's kit. `CG3 Assets/Pictures/IMG_6632.jpg` is the 4th photo-strip cell ("Caleb coaching young players"). Both kids wear that academy's crest, visible at desktop and 390px, and the 6 MB original is publicly downloadable. Remove from markup **and** delete the file. | Not started | — | Needs a decision on the 4th strip cell (see NEEDS CALEB). Git history still holds the file (public repo). |
-| 1.1 | 🔴 Phase 1 | Dead Gumroad "Buy Now" links (5 products + $119 bundle all point at bare `https://gumroad.com`) | Blocked | — | Waiting on Caleb: do the listings exist? The section is **already** `display:none` and its nav links are commented out, but the dead `href`s and prices still ship in the HTML (crawlable). The booking intro still says "or a digital program". If the products don't exist, remove the section from the rendered DOM (HTML comment) and drop the "digital program" mention. |
+| 0 | Section 0 | Map repo, capability check, confirm stack, create PROGRESS.md | Done | [pre-purge commit] | Stack corrected: static HTML on GitHub Pages, not Astro/Vercel. |
+| 0.1 | 🔴 Hard constraint | Remove the photo showing the third-party academy's kit. `CG3 Assets/Pictures/IMG_6632.jpg` was the 4th photo-strip cell ("Caleb coaching young players"). Both kids wore that academy's crest. Removed from the markup **and** the file deleted. | Done (on branch). Awaiting Caleb's approval, then merge to `main` immediately. | (0.1 commit) | Per Caleb (option b), the 4th cell is now the unused game photo `IMG_4069.JPG` (FGCU white kit, on the ball), `object-position:62% 40%`, alt "Caleb FGCU attacking with the ball". It's a temporary stand-in: Caleb will supply a real coaching photo in plain or CG3 kit within ~2 weeks. html-validate: 7 errors = baseline. Console clean, no overflow at 1440/390. |
+| 0.2 | 🔴 Hard constraint | Purge `IMG_6632.jpg` from git history on `main` (Caleb approved the rewrite, 2026-09-26) | Not started | — | **Only after 0.1 is live.** Walk Caleb through the exact commands and the effect on Cloudflare PR #1 **before** running anything. |
+| 1.1 | 🔴 Phase 1 | Dead Gumroad "Buy Now" links (5 products + $119 bundle all point at bare `https://gumroad.com`) | Not started | — | **Caleb: the products don't exist yet.** Delete the whole Digital Programs section (`#products`, its `<style>` block and the commented-out "Programs" nav links in the header and FAB) from the source, not just hide it. Remove "or a digital program" from the booking intro. **To restore later:** the full section is in git history, e.g. `git show [pre-purge commit]:index.html` (lines ~682–820), ready to re-add with real Gumroad product URLs. |
 | 1.2 | 🔴 Phase 1 | Add (813) 351-0034: header nav link (visible on mobile too; the nav "Book Session" button is hidden below 640px), a line under the submit button, and the phone as the primary Contact-block row | Not started | — | The Contact-block part replaces the "Email" row, which is the only code change 1.3 and 1.4 need. Proposed: "call" wording → `tel:`, "text" wording → `sms:` (confirm at task time). |
 | 1.3 | 🔴 Phase 1 | Kill the dead inbox everywhere | Not started | — | Repo-wide grep: 1 hit only (Contact block, plain text, not a `mailto`). None in meta, JSON-LD, comments, form config or history-relevant files. The form recipient is set in the **Formspree dashboard**, not the repo, so there is nothing to repoint in code → NEEDS CALEB to verify in Formspree. |
 | 1.4 | 🔴 Phase 1 | Never display the personal Gmail; the phone replaces the Email row | Not started | — | Gmail currently has 0 hits in the repo, and that is the expected end state: the "form config" is on Formspree's side. If a 2nd row is needed, link to `#booking`, not an address. |
+| 1.5 | 🔴 Phase 1 (added by Caleb) | Image optimization: resize and compress every image to its display size | Not started | — | Priority: `CG3 Assets/Client Testimonial/IMG_2758.JPG` (5.0 MB shown as a 96px avatar). Then the other on-page photos (hero, about, strip, booking, testimonials). Keep the originals out of the served path or replace them in place (decide at task time). Traffic is mostly phones. |
+| 1.6 | 🔴 Phase 1 (added by Caleb) | Trust stats | Not started | — | Change "100% Satisfaction Guaranteed" so it no longer claims a guarantee. Remove "5★ Average Rating" until there are real public reviews. Leave "50+ Players Trained" and flag it for Caleb to confirm. The trust bar is a 3-column grid, so check the layout once a tile is gone. |
 | — | Phase review | Phase 1 boundary review (`phase-review.md`) | Not started | — | |
-| 2.1 | 🟠 Phase 2 | Replace "Tampa · St. Pete · Clearwater · Brandon" with the 6 GBP areas | Not started | — | Hits: meta description (L7), hero eyebrow (L381), training footnote (L675), Contact "Location" (L936), footer bottom line (L1093). og/twitter descriptions say "Tampa Bay" (handled in 2.2). **Conflict:** the credential ticker has "St. Pete Aztecs UPSL" ×2 (L433, L443). That is a team name, not a service area, but it breaks the Phase 4 zero-hit grep → ask Caleb. Six areas in the hero eyebrow will wrap at 390px, so check layout. |
+| 2.1 | 🟠 Phase 2 | Replace "Tampa · St. Pete · Clearwater · Brandon" with the 6 GBP areas | Not started | — | Hits: meta description (L7), hero eyebrow (L381), training footnote (L675), Contact "Location" (L936), footer bottom line (L1093). og/twitter descriptions say "Tampa Bay" (handled in 2.2). The credential ticker's "St. Pete Aztecs UPSL" ×2 (L433, L443) **stays**: it's a credential, not a service area (Caleb, 2026-09-26), and it's excluded from the Phase 4 "St. Pete" check. Six areas in the hero eyebrow will wrap at 390px, so check layout. |
 | 2.2 | 🟠 Phase 2 | Meta description rewrite (153 chars, given verbatim), plus matching og:description / twitter:description | Not started | — | |
 | 2.3 | 🟠 Phase 2 | LocalBusiness JSON-LD (name, telephone, areaServed ×6, hours; **no email**) | Not started | — | None exists today. Service-area business: omit street address unless GBP shows one. Match GBP exactly. |
 | — | Phase review | Phase 2 boundary review | Not started | — | |
 | 3.1 | 🟠 Phase 3 | Dismissible tryout bar at the top of the hero ("High school tryouts start in October. Tryout prep blocks available now." → `#booking`), plus "Tryout Preparation" in the 1-on-1 list and in the form dropdown | Not started | — | Nav is `position:fixed` over the hero, so place the bar so it doesn't collide. No price for tryout prep (don't invent one). **Time-sensitive copy:** needs a removal date. |
 | 3.2 | 🟠 Phase 3 | Weekday daytime / homeschool availability line in the training section | Not started | — | Real hours: Mon/Wed 9–3, Tue/Thu 11–3, Fri 9–8:30. Don't claim "9–3 every weekday". No availability copy exists anywhere today. |
-| 3.3 | 🟠 Phase 3 | Replace "Contact for location & scheduling" with a structured slot for 2–3 park names, currently `[[TBD]]` | Not started | — | Open question: literal `[[TBD]]` shown to parents on the live site, or honest neutral copy with the `[[TBD]]` marker kept in code? |
+| 3.3 | 🟠 Phase 3 | Replace "Contact for location & scheduling" with a structured slot for 2–3 park names, currently `[[TBD]]` | Not started | — | **Decided (Caleb, 2026-09-26):** show parents honest neutral wording (no invented park names). Keep a `[[TBD]]` marker in an HTML comment/data attribute at the slot, and in this file, so the park names drop in without a redesign. |
 | 3.4 | 🟡 Phase 3 | Remove the hero scarcity line (L395–398); keep the booking-section one (L925) | Not started | — | |
 | 3.5 | 🟡 Phase 3 | Replace "within 24 hours" promises with a text-first line (e.g. "Text for same-day response.") | Not started | — | Hits: Contact "Response Time" (L954), form subhead (L968), success message (L973). Also review L1020 ("…will reach out to confirm availability and location"). |
 | — | Phase review | Phase 3 boundary review | Not started | — | |
-| 4 | Phase 4 | Full review as a separate engineer: greps, links, `tel:`/`sms:`, form recipient, validation, console, 390px + desktop; list of noticed-not-fixed | Not started | — | Grep targets: `coachcaleb`, `@cg3academy.com`, "St. Pete", "Clearwater", "Brandon", `the personal Gmail` (the email, not the GitHub username `calebmgeorge96-spec`; expect 0 since the recipient lives in Formspree), the third-party academy name (case-insensitive), bare `href="https://gumroad.com"`. Scope: every file except this PROGRESS.md, which records the old city names on purpose. |
+| 4 | Phase 4 | Full review as a separate engineer: greps, links, `tel:`/`sms:`, form recipient, validation, console, 390px + desktop; list of noticed-not-fixed | Not started | — | Grep targets: `coachcaleb`, `@cg3academy.com`, "St. Pete" (except the "St. Pete Aztecs UPSL" credential, kept by Caleb), "Clearwater", "Brandon", `the personal Gmail` (the email, not the GitHub username `calebmgeorge96-spec`; expect 0 since the recipient lives in Formspree), the third-party academy name (case-insensitive), bare `href="https://gumroad.com"`. Scope: every file except this PROGRESS.md, which records the old city names on purpose. |
 
 ## 🔴 NEEDS CALEB
-- [ ] **0.1 photo.** What goes in the 4th photo-strip cell once the offending coaching photo is removed? Options: (a) 3-photo strip; (b) an unused game photo already in the repo (`IMG_9893.JPG`, `IMG_4069.JPG`, `IMG_4070.JPG`); (c) a new coaching photo in plain or CG3 kit from you. There is no other coaching photo in the repo.
-- [ ] **0.1 history.** The repo is public, so the removed photo stays in git history. Options: leave it (low discoverability); make the repo private (Pages from a private repo needs a paid GitHub plan); or rewrite history on `main` (destructive force-push, needs your explicit OK).
-- [ ] **1.1** Do the 5 Gumroad products and the bundle exist as live listings? If yes, send the 6 product URLs.
-- [ ] **1.3** Formspree dashboard → form `meevyrnw`: confirm the notification email is your current inbox, not the suspended domain inbox. After deploy, send one test submission from the live site and confirm it arrives.
+- [ ] **0.1** Approve the photo swap so it can merge to `main` today. Confirm `IMG_4069.JPG` is you (it's from the same FGCU photo series as the other strip shots).
+- [ ] **0.1 follow-up (~2 weeks):** send a real coaching photo from your own sessions (plain or CG3 kit, no third-party crests) to replace the strip's 4th cell.
+- [x] ~~0.1 history~~: Caleb approved rewriting `main` to purge the file → task 0.2.
+- [x] ~~1.1~~: Products don't exist yet → remove the section (task 1.1).
+- [ ] **1.1 later:** build the Gumroad products; then restore the section from git history with real product URLs.
+- [ ] **1.3** (Caleb is doing this) Formspree dashboard → form `meevyrnw`: confirm the notification email is your current inbox, not the suspended domain inbox. After deploy, send one test submission from the live site and confirm it arrives.
+- [ ] **1.6** Confirm "50+ Players Trained" is accurate.
 - [ ] **3.3** Training park names (2–3) when decided.
 - [ ] **3.1** When should the tryout bar come down? (Suggest the first week of November.)
-- [ ] **2.1** Keep the "St. Pete Aztecs UPSL" credential? It's a team name, but it contains "St. Pete".
 - [ ] **Deploy.** Merge this branch to `main` for GitHub Pages to publish. Also decide on Cloudflare PR #1 (close it, or intentionally move hosting).
-- [ ] **Trust stats.** Confirm these are true and defensible before paid traffic sees them: "50+ Players Trained", "100% Satisfaction Guaranteed" (reads as a refund promise), "5★ Average Rating" (from which source?), "10+ Years Competing".
+- [ ] **Trust stats (rest):** confirm "10+ Years Competing" and the hero's "MLS Level Opposition" stat are how you want them worded.
 - [ ] **Later.** Set up the proper domain email, then swap it back into the Contact block (and schema, if wanted).
 
 ## Open [[TBD]]
@@ -88,6 +93,12 @@ Nothing on the site may reference, name, imply or link to the third-party academ
 - 2026-09-26: Keep the static single-file stack; edit `index.html` directly (see Stack decision).
 - 2026-09-26: 1.3 and 1.4 need no separate code change beyond 1.2's Contact-row swap; they become verification tasks (grep + Formspree).
 - 2026-09-26: This file is public, so the third-party academy's name and the personal Gmail are never written here, in commits or in comments.
+- 2026-09-26 (Caleb): 0.1 goes first, as its own commit, and merges to `main` as soon as it's approved, ahead of the other phases. The 4th strip cell uses an unused repo game photo until a real coaching photo arrives.
+- 2026-09-26 (Caleb): approved rewriting `main` to purge `IMG_6632.jpg` (task 0.2), only after 0.1 is live and after a walkthrough of the commands.
+- 2026-09-26 (Caleb): Digital Programs is removed from the source entirely (products not built yet). Restore from git history later.
+- 2026-09-26 (Caleb): 3.3 uses honest neutral wording on the page; `[[TBD]]` stays in code + this file.
+- 2026-09-26 (Caleb): keep the "St. Pete Aztecs UPSL" credential; excluded from the Phase 4 check.
+- 2026-09-26 (Caleb): added tasks 1.5 (image optimization) and 1.6 (trust stats). I placed them at the end of Phase 1 because both affect paid mobile traffic right away.
 
 ## Gotchas & dead ends
 - The Digital Programs section (`#products`) was already hidden (`display:none`) before this audit. Its dead Gumroad links still exist in source.
@@ -97,7 +108,6 @@ Nothing on the site may reference, name, imply or link to the third-party academ
 - The sandbox proxy blocks cg3academy.com. Don't retry; it's policy, not an outage.
 
 ## Noticed but not in the audit (candidates, not scheduled)
-- **Image weight (big mobile win):** `IMG_2758.JPG` 5.0 MB shown as a 96px avatar; `IMG_1635.JPG` 6.7 MB (booking photo, hidden on mobile but still downloaded); `IMG_6632.jpg` 6.1 MB; `IMG_9903.JPG` 3.9 MB. Social traffic is mostly mobile.
 - **Tailwind Play CDN in production:** render-blocking runtime JS, and it logs its own "should not be used in production" console warning on the live site.
 - **Accessibility:** the 6 form `<label>`s aren't associated with their inputs (`for`/`id` missing).
 - **Unused files served publicly:** 10 unused images, including 3 screenshots of older site versions (`Untitled.jpg`, `u.jpg`, `th.jpg`) that show outdated testimonial wording.
@@ -106,3 +116,4 @@ Nothing on the site may reference, name, imply or link to the third-party academ
 
 ## Session log
 - 2026-09-26: Phase 0 complete (stack mapped, capability check, Section 0 image audit found the 0.1 violation). Stopped for Caleb's go-ahead.
+- 2026-09-26: Caleb answered the Phase 0 questions (see Decisions). 0.1 implemented on the branch; stopped for approval before merging to `main`.
