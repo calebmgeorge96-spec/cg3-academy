@@ -420,6 +420,7 @@
       overflow: hidden;
       max-width: 100%;
       width: 100%;
+      position: relative;
     }
     .cred-scroll {
       display: flex; gap: 64px; align-items: center;
@@ -438,6 +439,29 @@
       letter-spacing: 0.16em; text-transform: uppercase; color: rgba(245,245,243,0.5);
     }
     .cred-dot { width: 4px; height: 4px; background: #C9A24A; border-radius: 50%; flex-shrink: 0; }
+    /* Ticker pauses on hover, while anything in it has focus, or via the pause button (WCAG 2.2.2) */
+    .cred-strip:hover .cred-scroll, .cred-strip:focus-within .cred-scroll, .cred-strip.paused .cred-scroll { animation-play-state: paused; }
+    .cred-toggle {
+      position: absolute; top: 0; right: 0; bottom: 0; width: 60px; padding: 0 0 0 16px;
+      display: flex; align-items: center; justify-content: center;
+      border: none; cursor: pointer; color: rgba(245,245,243,0.5);
+      background: linear-gradient(to right, rgba(10,10,10,0), #0A0A0A 45%);
+    }
+    @media (hover: hover) { .cred-toggle:hover { color: #C9A24A; } }
+    .cred-toggle .icon-play, .cred-strip.paused .cred-toggle .icon-pause { display: none; }
+    .cred-strip.paused .cred-toggle .icon-play { display: block; }
+
+    /* Reduced motion: no ticker (all credentials shown once, wrapped), no fade-ins, pulses or hover lifts */
+    @media (prefers-reduced-motion: reduce) {
+      .fade-up, .fade-left, .fade-right, .scale-in, .fade-in { opacity: 1; transform: none; transition: none; }
+      .cred-scroll { animation: none; width: auto; flex-wrap: wrap; justify-content: center; gap: 12px 40px; padding: 20px 24px; }
+      .cred-item[aria-hidden="true"], .cred-toggle { display: none; }
+      .urgency-dot { animation: none; }
+      #hero [style*="scrollPulse"] { animation: none !important; }
+      .card-elevated, .card-package, .testi-card, .photo-treatment img, .btn-primary, .btn-outline, .btn-primary::after { transition: none; }
+      .card-elevated:hover, .card-package:hover, .testi-card:hover, .photo-treatment:hover img, .btn-primary:hover, .btn-outline:hover { transform: none; }
+      #fab, #fab.fab-hidden { transition: none; transform: none; }
+    }
   </style>
 </head>
 <body>
@@ -572,16 +596,20 @@
       <div class="cred-item"><span class="cred-dot"></span>Played vs Chicago Fire</div>
       <div class="cred-item"><span class="cred-dot"></span>St. Pete Aztecs UPSL</div>
       <!-- duplicate for seamless loop -->
-      <div class="cred-item"><span class="cred-dot"></span>FGCU Div. I NCAA</div>
-      <div class="cred-item"><span class="cred-dot"></span>2× A-Sun Champion</div>
-      <div class="cred-item"><span class="cred-dot"></span>TB Rowdies U-23 PDL</div>
-      <div class="cred-item"><span class="cred-dot"></span>Kaw Valley FC · Sporting KC Affiliate</div>
-      <div class="cred-item"><span class="cred-dot"></span>Lakeland Tropics · USL League Two</div>
-      <div class="cred-item"><span class="cred-dot"></span>3× NCAA Tournament</div>
-      <div class="cred-item"><span class="cred-dot"></span>Played vs NYCFC</div>
-      <div class="cred-item"><span class="cred-dot"></span>Played vs Chicago Fire</div>
-      <div class="cred-item"><span class="cred-dot"></span>St. Pete Aztecs UPSL</div>
+      <div class="cred-item" aria-hidden="true"><span class="cred-dot"></span>FGCU Div. I NCAA</div>
+      <div class="cred-item" aria-hidden="true"><span class="cred-dot"></span>2× A-Sun Champion</div>
+      <div class="cred-item" aria-hidden="true"><span class="cred-dot"></span>TB Rowdies U-23 PDL</div>
+      <div class="cred-item" aria-hidden="true"><span class="cred-dot"></span>Kaw Valley FC · Sporting KC Affiliate</div>
+      <div class="cred-item" aria-hidden="true"><span class="cred-dot"></span>Lakeland Tropics · USL League Two</div>
+      <div class="cred-item" aria-hidden="true"><span class="cred-dot"></span>3× NCAA Tournament</div>
+      <div class="cred-item" aria-hidden="true"><span class="cred-dot"></span>Played vs NYCFC</div>
+      <div class="cred-item" aria-hidden="true"><span class="cred-dot"></span>Played vs Chicago Fire</div>
+      <div class="cred-item" aria-hidden="true"><span class="cred-dot"></span>St. Pete Aztecs UPSL</div>
     </div>
+    <button type="button" class="cred-toggle" aria-pressed="false" aria-label="Pause the credentials ticker">
+      <svg class="icon-pause" width="14" height="14" viewBox="0 0 14 14" fill="currentColor" aria-hidden="true"><rect x="2" y="1" width="3.5" height="12"/><rect x="8.5" y="1" width="3.5" height="12"/></svg>
+      <svg class="icon-play" width="14" height="14" viewBox="0 0 14 14" fill="currentColor" aria-hidden="true"><path d="M3 1l10 6-10 6z"/></svg>
+    </button>
   </div>
 
 
@@ -1131,6 +1159,10 @@
     onScroll();
 
     function fastScrollTo(targetY) {
+      if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        window.scrollTo(0, targetY);
+        return;
+      }
       const startY = window.pageYOffset;
       const distance = targetY - startY;
       const duration = Math.min(600, Math.max(280, Math.abs(distance) * 0.45));
@@ -1161,6 +1193,16 @@
         target.focus({ preventScroll: true });
       });
     });
+
+    // Credentials ticker pause button
+    const credStrip = $('.cred-strip');
+    const credToggle = $('.cred-toggle');
+    if (credStrip && credToggle) {
+      credToggle.addEventListener('click', () => {
+        const paused = credStrip.classList.toggle('paused');
+        credToggle.setAttribute('aria-pressed', String(paused));
+      });
+    }
 
     // Floating "Book now" link: hidden while any part of the booking section is on screen
     if (fab && booking && 'IntersectionObserver' in window) {
