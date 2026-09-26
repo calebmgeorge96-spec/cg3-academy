@@ -151,10 +151,10 @@
       -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
     }
 
-    #nav { transition: background 0.4s ease, box-shadow 0.4s ease; }
+    /* Scrolled header is fully opaque and switches instantly, so page content never shows through behind it */
+    #nav { transition: box-shadow 0.4s ease; }
     #nav.scrolled {
-      background: rgba(0,0,0,0.94);
-      backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+      background: #0A0A0A;
       box-shadow: 0 1px 0 rgba(201,162,74,0.18);
     }
 
@@ -290,22 +290,33 @@
     .nav-link:hover { color: #F5F5F3; }
     .nav-link:hover::after { width: 100%; }
 
-    /* Header call / text links */
-    .nav-phone { display: flex; align-items: center; gap: 10px; flex-shrink: 0; white-space: nowrap; }
+    /* Header call / text: one joined, gold-outlined unit (call segment + TEXT segment) */
+    .nav-phone { display: inline-flex; align-items: stretch; flex-shrink: 0; white-space: nowrap; border: 1px solid #C9A24A; }
     .nav-phone a {
       display: inline-flex; align-items: center; gap: 8px; min-height: 44px;
       font-family: 'Inter', sans-serif; font-weight: 600; text-decoration: none;
-      transition: color 0.2s ease, border-color 0.2s ease;
+      transition: color 0.15s ease, background 0.15s ease;
     }
-    .nav-phone-call { font-size: 13px; letter-spacing: 0.04em; color: #F5F5F3; }
+    .nav-phone-call { padding: 0 12px; font-size: 13px; letter-spacing: 0.04em; color: #F5F5F3; }
     .nav-phone-text {
-      font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase;
-      color: #C9A24A; border: 1px solid rgba(201,162,74,0.45); padding: 0 14px;
+      padding: 0 14px; font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase;
+      background: #C9A24A; color: #0A0A0A;
     }
     @media (hover: hover) {
       .nav-phone-call:hover { color: #C9A24A; }
-      .nav-phone-text:hover { border-color: #C9A24A; }
+      .nav-phone-text:hover { background: #d4af5a; }
     }
+    /* From 640px the gold "Book Session" button sits beside it, so TEXT becomes outlined there */
+    @media (min-width: 640px) {
+      .nav-phone-text { background: transparent; color: #C9A24A; border-left: 1px solid #C9A24A; }
+    }
+    @media (min-width: 640px) and (hover: hover) {
+      .nav-phone-text:hover { background: rgba(201,162,74,0.12); }
+    }
+    /* Header "Book Session" stays hidden below 640px (the floating BOOK NOW button covers mobile).
+       Pinned here because .btn-primary's display rule otherwise competes with Tailwind's "hidden". */
+    @media (max-width: 639px) { #nav .nav-book { display: none; } }
+
     /* Tryout prep bar (3.1): auto-hides from 2026-11-08 America/New_York. Delete with its markup and script after that date. */
     .tryout-bar { position: absolute; top: 80px; left: 0; right: 0; z-index: 20; display: flex; align-items: center; justify-content: center; min-height: 44px; padding: 0 56px; background: #C9A24A; }
     .tryout-bar[hidden] { display: none; }
@@ -315,9 +326,6 @@
     #hero.tryout-on .hero-content { padding-top: 208px; }
     @media (max-width: 600px) { #hero.tryout-on .hero-content { padding-top: 212px !important; } }
 
-    /* Header "Book Session" stays hidden below 640px (the floating BOOK NOW button covers mobile).
-       Pinned here because .btn-primary's display rule otherwise competes with Tailwind's "hidden". */
-    @media (max-width: 639px) { #nav .nav-book { display: none; } }
 
     .badge {
       display: inline-block; padding: 3px 10px; font-size: 9px; font-weight: 700;
@@ -342,11 +350,9 @@
       -webkit-tap-highlight-color: rgba(201,162,74,0.18);
     }
 
-    /* Mobile perf: backdrop-filter blur is the #1 cause of scroll jank on iOS Safari.
-       Replace with a solid bg on small screens. Also shorten fade-up animations so
-       they don't pile up while the page is scrolling between sections. */
+    /* Mobile perf: shorten fade-up animations so they don't pile up while the page
+       is scrolling between sections. (The scrolled header is solid at every width, no blur.) */
     @media (max-width: 768px) {
-      #nav.scrolled { backdrop-filter: none; -webkit-backdrop-filter: none; background: rgba(0,0,0,0.97); }
       .fade-up,.fade-left,.fade-right,.scale-in,.fade-in { transition: opacity 0.4s ease, transform 0.4s ease; }
       a[href^="#"], .btn-primary, .btn-outline { -webkit-tap-highlight-color: transparent; }
     }
@@ -1115,7 +1121,7 @@
     const formHeader = $('#form-header');
 
     function onScroll() {
-      const scrolled = window.scrollY > 60;
+      const scrolled = window.scrollY > 0;
       if (nav) nav.classList.toggle('scrolled', scrolled);
       if (stickyCta && window.innerWidth < 640) {
         stickyCta.classList.toggle('show', window.scrollY > window.innerHeight * 0.8);
