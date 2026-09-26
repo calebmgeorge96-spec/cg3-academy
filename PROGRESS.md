@@ -17,7 +17,7 @@
   - No `package.json`, framework or build config in the repo.
   - Vercel team "CG3's projects" has no cg3-academy project, and cg3academy.com is not among its domains.
   - GitHub reports `has_pages: true` for the repo, and `CNAME` = `cg3academy.com`.
-- An open, unmerged Cloudflare Workers PR exists: https://github.com/calebmgeorge96-spec/cg3-academy/pull/1 (bot-generated; adds `wrangler.jsonc` + `.gitignore`). It is not part of the current deploy. See 🔴 NEEDS CALEB.
+- Cloudflare: a bot-generated Workers PR (https://github.com/calebmgeorge96-spec/cg3-academy/pull/1) was never merged, and the site is not hosted there. Caleb deleted the `cg3-academy` Worker on 2026-09-26. Its workers.dev production URL had still been serving an April build that included the 0.1 photo, because builds from `main` had been failing. Caleb's reviewer verified that the production, commit-preview and branch-preview URLs now return 404. PR #1 closed 2026-09-26.
 
 ## Key values
 | Key | Value | Where it lives |
@@ -38,10 +38,12 @@ Nothing on the site may reference, name, imply or link to the third-party academ
 | # | Tier | Audit finding → task | Status | Commit | Note |
 |---|------|----------------------|--------|--------|------|
 | 0 | Section 0 | Map repo, capability check, confirm stack, create PROGRESS.md | Done | [pre-purge commit] | Stack corrected: static HTML on GitHub Pages, not Astro/Vercel. |
-| 0.1 | 🔴 Hard constraint | Remove the photo showing the third-party academy's kit. `CG3 Assets/Pictures/IMG_6632.jpg` was the 4th photo-strip cell ("Caleb coaching young players"). Both kids wore that academy's crest. Removed from the markup **and** the file deleted. | Done. **Live** 2026-09-26 (Pages run #53). Caleb verified on his phone: strip correct, old photo URL 404s. | [pre-purge commit] | Per Caleb (option b), the 4th cell is now the unused game photo `IMG_4069.JPG` (FGCU white kit, on the ball), `object-position:62% 40%`, alt "Caleb FGCU attacking with the ball". It's a temporary stand-in: Caleb will supply a real coaching photo in plain or CG3 kit within ~2 weeks. html-validate: 7 errors = baseline. Console clean, no overflow at 1440/390. |
+| 0.1 | 🔴 Hard constraint | Remove the photo showing the third-party academy's kit ("the 0.1 photo"). It was the 4th photo-strip cell ("Caleb coaching young players"), and both kids wore that academy's crest. Removed from the markup **and** the file deleted. | Done. **Live** 2026-09-26 (Pages run #53). Caleb verified on his phone: strip correct, old photo URL 404s. | [pre-purge commit] | Per Caleb (option b), the 4th cell is now the unused game photo `IMG_4069.JPG` (FGCU white kit, on the ball), `object-position:62% 40%`, alt "Caleb FGCU attacking with the ball". It's a temporary stand-in: Caleb will supply a real coaching photo in plain or CG3 kit within ~2 weeks. html-validate: 7 errors = baseline. Console clean, no overflow at 1440/390. |
 | 0.1b | 🔴 Hard constraint (Caleb, same merge as 0.1) | Keep PROGRESS.md off cg3academy.com | Done. **Live**; Caleb verified `/PROGRESS.md` 404s. | [pre-purge commit] | Added `_config.yml` with `exclude: [PROGRESS.md]`. Pages builds this repo with Jekyll (every deploy runs `actions/jekyll-build-pages`, "Build with Jekyll"). Verified locally with the same `github-pages` 232 gem: without the exclude, Jekyll renders `PROGRESS.md` into a page; with it, the log shows `EntryFilter: excluded /PROGRESS.md`. `index.html`, `CNAME`, `robots.txt` and `sitemap.xml` are byte-identical in the output. **Expected live result:** `/PROGRESS.md`, `/PROGRESS.html` and `/PROGRESS` all return GitHub Pages' 404. |
-| 0.2 | 🔴 Hard constraint | Purge `IMG_6632.jpg` from git history (Caleb approved the rewrite, 2026-09-26) | Done 2026-09-26. Force-pushed `main`, this branch and `cloudflare/workers-autoconfig`; Pages run #54 succeeded. | force-push (`main` [pre-purge commit] → [pre-purge commit]) | See "0.2 purge record" below. GitHub-side cached views still need Caleb's Support ticket. |
-| 1.1 | 🔴 Phase 1 | Dead Gumroad "Buy Now" links (5 products + $119 bundle all point at bare `https://gumroad.com`) | Not started | — | **Caleb: the products don't exist yet.** Delete the whole Digital Programs section (`#products`, its `<style>` block and the commented-out "Programs" nav links in the header and FAB) from the source, not just hide it. Remove "or a digital program" from the booking intro. **To restore later:** the full section is in git history, e.g. `git show [pre-purge commit]:index.html` (lines ~682–820; `[pre-purge commit]` = the pre-audit `main` tip, formerly `[pre-purge commit]`), ready to re-add with real Gumroad product URLs. |
+| 0.2 | 🔴 Hard constraint | Purge the 0.1 photo from git history (Caleb approved the rewrite, 2026-09-26) | Done 2026-09-26. Force-pushed `main`, this branch and `cloudflare/workers-autoconfig`; Pages run #54 succeeded. | force-push (`main` → [pre-purge commit]) | See "0.2 purge record" below. GitHub-side cached views still need Caleb's Support ticket (details in chat, not here). |
+| 0.2b | 🔴 Hard constraint (Caleb) | Close PR #1 ("Not hosting on Cloudflare. Closing.") and delete `cloudflare/workers-autoconfig` before 0.3 | Partial. PR closed 2026-09-26 19:05 UTC. **Branch delete blocked:** this session's GitHub proxy returns HTTP 403 on ref deletion (4 attempts; policy, not a network error). | — | 🔴 Caleb deletes the branch (the "Delete branch" button on the closed PR #1 page). `refs/pull/1/head` survives the close by design (goes on the Support ticket). GitHub stopped advertising `refs/pull/1/merge` once the PR closed; before that it still pointed at the pre-purge merge commit (it wasn't recomputed after 0.2). |
+| 0.3 | 🔴 Privacy (Caleb, 2026-09-26) | Scrub the personal Gmail (author/committer emails on 52 commits, one commit message, the fragment in PROGRESS.md) and the MacBook-local author email, plus all pre-purge commit IDs, from history. Rewrite `main` + this branch only. | In progress. Step 1 (this file) done. Rehearsal done. Real run waits on the 0.2b branch deletion. | — | Mailmap → `Caleb George <277883012+calebmgeorge96-spec@users.noreply.github.com>`. Text/message replacements: Gmail → "Caleb's inbox", Gmail fragment → "the personal Gmail", each old ID → "[pre-purge commit]". The mailmap and expressions files live in the scratchpad only (never committed). Gates a–f per Caleb's spec. |
+| 1.1 | 🔴 Phase 1 | Dead Gumroad "Buy Now" links (5 products + $119 bundle all point at bare `https://gumroad.com`) | Not started | — | **Caleb: the products don't exist yet.** Delete the whole Digital Programs section (`#products`, its `<style>` block and the commented-out "Programs" nav links in the header and FAB) from the source, not just hide it. Remove "or a digital program" from the booking intro. **To restore later:** the full section is in git history, e.g. `git show [pre-purge commit]:index.html` (lines ~682–820; `[pre-purge commit]` = the pre-audit `main` tip), ready to re-add with real Gumroad product URLs. |
 | 1.2 | 🔴 Phase 1 | Add (813) 351-0034: header nav link (visible on mobile too; the nav "Book Session" button is hidden below 640px), a line under the submit button, and the phone as the primary Contact-block row | Not started | — | The Contact-block part replaces the "Email" row, which is the only code change 1.3 and 1.4 need. Proposed: "call" wording → `tel:`, "text" wording → `sms:` (confirm at task time). |
 | 1.3 | 🔴 Phase 1 | Kill the dead inbox everywhere | Not started | — | Repo-wide grep: 1 hit only (Contact block, plain text, not a `mailto`). None in meta, JSON-LD, comments, form config or history-relevant files. The form recipient is set in the **Formspree dashboard**, not the repo, so there is nothing to repoint in code → NEEDS CALEB to verify in Formspree. |
 | 1.4 | 🔴 Phase 1 | Never display the personal Gmail; the phone replaces the Email row | Not started | — | Gmail currently has 0 hits in the repo, and that is the expected end state: the "form config" is on Formspree's side. If a 2nd row is needed, link to `#booking`, not an address. |
@@ -58,63 +60,36 @@ Nothing on the site may reference, name, imply or link to the third-party academ
 | 3.4 | 🟡 Phase 3 | Remove the hero scarcity line (L395–398); keep the booking-section one (L925) | Not started | — | |
 | 3.5 | 🟡 Phase 3 | Replace "within 24 hours" promises with a text-first line (e.g. "Text for same-day response.") | Not started | — | Hits: Contact "Response Time" (L954), form subhead (L968), success message (L973). Also review L1020 ("…will reach out to confirm availability and location"). |
 | — | Phase review | Phase 3 boundary review | Not started | — | |
-| 4 | Phase 4 | Full review as a separate engineer: greps, links, `tel:`/`sms:`, form recipient, validation, console, 390px + desktop; list of noticed-not-fixed | Not started | — | Grep targets: `coachcaleb`, `@cg3academy.com`, "St. Pete" (except the "St. Pete Aztecs UPSL" credential, kept by Caleb), "Clearwater", "Brandon", `the personal Gmail` (the email, not the GitHub username `calebmgeorge96-spec`; expect 0 since the recipient lives in Formspree), the third-party academy name (case-insensitive), bare `href="https://gumroad.com"`. Scope: every file except this PROGRESS.md, which records the old city names on purpose. |
+| 4 | Phase 4 | Full review as a separate engineer: greps, links, `tel:`/`sms:`, form recipient, validation, console, 390px + desktop; list of noticed-not-fixed | Not started | — | Grep targets: `coachcaleb`, `@cg3academy.com`, "St. Pete" (except the "St. Pete Aztecs UPSL" credential, kept by Caleb), "Clearwater", "Brandon", the personal Gmail address (exact string is in Caleb's audit; not the GitHub username `calebmgeorge96-spec`; expect 0 since the recipient lives in Formspree), the third-party academy name (case-insensitive), bare `href="https://gumroad.com"`. Scope: every file except this PROGRESS.md, which records the old city names on purpose. |
 
 ## 0.2 purge record (run 2026-09-26)
-**What was purged:** the single blob `CG3 Assets/Pictures/IMG_6632.jpg`, added in old `[pre-purge commit]` (2026-04-28, "Add image assets so photos display on live site") and deleted in old `[pre-purge commit]`. The third-party academy's name appeared nowhere in the text of history (0 hits in diffs, paths or messages), so the photo was the only trace.
+**What was purged:** the 0.1 photo, a single file that was added to the repo on 2026-04-28 and deleted by task 0.1 on 2026-09-26. The third-party academy's name appeared nowhere in the text of history (0 hits in diffs, paths or messages), so the photo was the only trace.
 
-**Commands run** (fresh `git clone --mirror` in the scratchpad):
-```
-git bundle create ../pre-purge-backup.bundle --all          # 33 MB, verified; container-only
-git filter-repo --invert-paths --path 'CG3 Assets/Pictures/IMG_6632.jpg'
-git push origin --force-with-lease=main:<old> main
-git push origin --force-with-lease=claude/nice-mccarthy-p1pb8x:<old> claude/nice-mccarthy-p1pb8x
-git push origin --force-with-lease=cloudflare/workers-autoconfig:<old> cloudflare/workers-autoconfig
-```
+**Method** (fresh `git clone --mirror` in the scratchpad): a verified 33 MB `git bundle` backup (container-only); `git filter-repo --invert-paths --path <the 0.1 photo>`; then one `git push --force-with-lease=<branch>:<old tip>` per branch for `main`, this branch and `cloudflare/workers-autoconfig`.
+
 **Gates, all passed before any push:**
 1. 0 photo objects left in history.
 2. `main` tree unchanged (`[pre-purge commit]`), so the live site is byte-identical.
 3. The Cloudflare branch differs from `main` by only `.gitignore` + `wrangler.jsonc`.
 
-**Push results:** no branch-protection block.
-
-| Ref | Old | New |
-|---|---|---|
-| `main` | [pre-purge commit] | [pre-purge commit] |
-| `claude/nice-mccarthy-p1pb8x` | [pre-purge commit] | [pre-purge commit] |
-| `cloudflare/workers-autoconfig` | [pre-purge commit] | [pre-purge commit] |
-| `refs/pull/1/head` (moved by GitHub) | [pre-purge commit] | [pre-purge commit] |
+**Push results:** no branch-protection block. New tips: `main` → `[pre-purge commit]`, this branch → `[pre-purge commit]`, `cloudflare/workers-autoconfig` → `[pre-purge commit]`. GitHub moved `refs/pull/1/head` to `[pre-purge commit]`.
 
 **Verified after:**
 - A fresh clone of all branches has 0 photo objects and 0 commits touching the path.
-- PR #1 is open with 2 files changed (`.gitignore`, `wrangler.jsonc`), base `[pre-purge commit]`.
+- PR #1 showed 2 files changed (`.gitignore`, `wrangler.jsonc`) on base `[pre-purge commit]`. **This check covered only the PR diff.** It missed that `refs/pull/1/merge` still pointed at the pre-purge merge commit, and that a Cloudflare Worker was still serving an old build with the photo. Both were found afterwards (see Stack decision and 0.2b).
 - Pages run #54 for `[pre-purge commit]` succeeded (18:37 UTC).
-- 57 of 59 commits got new IDs; the 2 commits before `[pre-purge commit]` kept theirs.
+- 57 of 59 commits got new IDs; the 2 oldest commits (before the photo was added) kept theirs.
 - The session checkout was reset to the new history, unshallowed, and its stale local `main` repointed and garbage-collected (0 photo objects locally).
 
-**Old → new IDs referenced in this file:**
-
-| Commit | Old | New |
-|---|---|---|
-| pre-audit `main` tip | [pre-purge commit] | [pre-purge commit] |
-| Phase 0 | [pre-purge commit] | [pre-purge commit] |
-| 0.1 | [pre-purge commit] | [pre-purge commit] |
-| 0.1b | [pre-purge commit] | [pre-purge commit] |
-| first changed (photo added) | [pre-purge commit] | [pre-purge commit] |
-
-The full map is in `filter-repo/commit-map` of the scratch mirror, which is container-only and lost when the session ends.
+**Post-0.2 IDs used in this file:** pre-audit `main` tip `[pre-purge commit]` · Phase 0 `[pre-purge commit]` · 0.1 `[pre-purge commit]` · 0.1b `[pre-purge commit]` · the commit that first added the photo, rewritten `[pre-purge commit]`. Pre-purge IDs are deliberately **not** recorded in this repo; Caleb has them (chat, 2026-09-26).
 
 ## 🔴 NEEDS CALEB
 - [x] ~~0.1 approve + confirm IMG_4069 is Caleb~~: done, live 2026-09-26.
 - [x] ~~0.1b check~~: Caleb verified 2026-09-26 (strip correct; `/PROGRESS.md` and the old photo URL 404).
 - [x] ~~0.2 go~~: run 2026-09-26 (see purge record).
-- [ ] **0.2 re-clone:** every local clone of this repo (your laptop, other Claude sessions) must be re-cloned, or hard-reset with `git fetch origin && git reset --hard origin/main`. **Never `git pull` an old clone; that merges the old history, photo included, back in.** Any old clone with `[pre-purge commit]` or `[pre-purge commit]` on `main` is pre-purge.
-- [ ] **0.2 GitHub Support ticket** (https://support.github.com/request): ask them to remove cached views and dereference/garbage-collect the old commits for `calebmgeorge96-spec/cg3-academy` after a sensitive-data history rewrite. Include:
-  - Affected PR: #1.
-  - First changed commit (old ID): `[pre-purge commit]`.
-  - Old ref tips: `main` [pre-purge commit]; `claude/nice-mccarthy-p1pb8x` [pre-purge commit]; `cloudflare/workers-autoconfig` [pre-purge commit]; `refs/pull/1/merge` [pre-purge commit].
-  - No LFS objects.
-  - Until Support acts, the old commits stay viewable on github.com to anyone who has their exact IDs.
+- [ ] **0.2b** Delete branch `cloudflare/workers-autoconfig` (the "Delete branch" button on closed PR #1). This session can't: HTTP 403 on ref deletion. **Blocks the 0.3 push.**
+- [ ] **Re-clone after 0.3:** every local clone of this repo (your laptop, other Claude sessions) must be re-cloned, or hard-reset with `git fetch origin && git reset --hard origin/main`. **Never `git pull` an old clone; that merges old history (photo and Gmail) back in.** Any clone fetched before the 0.3 push is stale.
+- [ ] **One GitHub Support ticket after 0.3** (https://support.github.com/request): remove cached views and garbage-collect the old commits after the 0.2 and 0.3 history rewrites. The ref tips, first changed commits, PR #1 refs and the no-LFS confirmation were given to Caleb **in chat only**. Until Support acts, old commits stay viewable on github.com to anyone who has their exact IDs, including everything reachable from PR #1's surviving head ref.
 - [ ] **0.1 follow-up (~2 weeks):** send a real coaching photo from your own sessions (plain or CG3 kit, no third-party crests) to replace the strip's 4th cell.
 - [x] ~~0.1 history~~: Caleb approved rewriting `main` to purge the file → task 0.2.
 - [x] ~~1.1~~: Products don't exist yet → remove the section (task 1.1).
@@ -123,7 +98,8 @@ The full map is in `filter-repo/commit-map` of the scratch mirror, which is cont
 - [ ] **1.6** Confirm "50+ Players Trained" is accurate.
 - [ ] **3.3** Training park names (2–3) when decided.
 - [ ] **3.1** When should the tryout bar come down? (Suggest the first week of November.)
-- [ ] **Deploy.** Merge this branch to `main` for GitHub Pages to publish (Caleb approves each merge). Also decide on Cloudflare PR #1: it's clean now (2 files), so close it or intentionally move hosting, at your convenience.
+- [x] ~~Cloudflare~~: Worker deleted by Caleb (reviewer verified 404s); PR #1 closed 2026-09-26.
+- [ ] **Deploy.** Merge this branch to `main` for GitHub Pages to publish (Caleb approves each merge).
 - [ ] **Trust stats (rest):** confirm "10+ Years Competing" and the hero's "MLS Level Opposition" stat are how you want them worded.
 - [ ] **Later.** Set up the proper domain email, then swap it back into the Contact block (and schema, if wanted).
 
@@ -134,10 +110,10 @@ The full map is in `filter-repo/commit-map` of the scratch mirror, which is cont
 ## Capability check (Section 0, 2026-09-26)
 | Capability | Status | Substitute / note |
 |---|---|---|
-| git | ✅ | Branch `claude/nice-mccarthy-p1pb8x`, up to date with `origin/main` at start (`[pre-purge commit]`, now `[pre-purge commit]` after the 0.2 rewrite). Full (non-shallow) clone since 0.2. |
+| git | ✅ | Branch `claude/nice-mccarthy-p1pb8x`, up to date with `origin/main` at start (pre-audit tip, now `[pre-purge commit]` after the 0.2 rewrite). Full (non-shallow) clone since 0.2. Ref **deletion** is blocked by the session's GitHub proxy (HTTP 403). |
 | Build | ➖ none exists | "Build green" = (1) `html-validate` (standard preset) shows **no new errors** vs baseline, (2) page loads with **zero console errors**, (3) **no horizontal overflow** at 390px and 1440px. Baseline: 7 pre-existing errors, all `<style>` inside `<body>` (L513, 534, 679, 820, 898, 1028, 1097). |
 | Screenshots (1440 + 390) | ✅ with a workaround | Playwright + Chromium from the session scratchpad (not committed). `cdn.tailwindcss.com` is blocked by the sandbox network policy, so the harness compiles the same Tailwind v3 config locally and substitutes it for the CDN script. Google Fonts are fetched via Node and handed to the browser. **Caveat:** CSS cascade order may differ slightly from the live CDN. |
-| Live site check | ❌ | cg3academy.com, formspree.io and *.github.io are blocked from this sandbox. Can't verify the live deploy or send a test submission; Caleb verifies. |
+| Live site check | ❌ | cg3academy.com, formspree.io, *.github.io and *.workers.dev are blocked from this sandbox. Anything not reachable from here is reported as **UNVERIFIED** until Caleb checks it. |
 | Vercel preview | n/a | The site isn't on Vercel. Preview = local server + screenshots. |
 | Deploy | ✅ with approval | GitHub Pages publishes on push to `main` (branch deploy, Jekyll build). Caleb approves each merge. Deploy runs are visible in GitHub Actions as "pages build and deployment". |
 | Pages build check | ✅ | `gem install github-pages -v 232` into the scratchpad (`GEM_HOME`), then `bundle exec jekyll build` with `LANG=C.UTF-8 NO_NETWORK=1` on a copy of the repo. Needs a Gemfile with `gem "github-pages", "232", group: :jekyll_plugins` (scratch only, **not** committed). Rendering any `.md` page through the default theme fails offline (the GitHub metadata lookup is blocked in the sandbox); that's sandbox-only. |
@@ -149,21 +125,26 @@ The full map is in `filter-repo/commit-map` of the scratch mirror, which is cont
 - 2026-09-26: 1.3 and 1.4 need no separate code change beyond 1.2's Contact-row swap; they become verification tasks (grep + Formspree).
 - 2026-09-26: This file is public, so the third-party academy's name and the personal Gmail are never written here, in commits or in comments.
 - 2026-09-26 (Caleb): 0.1 goes first, as its own commit, and merges to `main` as soon as it's approved, ahead of the other phases. The 4th strip cell uses an unused repo game photo until a real coaching photo arrives.
-- 2026-09-26 (Caleb): approved rewriting `main` to purge `IMG_6632.jpg` (task 0.2), only after 0.1 is live and after a walkthrough of the commands.
+- 2026-09-26 (Caleb): approved rewriting `main` to purge the 0.1 photo (task 0.2), only after 0.1 is live and after a walkthrough of the commands.
 - 2026-09-26 (Caleb): Digital Programs is removed from the source entirely (products not built yet). Restore from git history later.
 - 2026-09-26 (Caleb): 3.3 uses honest neutral wording on the page; `[[TBD]]` stays in code + this file.
 - 2026-09-26 (Caleb): keep the "St. Pete Aztecs UPSL" credential; excluded from the Phase 4 check.
 - 2026-09-26 (Caleb): PROGRESS.md must not be served on cg3academy.com → `_config.yml` `exclude` (task 0.1b), in the same merge as 0.1.
 - 2026-09-26 (Caleb): added tasks 1.5 (image optimization) and 1.6 (trust stats). I placed them at the end of Phase 1 because both affect paid mobile traffic right away.
+- 2026-09-26 (Caleb): approval pace is **per task**: one commit per task, stop after each. Locked.
+- 2026-09-26 (Caleb): anything I can't reach from the sandbox (the live site, workers.dev, Formspree, GitHub-side caches) is reported as **UNVERIFIED**, never as passed. "Checked" means checked from here.
+- 2026-09-26 (Caleb): close PR #1 and delete its branch before 0.3; 0.3 rewrites only `main` and this branch.
+- 2026-09-26 (Caleb): task 0.3 approved (Gmail + pre-purge IDs scrub). Old IDs and Support-ticket details go to Caleb in chat only, never into a file.
 
 ## Gotchas & dead ends
 - The Digital Programs section (`#products`) was already hidden (`display:none`) before this audit. Its dead Gumroad links still exist in source.
 - The `#sticky-cta` element was removed earlier, but the JS still references it (harmless null-guarded).
 - Mobile nav is the floating "BOOK NOW" FAB (`#fab`). The header "Book Session" button is `hidden sm:inline-block`, so below 640px the header shows only the logo.
-- Line numbers above refer to `index.html` at commit `[pre-purge commit]` (pre-audit; formerly `[pre-purge commit]`) and will drift as tasks land.
+- Line numbers above refer to `index.html` at commit `[pre-purge commit]` (pre-audit tip) and will drift as tasks land.
 - The sandbox proxy blocks cg3academy.com. Don't retry; it's policy, not an outage.
 - The original session checkout was a **shallow** clone. It was unshallowed during 0.2, but a new session's checkout may be shallow again; use `git clone --mirror` for any history work.
-- History was rewritten on 2026-09-26 (0.2). Commit IDs from before that date (in chat logs, old notes) no longer exist on the branches; see the old → new table in the purge record.
+- History was rewritten on 2026-09-26 (0.2, and 0.3 once it runs). Commit IDs from before a rewrite no longer exist on the branches, and pre-purge IDs are intentionally not recorded here.
+- A green check on one surface isn't a green check on all of them. For anything containing the removed photo, the surfaces are: branches, PR refs (`refs/pull/*/head` and `/merge`), other hosts built from the repo (e.g. a Cloudflare Worker), and GitHub's caches.
 - GitHub Pages runs the `github-pages` gem's plugins, including `jekyll-optional-front-matter`, so **any** `.md` file in the repo becomes a published page unless excluded. Add new docs to `_config.yml` `exclude` (or give them a leading `_`).
 - Setting `exclude` in Jekyll 3.10 replaces the default exclude list (Gemfile, node_modules, vendor…). None of those exist here; if any get added, list them in `_config.yml` too.
 
@@ -176,7 +157,8 @@ The full map is in `filter-repo/commit-map` of the scratch mirror, which is cont
 
 ## Session log
 - 2026-09-26: Phase 0 complete (stack mapped, capability check, Section 0 image audit found the 0.1 violation). Stopped for Caleb's go-ahead.
-- 2026-09-26: Caleb answered the Phase 0 questions (see Decisions). 0.1 implemented on the branch (old [pre-purge commit], now [pre-purge commit]); stopped for approval.
-- 2026-09-26: Caleb approved 0.1 and asked for PROGRESS.md to be excluded from the site in the same merge (0.1b). Fast-forwarded `main` [pre-purge commit] → [pre-purge commit] (old IDs; now [pre-purge commit] → [pre-purge commit]); Pages run #53 succeeded.
+- 2026-09-26: Caleb answered the Phase 0 questions (see Decisions). 0.1 implemented on the branch (now `[pre-purge commit]`); stopped for approval.
+- 2026-09-26: Caleb approved 0.1 and asked for PROGRESS.md to be excluded from the site in the same merge (0.1b). Fast-forwarded `main` (now `[pre-purge commit]` → `[pre-purge commit]`); Pages run #53 succeeded.
 - 2026-09-26: 0.2 purge planned and rehearsed on a scratch mirror; waiting for Caleb's go.
-- 2026-09-26: Caleb verified 0.1/0.1b live. Ran 0.2: all gates passed, 3 force-pushes succeeded, Pages run #54 green, PR #1 clean. Stopped before 1.1.
+- 2026-09-26: Caleb verified 0.1/0.1b live. Ran 0.2: all gates passed, 3 force-pushes succeeded, Pages run #54 green, PR #1 diff clean (see the caveat in the purge record). Stopped before 1.1.
+- 2026-09-26: Caleb deleted the Cloudflare Worker, set the UNVERIFIED rule, approved closing PR #1 and task 0.3. PR #1 closed; branch deletion blocked (403). 0.3 step 1 (this file) done; rehearsal run; waiting on the branch deletion before the real 0.3 push.
