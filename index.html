@@ -285,6 +285,15 @@
     /* Package buttons land on the form card just below the fixed 80px header */
     #book-form { scroll-margin-top: 96px; }
 
+    /* Skip link: off screen until it receives keyboard focus, then a gold pill above the header */
+    .skip-link {
+      position: fixed; top: -100px; left: 16px; z-index: 300;
+      display: inline-flex; align-items: center; min-height: 44px; padding: 0 20px;
+      background: #C9A24A; color: #0A0A0A; text-decoration: none;
+      font-family: 'Inter', sans-serif; font-size: 12px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
+    }
+    .skip-link:focus { top: 16px; }
+
     .nav-link {
       position: relative; font-size: 11px; font-weight: 600;
       letter-spacing: 0.12em; text-transform: uppercase;
@@ -472,6 +481,9 @@
 </head>
 <body>
 
+  <!-- Skip link: first Tab stop, hidden until focused -->
+  <a href="#main" class="skip-link">Skip to main content</a>
+
   <!-- ══════════════════════════════════════
        MOBILE STICKY CTA
   ══════════════════════════════════════ -->
@@ -512,6 +524,8 @@
   <!-- Floating "Book now" link (phones only; see #fab in the head styles) -->
   <a id="fab" href="#booking" aria-label="Book now">Book now</a>
 
+
+  <main id="main">
 
   <!-- ══════════════════════════════════════
        HERO
@@ -1099,6 +1113,8 @@
       .booking-details .info-item-value  { font-size:14px !important; }
     }
   </style>
+
+  </main>
 
 
   <!-- ══════════════════════════════════════
