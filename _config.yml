@@ -1,0 +1,3 @@
+# GitHub Pages builds this repo with Jekyll. Keep project docs off the live site.
+exclude:
+  - PROGRESS.md

@@ -6,7 +6,7 @@
 **Working branch:** `claude/nice-mccarthy-p1pb8x`. Nothing is live until it is merged to `main`.
 **Goal:** turn local-search and social traffic into booked sessions this week. Primary conversion is a text or call to (813) 351-0034, then the booking form.
 
-> ⚠️ **This file is public.** The repo is public and GitHub Pages serves every file in it, so this file is reachable at `cg3academy.com/PROGRESS.md`. Never write the name of the third-party academy (see Hard constraint) or Caleb's personal email address here, in commit messages or in code comments.
+> ⚠️ **This file is public on GitHub** (public repo), but it is **not** published on cg3academy.com: `_config.yml` excludes it from the GitHub Pages (Jekyll) build. Never write the name of the third-party academy (see Hard constraint) or Caleb's personal email address here, in commit messages or in code comments.
 
 ## Status legend
 `Not started` · `In progress` · `Blocked` · `Done`
@@ -38,7 +38,8 @@ Nothing on the site may reference, name, imply or link to the third-party academ
 | # | Tier | Audit finding → task | Status | Commit | Note |
 |---|------|----------------------|--------|--------|------|
 | 0 | Section 0 | Map repo, capability check, confirm stack, create PROGRESS.md | Done | [pre-purge commit] | Stack corrected: static HTML on GitHub Pages, not Astro/Vercel. |
-| 0.1 | 🔴 Hard constraint | Remove the photo showing the third-party academy's kit. `CG3 Assets/Pictures/IMG_6632.jpg` was the 4th photo-strip cell ("Caleb coaching young players"). Both kids wore that academy's crest. Removed from the markup **and** the file deleted. | Done (on branch). Awaiting Caleb's approval, then merge to `main` immediately. | (0.1 commit) | Per Caleb (option b), the 4th cell is now the unused game photo `IMG_4069.JPG` (FGCU white kit, on the ball), `object-position:62% 40%`, alt "Caleb FGCU attacking with the ball". It's a temporary stand-in: Caleb will supply a real coaching photo in plain or CG3 kit within ~2 weeks. html-validate: 7 errors = baseline. Console clean, no overflow at 1440/390. |
+| 0.1 | 🔴 Hard constraint | Remove the photo showing the third-party academy's kit. `CG3 Assets/Pictures/IMG_6632.jpg` was the 4th photo-strip cell ("Caleb coaching young players"). Both kids wore that academy's crest. Removed from the markup **and** the file deleted. | Done (on branch). Awaiting Caleb's approval, then merge to `main` immediately. | [pre-purge commit] | Per Caleb (option b), the 4th cell is now the unused game photo `IMG_4069.JPG` (FGCU white kit, on the ball), `object-position:62% 40%`, alt "Caleb FGCU attacking with the ball". It's a temporary stand-in: Caleb will supply a real coaching photo in plain or CG3 kit within ~2 weeks. html-validate: 7 errors = baseline. Console clean, no overflow at 1440/390. |
+| 0.1b | 🔴 Hard constraint (Caleb, same merge as 0.1) | Keep PROGRESS.md off cg3academy.com | Done (on branch) | (0.1b commit) | Added `_config.yml` with `exclude: [PROGRESS.md]`. Pages builds this repo with Jekyll (every deploy runs `actions/jekyll-build-pages`, "Build with Jekyll"). Verified locally with the same `github-pages` 232 gem: without the exclude, Jekyll renders `PROGRESS.md` into a page; with it, the log shows `EntryFilter: excluded /PROGRESS.md`. `index.html`, `CNAME`, `robots.txt` and `sitemap.xml` are byte-identical in the output. **Expected live result:** `/PROGRESS.md`, `/PROGRESS.html` and `/PROGRESS` all return GitHub Pages' 404. |
 | 0.2 | 🔴 Hard constraint | Purge `IMG_6632.jpg` from git history on `main` (Caleb approved the rewrite, 2026-09-26) | Not started | — | **Only after 0.1 is live.** Walk Caleb through the exact commands and the effect on Cloudflare PR #1 **before** running anything. |
 | 1.1 | 🔴 Phase 1 | Dead Gumroad "Buy Now" links (5 products + $119 bundle all point at bare `https://gumroad.com`) | Not started | — | **Caleb: the products don't exist yet.** Delete the whole Digital Programs section (`#products`, its `<style>` block and the commented-out "Programs" nav links in the header and FAB) from the source, not just hide it. Remove "or a digital program" from the booking intro. **To restore later:** the full section is in git history, e.g. `git show [pre-purge commit]:index.html` (lines ~682–820), ready to re-add with real Gumroad product URLs. |
 | 1.2 | 🔴 Phase 1 | Add (813) 351-0034: header nav link (visible on mobile too; the nav "Book Session" button is hidden below 640px), a line under the submit button, and the phone as the primary Contact-block row | Not started | — | The Contact-block part replaces the "Email" row, which is the only code change 1.3 and 1.4 need. Proposed: "call" wording → `tel:`, "text" wording → `sms:` (confirm at task time). |
@@ -85,7 +86,8 @@ Nothing on the site may reference, name, imply or link to the third-party academ
 | Screenshots (1440 + 390) | ✅ with a workaround | Playwright + Chromium from the session scratchpad (not committed). `cdn.tailwindcss.com` is blocked by the sandbox network policy, so the harness compiles the same Tailwind v3 config locally and substitutes it for the CDN script. Google Fonts are fetched via Node and handed to the browser. **Caveat:** CSS cascade order may differ slightly from the live CDN. |
 | Live site check | ❌ | cg3academy.com, formspree.io and *.github.io are blocked from this sandbox. Can't verify the live deploy or send a test submission; Caleb verifies. |
 | Vercel preview | n/a | The site isn't on Vercel. Preview = local server + screenshots. |
-| Deploy | 🔴 Caleb | GitHub Pages publishes on merge to `main`. |
+| Deploy | ✅ with approval | GitHub Pages publishes on push to `main` (branch deploy, Jekyll build). Caleb approves each merge. Deploy runs are visible in GitHub Actions as "pages build and deployment". |
+| Pages build check | ✅ | `gem install github-pages -v 232` into the scratchpad (`GEM_HOME`), then `bundle exec jekyll build` with `LANG=C.UTF-8 NO_NETWORK=1` on a copy of the repo. Needs a Gemfile with `gem "github-pages", "232", group: :jekyll_plugins` (scratch only, **not** committed). Rendering any `.md` page through the default theme fails offline (the GitHub metadata lookup is blocked in the sandbox); that's sandbox-only. |
 | Lighthouse | ⚠️ not run | Could be installed from npm and run against the local server, but the scores would be skewed by the CDN/font substitution. Will report as `[[TBD]]` rather than invent numbers. |
 | Form test submission | ❌ | Formspree is unreachable from the sandbox, and a real submission emails Caleb anyway. Verify manually (steps in task 1.3). |
 
@@ -98,6 +100,7 @@ Nothing on the site may reference, name, imply or link to the third-party academ
 - 2026-09-26 (Caleb): Digital Programs is removed from the source entirely (products not built yet). Restore from git history later.
 - 2026-09-26 (Caleb): 3.3 uses honest neutral wording on the page; `[[TBD]]` stays in code + this file.
 - 2026-09-26 (Caleb): keep the "St. Pete Aztecs UPSL" credential; excluded from the Phase 4 check.
+- 2026-09-26 (Caleb): PROGRESS.md must not be served on cg3academy.com → `_config.yml` `exclude` (task 0.1b), in the same merge as 0.1.
 - 2026-09-26 (Caleb): added tasks 1.5 (image optimization) and 1.6 (trust stats). I placed them at the end of Phase 1 because both affect paid mobile traffic right away.
 
 ## Gotchas & dead ends
@@ -106,6 +109,8 @@ Nothing on the site may reference, name, imply or link to the third-party academ
 - Mobile nav is the floating "BOOK NOW" FAB (`#fab`). The header "Book Session" button is `hidden sm:inline-block`, so below 640px the header shows only the logo.
 - Line numbers above refer to `index.html` at commit [pre-purge commit] and will drift as tasks land.
 - The sandbox proxy blocks cg3academy.com. Don't retry; it's policy, not an outage.
+- GitHub Pages runs the `github-pages` gem's plugins, including `jekyll-optional-front-matter`, so **any** `.md` file in the repo becomes a published page unless excluded. Add new docs to `_config.yml` `exclude` (or give them a leading `_`).
+- Setting `exclude` in Jekyll 3.10 replaces the default exclude list (Gemfile, node_modules, vendor…). None of those exist here; if any get added, list them in `_config.yml` too.
 
 ## Noticed but not in the audit (candidates, not scheduled)
 - **Tailwind Play CDN in production:** render-blocking runtime JS, and it logs its own "should not be used in production" console warning on the live site.
@@ -116,4 +121,5 @@ Nothing on the site may reference, name, imply or link to the third-party academ
 
 ## Session log
 - 2026-09-26: Phase 0 complete (stack mapped, capability check, Section 0 image audit found the 0.1 violation). Stopped for Caleb's go-ahead.
-- 2026-09-26: Caleb answered the Phase 0 questions (see Decisions). 0.1 implemented on the branch; stopped for approval before merging to `main`.
+- 2026-09-26: Caleb answered the Phase 0 questions (see Decisions). 0.1 implemented on the branch ([pre-purge commit]); stopped for approval.
+- 2026-09-26: Caleb approved 0.1 and asked for PROGRESS.md to be excluded from the site in the same merge (0.1b). Merging both to `main`.
