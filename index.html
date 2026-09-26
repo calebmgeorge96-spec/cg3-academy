@@ -357,15 +357,22 @@
       a[href^="#"], .btn-primary, .btn-outline { -webkit-tap-highlight-color: transparent; }
     }
 
-    #fab { position:fixed;bottom:max(56px, calc(28px + env(safe-area-inset-bottom)));right:24px;z-index:200;display:flex;flex-direction:column;align-items:flex-end;gap:12px;touch-action:manipulation; }
-    #fab-btn { height:44px;padding:0 20px;border-radius:24px;background:#C9A24A;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 24px rgba(0,0,0,0.45);transition:background 0.15s, transform 0.1s;position:relative;touch-action:manipulation;-webkit-tap-highlight-color:transparent; }
-    #fab-btn:hover { background:#d4af5a; }
-    #fab-btn:active { transform:scale(0.96); background:#b8923f; }
-    #fab-btn.open #fab-label { opacity:0; }
-    #fab-btn.open #fab-close { opacity:1; }
-    #fab-menu { display:flex;flex-direction:column;align-items:flex-end;gap:10px;pointer-events:none;opacity:0;transform:translateY(12px) scale(0.96);transform-origin:bottom right;transition:opacity 0.18s cubic-bezier(0.22,1,0.36,1),transform 0.18s cubic-bezier(0.22,1,0.36,1); }
-    #fab-menu.open { pointer-events:auto;opacity:1;transform:translateY(0) scale(1); }
-    #fab-menu a:active { transform:scale(0.97);opacity:0.85; }
+    /* Floating "Book now" link: phones only (below 640px, where the header "Book Session" button is hidden).
+       Hidden while the booking section is on screen (.fab-hidden, set by script) so it never covers the form. */
+    #fab { display:none; }
+    @media (max-width: 639px) {
+      #fab {
+        position:fixed; bottom:max(56px, calc(28px + env(safe-area-inset-bottom))); right:24px; z-index:200;
+        display:inline-flex; align-items:center; justify-content:center; height:44px; padding:0 20px; border-radius:24px;
+        background:#C9A24A; color:#0A0A0A; text-decoration:none; box-shadow:0 4px 24px rgba(0,0,0,0.45);
+        font-family:'Inter',sans-serif; font-size:10px; font-weight:700; letter-spacing:0.12em; text-transform:uppercase;
+        transition:opacity 0.2s ease, transform 0.2s ease, visibility 0s linear 0s, background 0.15s;
+        touch-action:manipulation; -webkit-tap-highlight-color:transparent;
+      }
+      #fab:active { transform:scale(0.96); background:#b8923f; }
+      #fab.fab-hidden { opacity:0; visibility:hidden; transform:translateY(8px); pointer-events:none; transition:opacity 0.2s ease, transform 0.2s ease, visibility 0s linear 0.2s; }
+    }
+    @media (max-width: 639px) and (hover: hover) { #fab:hover { background:#d4af5a; } }
 
     /* Mobile sticky CTA */
     #sticky-cta {
@@ -467,19 +474,8 @@
     </div>
   </nav>
 
-  <!-- FAB nav (mobile) -->
-  <div id="fab" class="lg:hidden">
-    <div id="fab-menu">
-      <a href="#about"        class="nav-link" style="font-size:13px;background:rgba(10,16,13,0.96);backdrop-filter:blur(16px);padding:10px 18px;border-radius:24px;border:1px solid rgba(201,162,74,0.18);white-space:nowrap;">About</a>
-      <a href="#training"     class="nav-link" style="font-size:13px;background:rgba(10,16,13,0.96);backdrop-filter:blur(16px);padding:10px 18px;border-radius:24px;border:1px solid rgba(201,162,74,0.18);white-space:nowrap;">Training</a>
-      <a href="#testimonials" class="nav-link" style="font-size:13px;background:rgba(10,16,13,0.96);backdrop-filter:blur(16px);padding:10px 18px;border-radius:24px;border:1px solid rgba(201,162,74,0.18);white-space:nowrap;">Results</a>
-      <a href="#booking" class="btn-primary" style="font-size:11px;padding:10px 20px;border-radius:24px;">Book a Session</a>
-    </div>
-    <button id="fab-btn" aria-label="Book now">
-      <span id="fab-label" style="font-family:'Inter',sans-serif;font-size:10px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:#0A0A0A;transition:opacity 0.2s;">BOOK NOW</span>
-      <span id="fab-close" style="font-family:'Inter',sans-serif;font-size:16px;font-weight:300;color:#0A0A0A;opacity:0;position:absolute;transition:opacity 0.2s;">×</span>
-    </button>
-  </div>
+  <!-- Floating "Book now" link (phones only; see #fab in the head styles) -->
+  <a id="fab" href="#booking" aria-label="Book now">Book now</a>
 
 
   <!-- ══════════════════════════════════════
@@ -1112,8 +1108,7 @@
     const nav = $('#nav');
     const stickyCta = $('#sticky-cta');
     const fab = $('#fab');
-    const fabBtn = $('#fab-btn');
-    const fabMenu = $('#fab-menu');
+    const booking = $('#booking');
     const contactForm = $('#contact-form');
     const submitBtn = $('#form-submit-btn');
     const formError = $('#form-error');
@@ -1154,35 +1149,17 @@
         if (!target) return;
 
         event.preventDefault();
-        closeFab();
         const y = target.getBoundingClientRect().top + window.pageYOffset - 20;
         fastScrollTo(y);
       });
     });
 
-    let fabOpen = false;
-    function setFab(open) {
-      fabOpen = open;
-      if (fabBtn) fabBtn.classList.toggle('open', fabOpen);
-      if (fabMenu) fabMenu.classList.toggle('open', fabOpen);
-      if (fabBtn) fabBtn.setAttribute('aria-expanded', String(fabOpen));
+    // Floating "Book now" link: hidden while any part of the booking section is on screen
+    if (fab && booking && 'IntersectionObserver' in window) {
+      new IntersectionObserver(entries => {
+        fab.classList.toggle('fab-hidden', entries[0].isIntersecting);
+      }).observe(booking);
     }
-
-    function closeFab() {
-      setFab(false);
-    }
-
-    if (fabBtn && fabMenu) {
-      fabBtn.setAttribute('aria-expanded', 'false');
-      fabBtn.addEventListener('click', event => {
-        event.stopPropagation();
-        setFab(!fabOpen);
-      });
-    }
-
-    document.addEventListener('click', event => {
-      if (fabOpen && fab && !fab.contains(event.target)) closeFab();
-    });
 
     const animClasses = '.fade-up,.fade-left,.fade-right,.scale-in,.fade-in';
     if ('IntersectionObserver' in window) {
