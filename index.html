@@ -282,6 +282,8 @@
     #form-success:focus, #form-error:focus { outline: none; }
     /* Sections that receive focus from in-page links (tabindex=-1 set by script): no ring on the whole section */
     [tabindex="-1"]:focus { outline: none; }
+    /* Package buttons land on the form card just below the fixed 80px header */
+    #book-form { scroll-margin-top: 96px; }
 
     .nav-link {
       position: relative; font-size: 11px; font-weight: 600;
@@ -782,7 +784,7 @@
             <div style="font-family:'Inter',sans-serif;font-size:12px;color:rgba(245,245,243,0.5);text-decoration:line-through;margin-bottom:8px;">$340 regular</div>
             <div style="display:inline-block;background:rgba(201,162,74,0.12);border:1px solid rgba(201,162,74,0.25);padding:3px 10px;font-family:'Inter',sans-serif;font-size:10px;font-weight:700;letter-spacing:0.12em;color:#C9A24A;text-transform:uppercase;margin-bottom:16px;">Save $34</div>
             <p style="font-family:'Inter',sans-serif;font-size:13px;line-height:1.6;color:rgba(245,245,243,0.5);margin-bottom:20px;">Lock in 4 private sessions at a 10% discount. Great for players building a new habit.</p>
-            <a href="#booking" class="btn-outline" style="width:100%;text-align:center;display:block;font-size:11px;padding:12px;">Select Pack</a>
+            <a href="#book-form" data-pick="1on1-4pack" class="btn-outline" style="width:100%;text-align:center;display:block;font-size:11px;padding:12px;">Select Pack</a>
           </div>
           <!-- 8-pack (featured) -->
           <div class="card-package featured-pkg" style="padding:28px;position:relative;">
@@ -792,7 +794,7 @@
             <div style="font-family:'Inter',sans-serif;font-size:12px;color:rgba(245,245,243,0.55);text-decoration:line-through;margin-bottom:8px;">$680 regular</div>
             <div style="display:inline-block;background:rgba(201,162,74,0.15);border:1px solid rgba(201,162,74,0.35);padding:3px 10px;font-family:'Inter',sans-serif;font-size:10px;font-weight:700;letter-spacing:0.12em;color:#C9A24A;text-transform:uppercase;margin-bottom:16px;">Save $102</div>
             <p style="font-family:'Inter',sans-serif;font-size:13px;line-height:1.6;color:rgba(245,245,243,0.55);margin-bottom:20px;">The commitment level where real transformation happens. 15% off. Most popular for serious players.</p>
-            <a href="#booking" class="btn-primary" style="width:100%;text-align:center;display:block;font-size:11px;padding:12px;">Select Pack</a>
+            <a href="#book-form" data-pick="1on1-8pack" class="btn-primary" style="width:100%;text-align:center;display:block;font-size:11px;padding:12px;">Select Pack</a>
           </div>
           <!-- 12-pack -->
           <div class="card-package" style="padding:28px;">
@@ -801,7 +803,7 @@
             <div style="font-family:'Inter',sans-serif;font-size:12px;color:rgba(245,245,243,0.5);text-decoration:line-through;margin-bottom:8px;">$1,020 regular</div>
             <div style="display:inline-block;background:rgba(201,162,74,0.12);border:1px solid rgba(201,162,74,0.25);padding:3px 10px;font-family:'Inter',sans-serif;font-size:10px;font-weight:700;letter-spacing:0.12em;color:#C9A24A;text-transform:uppercase;margin-bottom:16px;">Save $170</div>
             <p style="font-family:'Inter',sans-serif;font-size:13px;line-height:1.6;color:rgba(245,245,243,0.5);margin-bottom:20px;">Maximum volume, no expiration. Use at your own pace over 3–4 months. Best rate per session.</p>
-            <a href="#booking" class="btn-outline" style="width:100%;text-align:center;display:block;font-size:11px;padding:12px;">Select Pack</a>
+            <a href="#book-form" data-pick="1on1-12pack" class="btn-outline" style="width:100%;text-align:center;display:block;font-size:11px;padding:12px;">Select Pack</a>
           </div>
         </div>
 
@@ -815,7 +817,7 @@
             <div style="font-family:'Inter',sans-serif;font-size:12px;color:rgba(245,245,243,0.5);text-decoration:line-through;margin-bottom:8px;">$220 regular</div>
             <div style="display:inline-block;background:rgba(201,162,74,0.12);border:1px solid rgba(201,162,74,0.25);padding:3px 10px;font-family:'Inter',sans-serif;font-size:10px;font-weight:700;letter-spacing:0.12em;color:#C9A24A;text-transform:uppercase;margin-bottom:16px;">Save $22/player</div>
             <p style="font-family:'Inter',sans-serif;font-size:13px;line-height:1.6;color:rgba(245,245,243,0.5);margin-bottom:20px;">Lock in 4 group sessions per player. Great for teammates who want to train together consistently.</p>
-            <a href="#booking" class="btn-outline" style="width:100%;text-align:center;display:block;font-size:11px;padding:12px;">Select Pack</a>
+            <a href="#book-form" data-pick="group-4pack" class="btn-outline" style="width:100%;text-align:center;display:block;font-size:11px;padding:12px;">Select Pack</a>
           </div>
           <!-- Family duo (featured) -->
           <div class="card-package featured-pkg" style="padding:28px;position:relative;">
@@ -826,7 +828,7 @@
             <div style="font-family:'Inter',sans-serif;font-size:12px;color:rgba(245,245,243,0.55);text-decoration:line-through;margin-bottom:8px;">$440 regular</div>
             <div style="display:inline-block;background:rgba(201,162,74,0.15);border:1px solid rgba(201,162,74,0.35);padding:3px 10px;font-family:'Inter',sans-serif;font-size:10px;font-weight:700;letter-spacing:0.12em;color:#C9A24A;text-transform:uppercase;margin-bottom:16px;">Save $100 total</div>
             <p style="font-family:'Inter',sans-serif;font-size:13px;line-height:1.6;color:rgba(245,245,243,0.55);margin-bottom:20px;">The easy way to try group training — bring a sibling or friend for 4 sessions together. Elite coaching, shared cost, zero commitment.</p>
-            <a href="#booking" class="btn-primary" style="width:100%;text-align:center;display:block;font-size:11px;padding:12px;">Select Pack</a>
+            <a href="#book-form" data-pick="group-family" class="btn-primary" style="width:100%;text-align:center;display:block;font-size:11px;padding:12px;">Select Pack</a>
           </div>
           <!-- Group monthly -->
           <div class="card-package" style="padding:28px;">
@@ -836,7 +838,7 @@
             <div style="font-family:'Inter',sans-serif;font-size:12px;color:rgba(245,245,243,0.5);text-decoration:line-through;margin-bottom:8px;">$440 regular</div>
             <div style="display:inline-block;background:rgba(201,162,74,0.12);border:1px solid rgba(201,162,74,0.25);padding:3px 10px;font-family:'Inter',sans-serif;font-size:10px;font-weight:700;letter-spacing:0.12em;color:#C9A24A;text-transform:uppercase;margin-bottom:16px;">Save $70/mo</div>
             <p style="font-family:'Inter',sans-serif;font-size:13px;line-height:1.6;color:rgba(245,245,243,0.5);margin-bottom:20px;">Twice-weekly group sessions all month. The most affordable way to train consistently at a high level.</p>
-            <a href="#booking" class="btn-outline" style="width:100%;text-align:center;display:block;font-size:11px;padding:12px;">Select Plan</a>
+            <a href="#book-form" data-pick="group-monthly" class="btn-outline" style="width:100%;text-align:center;display:block;font-size:11px;padding:12px;">Select Plan</a>
           </div>
         </div>
       </div>
@@ -997,7 +999,7 @@
 
         <!-- 2: Form — order 2 on mobile, right col on desktop -->
         <div class="booking-form fade-up" data-delay="150" style="display:flex;flex-direction:column;">
-          <div class="card-elevated" style="padding:44px;flex:1;display:flex;flex-direction:column;">
+          <div id="book-form" class="card-elevated" style="padding:44px;flex:1;display:flex;flex-direction:column;">
             <div id="form-header">
               <h3 style="font-family:'Fraunces',serif;font-weight:900;font-size:26px;color:#F5F5F3;margin-bottom:6px;letter-spacing:-0.01em;">Book a Session</h3>
               <p style="font-family:'Inter',sans-serif;font-size:14px;color:#939393;margin-bottom:32px;">Fill out the form and Caleb will reach out to confirm your spot. For a same-day response, text <a href="sms:+18133510034" style="color:#C9A24A;text-decoration:underline;text-underline-offset:3px;font-weight:600;">(813) 351-0034</a>.</p>
@@ -1186,7 +1188,16 @@
         if (!target) return;
 
         event.preventDefault();
-        const y = target.getBoundingClientRect().top + window.pageYOffset - 20;
+        // Package buttons pre-select their option in the form's "I'm Interested In" dropdown
+        const interest = $('#cf-interest');
+        if (link.dataset.pick && interest && interest.querySelector('option[value="' + link.dataset.pick + '"]')) {
+          interest.value = link.dataset.pick;
+          interest.dispatchEvent(new Event('change', { bubbles: true }));
+        }
+        // Layout position (offsetTop ignores the fade-in slide, which would otherwise shift the landing spot by 40px)
+        let y = 0;
+        for (let el = target; el; el = el.offsetParent) y += el.offsetTop;
+        y -= parseFloat(getComputedStyle(target).scrollMarginTop) || 20;
         fastScrollTo(y);
         // Move keyboard focus with the scroll, so the next Tab continues from the target, not from the link
         if (!target.hasAttribute('tabindex')) target.setAttribute('tabindex', '-1');
