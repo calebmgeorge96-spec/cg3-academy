@@ -80,7 +80,7 @@ Nothing on the site may reference, name, imply or link to the third-party academ
 | 5.12 | 🟡 Phase 5 (Phase 4 fix #18) | Canonical URL `https://cg3academy.com/` | Done (branch) | 38bab26 | One `<link rel="canonical" href="https://cg3academy.com/" />` in `<head>`, right after the meta description; matches `og:url` and the sitemap `<loc>`. JSON-LD untouched (no `url`/`image` added; still no address). |
 | 5.13 | 🟡 Phase 5 (Phase 4 fix #19) | Keep focus after the tryout bar is dismissed | Done (branch) | 07d59d9 | The × handler now gives the hero `<h1>` `tabindex="-1"` and focuses it (`preventScroll`, no ring), instead of focus falling to `<body>`. Keyboard and mouse at 360/390/768/1440: bar hidden, localStorage key set, no scroll jump, next Tab = "Book Your Session", still hidden after reload. |
 | 5.14 | 🟡 Phase 5 (Phase 4 fix #20) | 12-pack wording (price unchanged) | Done (branch) | 4366878 | "Maximum volume, no expiration. Use at your own pace over 3–4 months. Best rate per session." → "Maximum volume. No expiration. Most players use it over 3–4 months. Best rate per session." (Caleb's suggested wording for the conflicting part; the first and last phrases kept). $850 / $1,020 regular / Save $170 unchanged. |
-| — | Phase review | Phase 5 boundary review | Done (branch). **Awaiting Caleb's phase approval; nothing merged to `main`.** | this commit (PROGRESS only) | See "Phase 5 review record" below. |
+| — | Phase review | Phase 5 boundary review | Done. Approved by Caleb; `main` fast-forwarded `9334ac7` → `597deb4` on 2026-09-26 (no merge commit); Pages run #58 green 21:58:57 UTC; live `index.html` byte-identical to `597deb4`. | 597deb4 (PROGRESS only) | See "Phase 5 review record" below. |
 
 ## 0.2 purge record (run 2026-09-26)
 **What was purged:** the 0.1 photo, a single file that was added to the repo on 2026-04-28 and deleted by task 0.1 on 2026-09-26. The third-party academy's name appeared nowhere in the text of history (0 hits in diffs, paths or messages), so the photo was the only trace.
@@ -298,7 +298,7 @@ Browser tests ran against the branch's `index.html` served locally. Every Formsp
 - [x] ~~Enforce HTTPS~~: turned on by Caleb (Phase 4 fix #1); `http://` now 301s to `https://` (checked 2026-09-26).
 - [x] ~~Height~~: 6'1" (Caleb, Phase 5); changed in 5.2.
 - [x] ~~Phase 4 ranked fix list~~: Caleb picked Phase 5 (all but #10 and #17).
-- [ ] **Phase 5 approval:** review the 14 commits on this branch; nothing is merged. Merge is a fast-forward of `main` to this branch once approved.
+- [x] ~~Phase 5 approval~~: approved; `main` fast-forwarded to `597deb4`, Pages run #58 green (2026-09-26).
 - [ ] **Later phase (Caleb):** replace the Tailwind CDN (#10) and move the in-body `<style>` blocks into `<head>` (#17) together.
 - [ ] **Trust stats (rest):** confirm "10+ Years Competing" and the hero's "MLS Level Opposition" stat are how you want them worded.
 - [x] ~~GPS in served files~~: the 3 GPS-tagged unused photos were deleted in task B, so once merged no served file carries GPS. **Remaining (Caleb chose no history rewrite):** those 3 files and the pre-1.5 originals of the 4 used GPS photos stay in git history on GitHub.
