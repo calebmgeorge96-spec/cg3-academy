@@ -277,6 +277,8 @@
     }
     .form-input:focus { border-color: #C9A24A; box-shadow: 0 0 0 3px rgba(201,162,74,0.1); }
     .form-input::placeholder { color: #939393; }
+    /* Form result messages take focus after a submit (so they are read out); no ring on these non-interactive targets */
+    #form-success:focus, #form-error:focus { outline: none; }
 
     .nav-link {
       position: relative; font-size: 11px; font-weight: 600;
@@ -970,7 +972,7 @@
               <p style="font-family:'Inter',sans-serif;font-size:14px;color:#939393;margin-bottom:32px;">Fill out the form and Caleb will reach out to confirm your spot. For a same-day response, text <a href="sms:+18133510034" style="color:#C9A24A;text-decoration:underline;text-underline-offset:3px;font-weight:600;">(813) 351-0034</a>.</p>
             </div>
 
-            <div id="form-success" style="display:none;flex:1;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:40px 20px;">
+            <div id="form-success" role="status" tabindex="-1" style="display:none;flex:1;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:40px 20px;">
               <div style="font-family:'Fraunces',serif;font-weight:900;font-size:32px;color:#C9A24A;margin-bottom:14px;">Message Sent.</div>
               <p style="font-family:'Inter',sans-serif;font-size:15px;color:rgba(245,245,243,0.55);">Caleb will reach out to confirm your spot. For a same-day response, text <a href="sms:+18133510034" style="color:#C9A24A;text-decoration:underline;text-underline-offset:3px;font-weight:600;">(813) 351-0034</a>.</p>
             </div>
@@ -1018,7 +1020,7 @@
                 <label for="cf-message" style="display:block;font-family:'Inter',sans-serif;font-size:10px;font-weight:700;letter-spacing:0.14em;color:#939393;text-transform:uppercase;margin-bottom:8px;">Message</label>
                 <textarea id="cf-message" name="message" placeholder="Tell me about your goals, age, position, and experience level..." class="form-input" rows="4" style="resize:vertical;flex:1;min-height:100px;" minlength="10" maxlength="1200" required></textarea>
               </div>
-              <div id="form-error" style="display:none;font-family:'Inter',sans-serif;font-size:13px;color:#e05c5c;text-align:center;"></div>
+              <div id="form-error" role="alert" tabindex="-1" style="display:none;font-family:'Inter',sans-serif;font-size:13px;color:#e05c5c;text-align:center;"></div>
               <button type="submit" id="form-submit-btn" class="btn-primary" style="width:100%;text-align:center;margin-top:4px;padding:18px 32px;font-size:12px;">Request My Spot</button>
               <p style="font-family:'Inter',sans-serif;font-size:14px;font-weight:600;text-align:center;margin:0;"><a href="sms:+18133510034" style="color:#C9A24A;text-decoration:underline;text-underline-offset:3px;display:inline-block;padding:12px 0;">or text me at (813) 351-0034 for the fastest response</a></p>
               <p style="font-family:'Inter',sans-serif;font-size:11px;color:rgba(245,245,243,0.3);text-align:center;">No commitment required. Caleb will reach out to confirm availability and location.</p>
@@ -1201,10 +1203,20 @@
       button.addEventListener('click', () => switchTab(button.id.replace('tab-', '')));
     });
 
+    // Error messages take focus so screen readers read them and keyboard users stay next to the form
     function setFormError(message) {
       if (!formError) return;
       formError.textContent = message;
       formError.style.display = message ? 'block' : 'none';
+      if (message) formError.focus();
+    }
+
+    // Formspree returns fragments like {field: "email", message: "should be an email"}; name the field
+    const FIELD_NAMES = { first_name: 'First name', last_name: 'Last name', email: 'Email', interested_in: 'Interested in', phone: 'Phone', message: 'Message' };
+    function describeError(error) {
+      const text = String(error.message || '').trim();
+      const sentence = FIELD_NAMES[error.field] ? FIELD_NAMES[error.field] + ' ' + text : text.charAt(0).toUpperCase() + text.slice(1);
+      return /[.!?]$/.test(sentence) ? sentence : sentence + '.';
     }
 
     if (contactForm) {
@@ -1238,7 +1250,10 @@
             contactForm.reset();
             contactForm.style.display = 'none';
             if (formHeader) formHeader.style.display = 'none';
-            if (formSuccess) formSuccess.style.display = 'flex';
+            if (formSuccess) {
+              formSuccess.style.display = 'flex';
+              formSuccess.focus();
+            }
             return;
           }
 
@@ -1246,7 +1261,7 @@
           try {
             const data = await response.json();
             if (Array.isArray(data.errors) && data.errors.length) {
-              errorMessage = data.errors.map(error => error.message).join(', ');
+              errorMessage = data.errors.map(describeError).join(' ');
             }
           } catch (_) {}
           setFormError(errorMessage);
