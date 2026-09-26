@@ -561,6 +561,9 @@
           bar.hidden = true;
           hero.classList.remove('tryout-on');
           try { localStorage.setItem(KEY, '1'); } catch (e) {}
+          // Focus would otherwise fall to <body>; move it to the hero heading so the next Tab is the hero button
+          var heading = hero.querySelector('h1');
+          if (heading) { heading.setAttribute('tabindex', '-1'); heading.focus({ preventScroll: true }); }
         });
       })();
     </script>
