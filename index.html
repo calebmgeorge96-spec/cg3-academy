@@ -306,6 +306,15 @@
       .nav-phone-call:hover { color: #C9A24A; }
       .nav-phone-text:hover { border-color: #C9A24A; }
     }
+    /* Tryout prep bar (3.1): auto-hides from 2026-11-08 America/New_York. Delete with its markup and script after that date. */
+    .tryout-bar { position: absolute; top: 80px; left: 0; right: 0; z-index: 20; display: flex; align-items: center; justify-content: center; min-height: 44px; padding: 0 56px; background: #C9A24A; }
+    .tryout-bar[hidden] { display: none; }
+    .tryout-bar-link { display: inline-block; padding: 12px 0; font-family: 'Inter', sans-serif; font-size: 13px; font-weight: 600; line-height: 1.4; color: #0A0A0A; text-align: center; text-decoration: none; }
+    @media (hover: hover) { .tryout-bar-link:hover { text-decoration: underline; text-underline-offset: 3px; } }
+    .tryout-bar-close { position: absolute; right: 6px; top: 50%; transform: translateY(-50%); width: 44px; height: 44px; border: none; background: none; color: #0A0A0A; font-size: 22px; line-height: 1; cursor: pointer; }
+    #hero.tryout-on .hero-content { padding-top: 208px; }
+    @media (max-width: 600px) { #hero.tryout-on .hero-content { padding-top: 212px !important; } }
+
     /* Header "Book Session" stays hidden below 640px (the floating BOOK NOW button covers mobile).
        Pinned here because .btn-primary's display rule otherwise competes with Tailwind's "hidden". */
     @media (max-width: 639px) { #nav .nav-book { display: none; } }
@@ -473,6 +482,36 @@
   <section id="hero" style="position:relative;min-height:100vh;display:flex;align-items:flex-end;background-image:url('CG3%20Assets/Pictures/IMG_9896.JPG');background-size:cover;background-position:15% 20%;">
     <div style="position:absolute;inset:0;background:linear-gradient(to top,#0A0A0A 0%,rgba(0,0,0,0.82) 35%,rgba(0,0,0,0.45) 65%,rgba(0,0,0,0.62) 100%);"></div>
     <div style="position:absolute;inset:0;background:radial-gradient(ellipse at 75% 50%,rgba(201,162,74,0.05) 0%,transparent 65%);"></div>
+
+    <!-- Tryout prep bar (3.1): hidden by default; shown before 2026-11-08 (America/New_York) unless dismissed.
+         Delete this block, its CSS and its script after 2026-11-08. -->
+    <div id="tryout-bar" class="tryout-bar" hidden>
+      <a href="#booking" class="tryout-bar-link">High school tryouts start in October. Tryout prep blocks available now.</a>
+      <button type="button" class="tryout-bar-close" aria-label="Dismiss tryout notice">&times;</button>
+    </div>
+    <script>
+      (function () {
+        var bar = document.getElementById('tryout-bar');
+        var hero = document.getElementById('hero');
+        var KEY = 'cg3-tryout-bar-dismissed';
+        if (!bar || !hero) return;
+        var today;
+        try {
+          var parts = new Intl.DateTimeFormat('en-US', { timeZone: 'America/New_York', year: 'numeric', month: '2-digit', day: '2-digit' }).formatToParts(new Date());
+          var get = function (t) { return parts.filter(function (p) { return p.type === t; })[0].value; };
+          today = get('year') + '-' + get('month') + '-' + get('day');
+        } catch (e) { return; }
+        if (today >= '2026-11-08') return;
+        try { if (localStorage.getItem(KEY) === '1') return; } catch (e) {}
+        bar.hidden = false;
+        hero.classList.add('tryout-on');
+        bar.querySelector('.tryout-bar-close').addEventListener('click', function () {
+          bar.hidden = true;
+          hero.classList.remove('tryout-on');
+          try { localStorage.setItem(KEY, '1'); } catch (e) {}
+        });
+      })();
+    </script>
 
     <div class="hero-content" style="position:relative;z-index:10;width:100%;max-width:1280px;margin:0 auto;padding:160px 40px 100px;">
       <div class="fade-up" style="display:flex;align-items:center;gap:12px;margin-bottom:32px;">
@@ -659,6 +698,7 @@
             The fastest path to improvement. Every session built around your position, weaknesses, and goals. No wasted reps.
           </p>
           <ul style="list-style:none;padding:0;margin:0 0 36px;display:flex;flex-direction:column;gap:12px;">
+            <li style="display:flex;align-items:center;gap:10px;font-family:'Inter',sans-serif;font-size:14px;color:rgba(245,245,243,0.75);"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7" stroke="#C9A24A" stroke-width="1"/><polyline points="5,8 7,10.5 11,6" stroke="#C9A24A" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>Tryout Preparation</li>
             <li style="display:flex;align-items:center;gap:10px;font-family:'Inter',sans-serif;font-size:14px;color:rgba(245,245,243,0.75);"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7" stroke="#C9A24A" stroke-width="1"/><polyline points="5,8 7,10.5 11,6" stroke="#C9A24A" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>Personalized technique correction</li>
             <li style="display:flex;align-items:center;gap:10px;font-family:'Inter',sans-serif;font-size:14px;color:rgba(245,245,243,0.75);"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7" stroke="#C9A24A" stroke-width="1"/><polyline points="5,8 7,10.5 11,6" stroke="#C9A24A" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>Position-specific tactical work</li>
             <li style="display:flex;align-items:center;gap:10px;font-family:'Inter',sans-serif;font-size:14px;color:rgba(245,245,243,0.75);"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7" stroke="#C9A24A" stroke-width="1"/><polyline points="5,8 7,10.5 11,6" stroke="#C9A24A" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>Video review available on request</li>
@@ -950,6 +990,7 @@
                 <select name="interested_in" class="form-input" required style="cursor:pointer;">
                   <option value="" disabled selected>Select an option...</option>
                   <optgroup label="1-on-1 Training">
+                    <option value="1on1-tryout-prep">Tryout Preparation</option>
                     <option value="1on1-single">Single Session — $85</option>
                     <option value="1on1-4pack">4-Session Pack — $306 (save $34)</option>
                     <option value="1on1-8pack">8-Session Pack — $578 (save $102)</option>
