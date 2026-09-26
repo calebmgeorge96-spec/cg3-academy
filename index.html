@@ -296,6 +296,10 @@
     }
     .nav-link:hover { color: #F5F5F3; }
     .nav-link:hover::after { width: 100%; }
+    /* 44px-tall tap targets for the header and footer nav links; the hover underline stays 2px under the text */
+    #nav .nav-link, .footer-nav .nav-link { display: inline-flex; align-items: center; min-height: 44px; }
+    #nav .nav-link::after { bottom: 11.8px; }
+    .footer-nav .nav-link::after { bottom: 9.5px; }
 
     /* Header call / text: one joined, gold-outlined unit (call segment + TEXT segment) */
     .nav-phone { display: inline-flex; align-items: stretch; flex-shrink: 0; white-space: nowrap; border: 1px solid #C9A24A; }
@@ -499,7 +503,7 @@
             <a href="tel:+18133510034" class="nav-phone-call" aria-label="Call (813) 351-0034"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#C9A24A" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg><span>(813) 351-0034</span></a>
             <a href="sms:+18133510034" class="nav-phone-text" aria-label="Text (813) 351-0034">Text</a>
           </div>
-          <a href="#booking" class="btn-primary nav-book hidden sm:inline-block" style="padding:12px 24px;font-size:11px;">Book Session</a>
+          <a href="#booking" class="btn-primary nav-book hidden sm:inline-block" style="padding:12px 24px;font-size:11px;line-height:20px;">Book Session</a>
         </div>
       </div>
     </div>
@@ -784,7 +788,7 @@
             <div style="font-family:'Inter',sans-serif;font-size:12px;color:rgba(245,245,243,0.5);text-decoration:line-through;margin-bottom:8px;">$340 regular</div>
             <div style="display:inline-block;background:rgba(201,162,74,0.12);border:1px solid rgba(201,162,74,0.25);padding:3px 10px;font-family:'Inter',sans-serif;font-size:10px;font-weight:700;letter-spacing:0.12em;color:#C9A24A;text-transform:uppercase;margin-bottom:16px;">Save $34</div>
             <p style="font-family:'Inter',sans-serif;font-size:13px;line-height:1.6;color:rgba(245,245,243,0.5);margin-bottom:20px;">Lock in 4 private sessions at a 10% discount. Great for players building a new habit.</p>
-            <a href="#book-form" data-pick="1on1-4pack" class="btn-outline" style="width:100%;text-align:center;display:block;font-size:11px;padding:12px;">Select Pack</a>
+            <a href="#book-form" data-pick="1on1-4pack" class="btn-outline" style="width:100%;text-align:center;display:block;font-size:11px;line-height:20px;padding:12px;">Select Pack</a>
           </div>
           <!-- 8-pack (featured) -->
           <div class="card-package featured-pkg" style="padding:28px;position:relative;">
@@ -794,7 +798,7 @@
             <div style="font-family:'Inter',sans-serif;font-size:12px;color:rgba(245,245,243,0.55);text-decoration:line-through;margin-bottom:8px;">$680 regular</div>
             <div style="display:inline-block;background:rgba(201,162,74,0.15);border:1px solid rgba(201,162,74,0.35);padding:3px 10px;font-family:'Inter',sans-serif;font-size:10px;font-weight:700;letter-spacing:0.12em;color:#C9A24A;text-transform:uppercase;margin-bottom:16px;">Save $102</div>
             <p style="font-family:'Inter',sans-serif;font-size:13px;line-height:1.6;color:rgba(245,245,243,0.55);margin-bottom:20px;">The commitment level where real transformation happens. 15% off. Most popular for serious players.</p>
-            <a href="#book-form" data-pick="1on1-8pack" class="btn-primary" style="width:100%;text-align:center;display:block;font-size:11px;padding:12px;">Select Pack</a>
+            <a href="#book-form" data-pick="1on1-8pack" class="btn-primary" style="width:100%;text-align:center;display:block;font-size:11px;line-height:20px;padding:12px;">Select Pack</a>
           </div>
           <!-- 12-pack -->
           <div class="card-package" style="padding:28px;">
@@ -803,7 +807,7 @@
             <div style="font-family:'Inter',sans-serif;font-size:12px;color:rgba(245,245,243,0.5);text-decoration:line-through;margin-bottom:8px;">$1,020 regular</div>
             <div style="display:inline-block;background:rgba(201,162,74,0.12);border:1px solid rgba(201,162,74,0.25);padding:3px 10px;font-family:'Inter',sans-serif;font-size:10px;font-weight:700;letter-spacing:0.12em;color:#C9A24A;text-transform:uppercase;margin-bottom:16px;">Save $170</div>
             <p style="font-family:'Inter',sans-serif;font-size:13px;line-height:1.6;color:rgba(245,245,243,0.5);margin-bottom:20px;">Maximum volume, no expiration. Use at your own pace over 3–4 months. Best rate per session.</p>
-            <a href="#book-form" data-pick="1on1-12pack" class="btn-outline" style="width:100%;text-align:center;display:block;font-size:11px;padding:12px;">Select Pack</a>
+            <a href="#book-form" data-pick="1on1-12pack" class="btn-outline" style="width:100%;text-align:center;display:block;font-size:11px;line-height:20px;padding:12px;">Select Pack</a>
           </div>
         </div>
 
@@ -817,7 +821,7 @@
             <div style="font-family:'Inter',sans-serif;font-size:12px;color:rgba(245,245,243,0.5);text-decoration:line-through;margin-bottom:8px;">$220 regular</div>
             <div style="display:inline-block;background:rgba(201,162,74,0.12);border:1px solid rgba(201,162,74,0.25);padding:3px 10px;font-family:'Inter',sans-serif;font-size:10px;font-weight:700;letter-spacing:0.12em;color:#C9A24A;text-transform:uppercase;margin-bottom:16px;">Save $22/player</div>
             <p style="font-family:'Inter',sans-serif;font-size:13px;line-height:1.6;color:rgba(245,245,243,0.5);margin-bottom:20px;">Lock in 4 group sessions per player. Great for teammates who want to train together consistently.</p>
-            <a href="#book-form" data-pick="group-4pack" class="btn-outline" style="width:100%;text-align:center;display:block;font-size:11px;padding:12px;">Select Pack</a>
+            <a href="#book-form" data-pick="group-4pack" class="btn-outline" style="width:100%;text-align:center;display:block;font-size:11px;line-height:20px;padding:12px;">Select Pack</a>
           </div>
           <!-- Family duo (featured) -->
           <div class="card-package featured-pkg" style="padding:28px;position:relative;">
@@ -828,7 +832,7 @@
             <div style="font-family:'Inter',sans-serif;font-size:12px;color:rgba(245,245,243,0.55);text-decoration:line-through;margin-bottom:8px;">$440 regular</div>
             <div style="display:inline-block;background:rgba(201,162,74,0.15);border:1px solid rgba(201,162,74,0.35);padding:3px 10px;font-family:'Inter',sans-serif;font-size:10px;font-weight:700;letter-spacing:0.12em;color:#C9A24A;text-transform:uppercase;margin-bottom:16px;">Save $100 total</div>
             <p style="font-family:'Inter',sans-serif;font-size:13px;line-height:1.6;color:rgba(245,245,243,0.55);margin-bottom:20px;">The easy way to try group training — bring a sibling or friend for 4 sessions together. Elite coaching, shared cost, zero commitment.</p>
-            <a href="#book-form" data-pick="group-family" class="btn-primary" style="width:100%;text-align:center;display:block;font-size:11px;padding:12px;">Select Pack</a>
+            <a href="#book-form" data-pick="group-family" class="btn-primary" style="width:100%;text-align:center;display:block;font-size:11px;line-height:20px;padding:12px;">Select Pack</a>
           </div>
           <!-- Group monthly -->
           <div class="card-package" style="padding:28px;">
@@ -838,7 +842,7 @@
             <div style="font-family:'Inter',sans-serif;font-size:12px;color:rgba(245,245,243,0.5);text-decoration:line-through;margin-bottom:8px;">$440 regular</div>
             <div style="display:inline-block;background:rgba(201,162,74,0.12);border:1px solid rgba(201,162,74,0.25);padding:3px 10px;font-family:'Inter',sans-serif;font-size:10px;font-weight:700;letter-spacing:0.12em;color:#C9A24A;text-transform:uppercase;margin-bottom:16px;">Save $70/mo</div>
             <p style="font-family:'Inter',sans-serif;font-size:13px;line-height:1.6;color:rgba(245,245,243,0.5);margin-bottom:20px;">Twice-weekly group sessions all month. The most affordable way to train consistently at a high level.</p>
-            <a href="#book-form" data-pick="group-monthly" class="btn-outline" style="width:100%;text-align:center;display:block;font-size:11px;padding:12px;">Select Plan</a>
+            <a href="#book-form" data-pick="group-monthly" class="btn-outline" style="width:100%;text-align:center;display:block;font-size:11px;line-height:20px;padding:12px;">Select Plan</a>
           </div>
         </div>
       </div>
@@ -1115,7 +1119,7 @@
         </div>
         <div>
           <div style="font-family:'Inter',sans-serif;font-size:10px;font-weight:700;letter-spacing:0.2em;color:#939393;text-transform:uppercase;margin-bottom:20px;">Navigate</div>
-          <div style="display:flex;flex-direction:column;gap:12px;">
+          <div class="footer-nav" style="display:flex;flex-direction:column;">
             <a href="#about"    class="nav-link" style="font-size:14px;">About</a>
             <a href="#training" class="nav-link" style="font-size:14px;">Training &amp; Packages</a>
             <a href="#booking"  class="nav-link" style="font-size:14px;">Book a Session</a>
@@ -1124,7 +1128,7 @@
         <div>
           <div style="font-family:'Inter',sans-serif;font-size:10px;font-weight:700;letter-spacing:0.2em;color:#939393;text-transform:uppercase;margin-bottom:20px;">Ready to Start?</div>
           <p style="font-family:'Inter',sans-serif;font-size:14px;line-height:1.7;color:rgba(245,245,243,0.5);margin-bottom:20px;">Book a session and start training with a clear plan.</p>
-          <a href="#booking" class="btn-primary" style="display:inline-block;padding:12px 24px;font-size:11px;">Book a Session</a>
+          <a href="#booking" class="btn-primary" style="display:inline-block;padding:12px 24px;font-size:11px;line-height:20px;">Book a Session</a>
         </div>
       </div>
       <div style="border-top:1px solid rgba(245,245,243,0.06);padding-top:24px;display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:8px;">
