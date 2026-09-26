@@ -978,21 +978,21 @@
             <form id="contact-form" action="https://formspree.io/f/meevyrnw" method="POST" style="display:flex;flex-direction:column;gap:16px;flex:1;">
               <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
                 <div>
-                  <label style="display:block;font-family:'Inter',sans-serif;font-size:10px;font-weight:700;letter-spacing:0.14em;color:#939393;text-transform:uppercase;margin-bottom:8px;">First Name</label>
-                  <input type="text" name="first_name" placeholder="First name" class="form-input" autocomplete="given-name" maxlength="60" required />
+                  <label for="cf-first-name" style="display:block;font-family:'Inter',sans-serif;font-size:10px;font-weight:700;letter-spacing:0.14em;color:#939393;text-transform:uppercase;margin-bottom:8px;">First Name</label>
+                  <input id="cf-first-name" type="text" name="first_name" placeholder="First name" class="form-input" autocomplete="given-name" maxlength="60" required />
                 </div>
                 <div>
-                  <label style="display:block;font-family:'Inter',sans-serif;font-size:10px;font-weight:700;letter-spacing:0.14em;color:#939393;text-transform:uppercase;margin-bottom:8px;">Last Name</label>
-                  <input type="text" name="last_name" placeholder="Last name" class="form-input" autocomplete="family-name" maxlength="60" required />
+                  <label for="cf-last-name" style="display:block;font-family:'Inter',sans-serif;font-size:10px;font-weight:700;letter-spacing:0.14em;color:#939393;text-transform:uppercase;margin-bottom:8px;">Last Name</label>
+                  <input id="cf-last-name" type="text" name="last_name" placeholder="Last name" class="form-input" autocomplete="family-name" maxlength="60" required />
                 </div>
               </div>
               <div>
-                <label style="display:block;font-family:'Inter',sans-serif;font-size:10px;font-weight:700;letter-spacing:0.14em;color:#939393;text-transform:uppercase;margin-bottom:8px;">Email</label>
-                <input type="email" name="email" placeholder="you@example.com" class="form-input" autocomplete="email" maxlength="120" required />
+                <label for="cf-email" style="display:block;font-family:'Inter',sans-serif;font-size:10px;font-weight:700;letter-spacing:0.14em;color:#939393;text-transform:uppercase;margin-bottom:8px;">Email</label>
+                <input id="cf-email" type="email" name="email" placeholder="you@example.com" class="form-input" autocomplete="email" maxlength="120" required />
               </div>
               <div>
-                <label style="display:block;font-family:'Inter',sans-serif;font-size:10px;font-weight:700;letter-spacing:0.14em;color:#939393;text-transform:uppercase;margin-bottom:8px;">I'm Interested In</label>
-                <select name="interested_in" class="form-input" required style="cursor:pointer;">
+                <label for="cf-interest" style="display:block;font-family:'Inter',sans-serif;font-size:10px;font-weight:700;letter-spacing:0.14em;color:#939393;text-transform:uppercase;margin-bottom:8px;">I'm Interested In</label>
+                <select id="cf-interest" name="interested_in" class="form-input" required style="cursor:pointer;">
                   <option value="" disabled selected>Select an option...</option>
                   <optgroup label="1-on-1 Training">
                     <option value="1on1-tryout-prep">Tryout Preparation</option>
@@ -1010,13 +1010,13 @@
                 </select>
               </div>
               <div>
-                <label style="display:block;font-family:'Inter',sans-serif;font-size:10px;font-weight:700;letter-spacing:0.14em;color:#939393;text-transform:uppercase;margin-bottom:8px;">Phone <span style="color:rgba(245,245,243,0.35);font-weight:500;">Optional</span></label>
-                <input type="tel" name="phone" placeholder="Best number to reach you" class="form-input" autocomplete="tel" maxlength="30" />
+                <label for="cf-phone" style="display:block;font-family:'Inter',sans-serif;font-size:10px;font-weight:700;letter-spacing:0.14em;color:#939393;text-transform:uppercase;margin-bottom:8px;">Phone <span style="color:rgba(245,245,243,0.35);font-weight:500;">Optional</span></label>
+                <input id="cf-phone" type="tel" name="phone" placeholder="Best number to reach you" class="form-input" autocomplete="tel" maxlength="30" />
               </div>
               <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px;opacity:0;height:0;width:0;" aria-hidden="true" />
               <div style="display:flex;flex-direction:column;flex:1;">
-                <label style="display:block;font-family:'Inter',sans-serif;font-size:10px;font-weight:700;letter-spacing:0.14em;color:#939393;text-transform:uppercase;margin-bottom:8px;">Message</label>
-                <textarea name="message" placeholder="Tell me about your goals, age, position, and experience level..." class="form-input" rows="4" style="resize:vertical;flex:1;min-height:100px;" minlength="10" maxlength="1200" required></textarea>
+                <label for="cf-message" style="display:block;font-family:'Inter',sans-serif;font-size:10px;font-weight:700;letter-spacing:0.14em;color:#939393;text-transform:uppercase;margin-bottom:8px;">Message</label>
+                <textarea id="cf-message" name="message" placeholder="Tell me about your goals, age, position, and experience level..." class="form-input" rows="4" style="resize:vertical;flex:1;min-height:100px;" minlength="10" maxlength="1200" required></textarea>
               </div>
               <div id="form-error" style="display:none;font-family:'Inter',sans-serif;font-size:13px;color:#e05c5c;text-align:center;"></div>
               <button type="submit" id="form-submit-btn" class="btn-primary" style="width:100%;text-align:center;margin-top:4px;padding:18px 32px;font-size:12px;">Request My Spot</button>
