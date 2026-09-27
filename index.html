@@ -464,7 +464,10 @@
   <!-- Section styles, moved here from the page body (6.2). Same order and same cascade position as before:
        after every other stylesheet. -->
   <style>@media(max-width:900px){.about-grid{grid-template-columns:1fr!important;row-gap:48px!important}.about-grid>div:first-child{overflow:hidden}}
-  @media(max-width:600px){#hero{min-height:auto!important;background-position:60% 5%!important}.hero-content{padding:140px 24px 120px!important}}</style>
+  @media(max-width:600px){#hero{min-height:auto!important;background-position:60% 5%!important}.hero-content{padding:140px 24px 120px!important}}
+  /* Phones: the header uses the hero's 24px side margins; the eyebrow is 3 clean lines with the gold dash on the first */
+  @media(max-width:600px){#nav>div{padding:0 24px!important}.hero-eyebrow{align-items:flex-start!important}.hero-eyebrow-rule{flex-shrink:0;width:24px!important;margin-top:8px}.hero-eyebrow-text{letter-spacing:0.18em!important}.eyebrow-sep{display:none}.eyebrow-line{display:block}}
+  @media(max-width:359px){.hero-eyebrow-text{font-size:10px!important;letter-spacing:0.12em!important}}</style>
   <style>@media(max-width:600px){.photo-strip{grid-template-columns:1fr 1fr!important;height:auto!important}.strip-cell{height:220px!important}}</style>
   <style>@media(max-width:900px){.training-grid{grid-template-columns:1fr!important}#panel-solo,#panel-group{grid-template-columns:1fr!important}}</style>
   <style>@media(max-width:900px){.testi-grid{grid-template-columns:1fr!important}.trust-grid{grid-template-columns:1fr!important}}</style>
@@ -590,9 +593,9 @@
     </script>
 
     <div class="hero-content" style="position:relative;z-index:10;width:100%;max-width:1280px;margin:0 auto;padding:160px 40px 100px;">
-      <div class="fade-up" style="display:flex;align-items:center;gap:12px;margin-bottom:32px;">
-        <div style="width:32px;height:1px;background:#C9A24A;"></div>
-        <span style="font-family:'Inter',sans-serif;font-size:11px;font-weight:600;letter-spacing:0.22em;text-transform:uppercase;color:#C9A24A;">Private 1-on-1 Coaching · Carrollwood · Northdale · Lutz · Citrus Park · Westchase · Odessa</span>
+      <div class="fade-up hero-eyebrow" style="display:flex;align-items:center;gap:12px;margin-bottom:32px;">
+        <div class="hero-eyebrow-rule" style="width:32px;height:1px;background:#C9A24A;"></div>
+        <span class="hero-eyebrow-text" style="font-family:'Inter',sans-serif;font-size:11px;font-weight:600;letter-spacing:0.22em;text-transform:uppercase;color:#C9A24A;">Private 1-on-1 Coaching<span class="eyebrow-sep"> · </span><span class="eyebrow-line">Carrollwood · Northdale · Lutz</span><span class="eyebrow-sep"> · </span><span class="eyebrow-line">Citrus Park · Westchase · Odessa</span></span>
       </div>
 
       <h1 class="fade-up" data-delay="100" style="font-family:'Fraunces',serif;font-weight:900;font-size:clamp(56px,9vw,120px);line-height:0.9;letter-spacing:-0.03em;color:#F5F5F3;max-width:900px;margin-bottom:32px;">
