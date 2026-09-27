@@ -1,7 +1,7 @@
 # PROGRESS — CG3 Academy (cg3academy.com)
 
 **Mode:** 2 — fix from audit (audit supplied inline by Caleb, 2026-09-26)
-**Stack:** single static `index.html` + Tailwind Play CDN + vanilla JS (no build step)
+**Stack:** single static `index.html` + pre-built Tailwind CSS inlined in `<head>` (since 6.1; was the Tailwind Play CDN) + vanilla JS (no build step to deploy)
 **Hosting:** GitHub Pages, serving branch `main` of `calebmgeorge96-spec/cg3-academy` (public repo), custom domain via `CNAME`
 **Working branch:** `claude/nice-mccarthy-p1pb8x`. Nothing is live until it is merged to `main`.
 **Goal:** turn local-search and social traffic into booked sessions this week. Primary conversion is a text or call to (813) 351-0034, then the booking form.
@@ -81,8 +81,9 @@ Nothing on the site may reference, name, imply or link to the third-party academ
 | 5.13 | 🟡 Phase 5 (Phase 4 fix #19) | Keep focus after the tryout bar is dismissed | Done (branch) | 07d59d9 | The × handler now gives the hero `<h1>` `tabindex="-1"` and focuses it (`preventScroll`, no ring), instead of focus falling to `<body>`. Keyboard and mouse at 360/390/768/1440: bar hidden, localStorage key set, no scroll jump, next Tab = "Book Your Session", still hidden after reload. |
 | 5.14 | 🟡 Phase 5 (Phase 4 fix #20) | 12-pack wording (price unchanged) | Done (branch) | 4366878 | "Maximum volume, no expiration. Use at your own pace over 3–4 months. Best rate per session." → "Maximum volume. No expiration. Most players use it over 3–4 months. Best rate per session." (Caleb's suggested wording for the conflicting part; the first and last phrases kept). $850 / $1,020 regular / Save $170 unchanged. |
 | — | Phase review | Phase 5 boundary review | Done. Approved by Caleb; `main` fast-forwarded `9334ac7` → `597deb4` on 2026-09-26 (no merge commit); Pages run #58 green 21:58:57 UTC; live `index.html` byte-identical to `597deb4`. | 597deb4 (PROGRESS only) | See "Phase 5 review record" below. |
-| 6.1 | 🟠 Phase 6 (Caleb; Phase 4 fix #10) | Replace the Tailwind Play CDN with pre-built CSS, zero visual change | Done (branch) | see Phase 6 record | Removed `<script src="https://cdn.tailwindcss.com">` (126 KB compressed of render-blocking JS, v3.4.17) and the inline `tailwind.config` script. Added one `<style>` at the end of `<head>` holding, **verbatim**, the 4,970-byte CSS the CDN generated for this page (Tailwind's base reset + the 12 utilities the page uses: `visible`, `fixed`, `left-0`, `right-0`, `top-0`, `z-50`, `hidden`, `items-center`, `gap-8`, `sm:block`, `sm:inline-block`, `lg:flex`), MIT banner kept. It sits exactly where the CDN injected its `<style>` (checked in the browser: last element of `<head>`, after the page's own stylesheet), so the cascade order is unchanged. **Proof:** old page (CDN) vs new page, 8 states (default, scrolled header, Group tab, tryout dismissed, ticker paused, form error, form success, reduced motion) × 360/390/768/1440: every computed property of all 456 body elements (plus ::before/::after) and every box identical in all 32; screen-by-screen pixel diff identical except 1–4 stray pixels at 360/390 that appear at the same coordinates when the old page is compared with itself (Chrome rendering noise). Console is now empty (the CDN's production warning is gone); 0 requests to the CDN. **Rebuild recipe** (only if Tailwind classes in the markup change): in a scratch folder, `npm i tailwindcss@3.4.17 postcss`; `tailwind.config.js` = the old inline config (theme.extend colors black #0A0A0A, charcoal #141414, grey #222222, silver #939393, white #F5F5F3, gold #C9A24A; fontFamily display [Fraunces, serif], sans [Inter, sans-serif]) with `content: { files: ['index.html'], extract: { html: c => [...class="…" values, ...classList.add/remove/toggle('…') names] } }`; run Tailwind as a plain PostCSS plugin (`postcss([tailwindcss(config)]).process('@tailwind base; @tailwind components; @tailwind utilities;')`, **not** the CLI, which adds autoprefixer and its `--minify` drops `-webkit-text-size-adjust`). That output has the same 52 rules in the same order as the CDN's (only difference: the CDN also prefixes `text-decoration` for `abbr[title]`, which the page doesn't use). Paste it over the `<style>` block. |
-| 6.2 | 🟡 Phase 6 (Caleb; Phase 4 fix #17) | Move the 6 in-body `<style>` blocks into `<head>`, zero visual change | Done (branch) | see Phase 6 record | The 6 blocks (About/hero mobile rules, photo strip, training grid, testimonials/trust grid, booking grid, footer grid) now sit at the end of `<head>`, after the Tailwind block, in their original order, under one comment. That is the same cascade position they had (after every head stylesheet, in document order). Their CSS text is byte-identical (checked programmatically), and the rest of the document is unchanged apart from comments and whitespace. **Proof:** the same 32-state × 456-element comparison, run against the *original* page (`e2cd01f`, CDN + in-body styles), so it covers 6.1 + 6.2 together: 0 computed-style or box differences; pixel diffs only at the known noise coordinates. **Validation:** the W3C Nu checker and html-validate now both report 0 errors (were 6; the remaining 52 Nu messages are "info" notes about trailing slashes on void elements). |
+| 6.1 | 🟠 Phase 6 (Caleb; Phase 4 fix #10) | Replace the Tailwind Play CDN with pre-built CSS, zero visual change | Done (branch) | b2601bc | Removed `<script src="https://cdn.tailwindcss.com">` (126 KB compressed of render-blocking JS, v3.4.17) and the inline `tailwind.config` script. Added one `<style>` at the end of `<head>` holding, **verbatim**, the 4,970-byte CSS the CDN generated for this page (Tailwind's base reset + the 12 utilities the page uses: `visible`, `fixed`, `left-0`, `right-0`, `top-0`, `z-50`, `hidden`, `items-center`, `gap-8`, `sm:block`, `sm:inline-block`, `lg:flex`), MIT banner kept. It sits exactly where the CDN injected its `<style>` (checked in the browser: last element of `<head>`, after the page's own stylesheet), so the cascade order is unchanged. **Proof:** old page (CDN) vs new page, 8 states (default, scrolled header, Group tab, tryout dismissed, ticker paused, form error, form success, reduced motion) × 360/390/768/1440: every computed property of all 456 body elements (plus ::before/::after) and every box identical in all 32; screen-by-screen pixel diff identical except 1–4 stray pixels at 360/390 that appear at the same coordinates when the old page is compared with itself (Chrome rendering noise). Console is now empty (the CDN's production warning is gone); 0 requests to the CDN. **Rebuild recipe** (only if Tailwind classes in the markup change): in a scratch folder, `npm i tailwindcss@3.4.17 postcss`; `tailwind.config.js` = the old inline config (theme.extend colors black #0A0A0A, charcoal #141414, grey #222222, silver #939393, white #F5F5F3, gold #C9A24A; fontFamily display [Fraunces, serif], sans [Inter, sans-serif]) with `content: { files: ['index.html'], extract: { html: c => [...class="…" values, ...classList.add/remove/toggle('…') names] } }`; run Tailwind as a plain PostCSS plugin (`postcss([tailwindcss(config)]).process('@tailwind base; @tailwind components; @tailwind utilities;')`, **not** the CLI, which adds autoprefixer and its `--minify` drops `-webkit-text-size-adjust`). That output has the same 52 rules in the same order as the CDN's (only difference: the CDN also prefixes `text-decoration` for `abbr[title]`, which the page doesn't use). Paste it over the `<style>` block. |
+| 6.2 | 🟡 Phase 6 (Caleb; Phase 4 fix #17) | Move the 6 in-body `<style>` blocks into `<head>`, zero visual change | Done (branch) | 1c3ceae | The 6 blocks (About/hero mobile rules, photo strip, training grid, testimonials/trust grid, booking grid, footer grid) now sit at the end of `<head>`, after the Tailwind block, in their original order, under one comment. That is the same cascade position they had (after every head stylesheet, in document order). Their CSS text is byte-identical (checked programmatically), and the rest of the document is unchanged apart from comments and whitespace. **Proof:** the same 32-state × 456-element comparison, run against the *original* page (`e2cd01f`, CDN + in-body styles), so it covers 6.1 + 6.2 together: 0 computed-style or box differences; pixel diffs only at the known noise coordinates. **Validation:** the W3C Nu checker and html-validate now both report 0 errors (were 6; the remaining 52 Nu messages are "info" notes about trailing slashes on void elements). |
+| — | Phase review | Phase 6 boundary review | Done (branch). **Awaiting Caleb's phase approval; nothing merged to `main`.** | this commit (PROGRESS only) | See "Phase 6 review record" below. |
 
 ## 0.2 purge record (run 2026-09-26)
 **What was purged:** the 0.1 photo, a single file that was added to the repo on 2026-04-28 and deleted by task 0.1 on 2026-09-26. The third-party academy's name appeared nowhere in the text of history (0 hits in diffs, paths or messages), so the photo was the only trace.
@@ -280,6 +281,48 @@ Browser tests ran against the branch's `index.html` served locally. Every Formsp
 
 **UNVERIFIED:** real phones (iOS/Android: `tel:`/`sms:`, the floating button's hide/show, safe-area spacing, the reduced-motion setting); screen-reader announcements (VoiceOver/TalkBack/NVDA; roles and focus were checked in Chrome's accessibility tree only); Formspree delivery and the dashboard recipient; Google Rich Results / Search Console reading the canonical; Lighthouse scores.
 
+## Phase 6 review record (2026-09-26)
+Caleb started the deferred Phase 4 items #10 (Tailwind Play CDN → pre-built CSS) and #17 (in-body `<style>` blocks → `<head>`) as one phase. The goal was zero visual change, so the proof is a rendering-equivalence test, not screenshots alone.
+
+**Where the CDN put its CSS.** Checked in the browser on the Phase 5 page: the CDN appends one `<style>` as the **last element of `<head>`**, after the page's own stylesheet. The 6 in-body blocks come after it in document order. The new page keeps exactly that order: page stylesheet → Tailwind block (6.1) → the 6 section blocks (6.2), all in `<head>`.
+
+**Equivalence test** (headless Chrome, scratchpad only):
+- **Pages compared:** the original page (`e2cd01f`, with the CDN and the in-body styles) against the new page. Both are served locally with Formspree mocked, a pinned clock (2026-09-26, New York time) and every web-font face force-loaded.
+- **Coverage:** 8 states × 4 widths (360/390/768/1440) = 32 comparisons. The states are default, scrolled header, Group Packages tab, tryout bar dismissed, ticker paused, form error, form success, and reduced motion.
+- **What's compared:** every computed CSS property (all longhands) and the box (x, y, width, height to 0.01px) of all 456 elements in `<body>`, their `::before`/`::after`, plus `html`/`body`. It also takes a pixel-exact screen-by-screen screenshot diff down the whole page.
+- **Control:** the original page against itself, to find the harness's noise floor. Result: 0 style/box differences. A few runs showed 1–4 stray pixels, always at the same two spots (360: x243 y134; 390: row 92, 4 pixels on the second screen). That's Chrome rendering noise.
+- **6.1 alone:** 0 style/box differences in all 32; stray pixels only at those same coordinates.
+- **6.1 + 6.2** (final page vs original): 0 style/box differences in all 32; stray pixels only at those same coordinates.
+- **Harness fixes along the way:** Chrome's full-page capture isn't pixel-deterministic, so the diff uses viewport tiles. Web-font subsets load on demand, which caused one-off 1/64px text-width differences until all faces were force-loaded before measuring. The mouse is parked after clicks so hover transitions don't leak in.
+
+**Other checks on the final page (`1c3ceae`):**
+- **Name and Gmail:** the name check (with its positive control) and the Gmail check are 0 in every tracked file.
+- **Prices:** all 34 price strings and all 10 dropdown options are identical to `main`.
+- **Validation:** html-validate 0 errors; W3C Nu 0 errors (only 52 "info" notes about trailing slashes). Both were 6 before.
+- **Console and requests:** at 360/390/768/1440 the console is completely empty (the CDN's warning is gone), with 0 page errors, 0 failed requests and 0 requests to `cdn.tailwindcss.com`. Overflow is 0.
+- **Behaviour suites** re-run and all pass:
+  - tryout bar (pinned clock in New York, Honolulu and Tokyo time: visible through Nov 7 23:59:59 ET, hidden from Nov 8 00:00 ET);
+  - Tab walk at 390/1440 (0 invisible stops, every stop has a focus indicator);
+  - floating button (one Book button at every width tested, 0 overlaps with "Request My Spot");
+  - all form outcomes;
+  - in-page links (start within 50ms, settle ~0.5–0.65s, focus the target);
+  - all 6 package pre-selects;
+  - ticker pause/resume and reduced motion.
+- **Speed** (lab measurement: 390px phone profile, 4× CPU slowdown, slow-4G network for every networked request; local files served instantly for both versions; median of 5 loads):
+
+  | Metric | Before | After |
+  |---|---|---|
+  | First contentful paint | 1,440ms | 336ms |
+  | Largest contentful paint | 2,152ms | 1,004ms |
+  | DOMContentLoaded | 1,629ms | 529ms |
+  | Load | 2,242ms | 1,122ms |
+
+  About 120 KB less is transferred (the CDN script). `index.html` grows from 93,489 to 98,356 bytes (+4.9 KB; +1.4 KB compressed) for the inlined CSS.
+
+**Trade-off:** there is no longer a live Tailwind compiler. A **new** Tailwind utility class added to the markup won't work until the CSS is rebuilt (recipe in the 6.1 row). Classes already in use keep working, and plain inline styles or the page's own CSS need nothing.
+
+**UNVERIFIED:** real phones and real-world speed (the timings above are lab numbers); any visitor-side cache effects on the first live load after merge.
+
 ## 🔴 NEEDS CALEB
 - [x] ~~0.1 approve + confirm IMG_4069 is Caleb~~: done, live 2026-09-26.
 - [x] ~~0.1b check~~: Caleb verified 2026-09-26 (strip correct; `/PROGRESS.md` and the old photo URL 404).
@@ -301,7 +344,8 @@ Browser tests ran against the branch's `index.html` served locally. Every Formsp
 - [x] ~~Height~~: 6'1" (Caleb, Phase 5); changed in 5.2.
 - [x] ~~Phase 4 ranked fix list~~: Caleb picked Phase 5 (all but #10 and #17).
 - [x] ~~Phase 5 approval~~: approved; `main` fast-forwarded to `597deb4`, Pages run #58 green (2026-09-26).
-- [ ] **Later phase (Caleb):** replace the Tailwind CDN (#10) and move the in-body `<style>` blocks into `<head>` (#17) together.
+- [x] ~~Later phase: Tailwind CDN (#10) + style blocks (#17)~~: done as Phase 6 (6.1, 6.2) on this branch.
+- [ ] **Phase 6 approval:** nothing is merged. Merge is a fast-forward of `main` to this branch once approved.
 - [ ] **Trust stats (rest):** confirm "10+ Years Competing" and the hero's "MLS Level Opposition" stat are how you want them worded.
 - [x] ~~GPS in served files~~: the 3 GPS-tagged unused photos were deleted in task B, so once merged no served file carries GPS. **Remaining (Caleb chose no history rewrite):** those 3 files and the pre-1.5 originals of the 4 used GPS photos stay in git history on GitHub.
 - [ ] **2.3 decision (optional):** Google may flag the missing `address` on the LocalBusiness schema. Leave it (service-area business, matches GBP), or add a city-level address without a street (e.g. locality + FL) to match GBP. Run Google's Rich Results Test after merge.
@@ -351,10 +395,12 @@ Browser tests ran against the branch's `index.html` served locally. Every Formsp
 - 2026-09-26 (Caleb): close PR #1 and delete its branch before 0.3; 0.3 rewrites only `main` and this branch.
 - 2026-09-26 (Caleb): task 0.3 approved (Gmail + pre-purge IDs scrub). Old IDs and Support-ticket details go to Caleb in chat only, never into a file.
 - 2026-09-26 (Caleb): Phase 5 approved. The floating button becomes one phone-only link to `#booking`, with no menu, hidden over the booking section and named "Book now". Height is 6'1". Tryout text is "High school tryout season is here. Tryout prep blocks available now." Contrast is raised with lighter greys, not new colours. "Select Pack" pre-selects and scrolls to the form. Canonical is `https://cg3academy.com/`. 12-pack wording: "No expiration. Most players use it over 3–4 months." Skip #10 and #17 for now (together later). Name check always uses `grep -i -E -f` with a positive control. Commits only as `Claude <noreply@anthropic.com>`.
+- 2026-09-26 (Caleb): Phase 5 merged (`main` → `597deb4`, then `e2cd01f` for its PROGRESS note). Started Phase 6: the Tailwind CDN swap (#10) and the in-body style blocks (#17) together, as their own phase; commit and push the branch, nothing merges without approval.
 
 ## Gotchas & dead ends
 - The Digital Programs section (`#products`) was already hidden (`display:none`) before this audit. Its dead Gumroad links still exist in source.
 - The `#sticky-cta` element was removed earlier, but the JS still references it (harmless null-guarded).
+- **Tailwind is pre-built since 6.1** (no CDN). A new Tailwind utility class in the markup does nothing until the inlined Tailwind `<style>` is rebuilt; use the recipe in the 6.1 row (Tailwind as a PostCSS plugin, not the CLI). Keep any new `<style>` in `<head>`, after the section styles, to preserve the cascade.
 - Since 5.1 the floating "Book now" (`#fab`) is a plain link to `#booking`, shown only below 640px (where the header "Book Session" is hidden) and hidden while `#booking` is on screen. There is no section menu below 1024px.
 - Line numbers above refer to `index.html` at commit `61bcab0` (pre-audit tip) and will drift as tasks land.
 - The earlier cloud sandbox's proxy blocks cg3academy.com. Don't retry there; it's policy, not an outage. A session on Caleb's Mac can reach the live site.
@@ -371,7 +417,7 @@ Browser tests ran against the branch's `index.html` served locally. Every Formsp
 ## Noticed but not in the audit (candidates, not scheduled)
 - ~~**Floating mobile button label**~~: fixed in 3.6 (`aria-label="Book now"`). Other FAB bugs are in the Phase 4 fix list (#3, #4, #9, #14).
 - **Commit message of the 0.1 commit** names the removed photo's filename (a filename only; the file isn't retrievable from any branch).
-- **Tailwind Play CDN in production:** render-blocking runtime JS, and it logs its own "should not be used in production" console warning on the live site. Now Phase 4 fix #10.
+- ~~**Tailwind Play CDN in production**~~: replaced by pre-built CSS in 6.1 (Phase 4 fix #10).
 - **Accessibility:** the 6 form `<label>`s aren't associated with their inputs (`for`/`id` missing). Now Phase 4 fix #2.
 - ~~**Unused files served publicly**~~: deleted in task B; all 11 return 404 on the live site (checked in Phase 4).
 - ~~`sitemap.xml` `lastmod`~~: bumped to 2026-09-26 in 3.7. Bump again whenever the page content changes.
@@ -392,3 +438,4 @@ Browser tests ran against the branch's `index.html` served locally. Every Formsp
 - 2026-09-26: Mid-run, Caleb added C (joined header call/text unit + opaque header) and D (semi-pro accuracy); both done, one commit each. Phase 2+3 review re-run on the final state: all green. Fixed an in-phase slip (the academy's name in this file) by amending and force-pushing this branch only. Stopped for Caleb's approval; nothing merged.
 - 2026-09-26: New session (on Caleb's Mac). Verified the starting state on a fresh clone (`main` `4cc1c87`, branch `9334ac7`, 0 sensitive-string hits in all history and objects). Fast-forwarded `main` → `9334ac7` per Caleb's approval; Pages run #57 green; live `index.html` byte-identical. Ran the Phase 4 review (review only; see the record above). Stopped for Caleb.
 - 2026-09-26: Caleb's reviewer verified Phase 4; Caleb turned on Enforce HTTPS and approved Phase 5. Did 5.1–5.14 (one commit each, each gated), fixed one slip in-phase (5.11's note first said html-validate was "still 6"; corrected by amending that unpushed commit), then ran the Phase 5 review on the final state. Branch pushed; nothing merged. Stopped for Caleb.
+- 2026-09-26: Phase 6 done on the branch: 6.1 (pre-built Tailwind CSS, `b2601bc`) and 6.2 (style blocks into `<head>`, `1c3ceae`), each proven rendering-identical to the original page (32 states × 4 widths, every computed style, box and pixel, against a control run). Validation now 0 errors. Branch pushed; nothing merged. Stopped for Caleb.
