@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>CG3 Academy — Private Soccer Coaching</title>
+  <title>CG3 Academy | Private Soccer Coaching</title>
   <meta name="description" content="Private and small group soccer training in Carrollwood, Northdale, Lutz, Land O' Lakes, Citrus Park, Westchase and Odessa. NCAA Division I and Tampa Bay Rowdies U-23 experience. Ages 4 and up, all skill levels." />
   <link rel="canonical" href="https://cg3academy.com/" />
 
@@ -20,7 +20,7 @@
   <!-- Open Graph / Facebook / iMessage -->
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://cg3academy.com/" />
-  <meta property="og:title" content="CG3 Academy — Private Soccer Coaching" />
+  <meta property="og:title" content="CG3 Academy | Private Soccer Coaching" />
   <meta property="og:description" content="Private and small group soccer training in Carrollwood, Northdale, Lutz, Land O' Lakes, Citrus Park, Westchase and Odessa. NCAA Division I and Tampa Bay Rowdies U-23 experience. Ages 4 and up, all skill levels." />
   <meta property="og:image" content="https://cg3academy.com/Brand_assets/og-image.png" />
   <meta property="og:image:width" content="1200" />
@@ -29,7 +29,7 @@
 
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="CG3 Academy — Private Soccer Coaching" />
+  <meta name="twitter:title" content="CG3 Academy | Private Soccer Coaching" />
   <meta name="twitter:description" content="Private and small group soccer training in Carrollwood, Northdale, Lutz, Land O' Lakes, Citrus Park, Westchase and Odessa. NCAA Division I and Tampa Bay Rowdies U-23 experience. Ages 4 and up, all skill levels." />
   <meta name="twitter:image" content="https://cg3academy.com/Brand_assets/og-image.png" />
   <!-- LocalBusiness structured data: must match the Google Business Profile exactly (no email, no street address) -->
@@ -323,13 +323,9 @@
     /* Header "Book Session" is the same 46px box as the call/text unit beside it (1px gold edge, no glow, no hover lift) */
     #nav .nav-book:hover { transform: none; }
     .nav-bar > :last-child { white-space: nowrap; }
-    /* Desktop header from 1200px: About / Training / Results exactly centred on the page (equal 1fr side columns),
-       logo left, call + Book right. From 1024 to 1199px there isn't room to centre, so the links keep equal gaps either side. */
-    @media (min-width: 1200px) {
-      .nav-bar { display: grid !important; grid-template-columns: 1fr auto 1fr; column-gap: 32px; }
-      .nav-bar > a:first-child { justify-self: start; }
-      .nav-bar > :last-child { justify-self: end; }
-    }
+    /* Desktop header: logo left, call + Book right, and About / Training / Results sit with EQUAL gaps either side
+       (flex space-between) at every width. Page-centring them left a ~3x wider gap after the logo than before the
+       call button, because the right-hand group is much wider than the logo. */
 
     /* Tryout prep bar (3.1): auto-hides from 2026-11-08 America/New_York. Delete with its markup and script after that date. */
     .tryout-bar { position: absolute; top: 80px; left: 0; right: 0; z-index: 20; display: flex; align-items: center; justify-content: center; min-height: 44px; padding: 0 56px; background: #C9A24A; }
@@ -465,14 +461,44 @@
   <style>*, ::before, ::after{--tw-border-spacing-x:0;--tw-border-spacing-y:0;--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;--tw-pan-x: ;--tw-pan-y: ;--tw-pinch-zoom: ;--tw-scroll-snap-strictness:proximity;--tw-gradient-from-position: ;--tw-gradient-via-position: ;--tw-gradient-to-position: ;--tw-ordinal: ;--tw-slashed-zero: ;--tw-numeric-figure: ;--tw-numeric-spacing: ;--tw-numeric-fraction: ;--tw-ring-inset: ;--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:rgb(59 130 246 / 0.5);--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000;--tw-blur: ;--tw-brightness: ;--tw-contrast: ;--tw-grayscale: ;--tw-hue-rotate: ;--tw-invert: ;--tw-saturate: ;--tw-sepia: ;--tw-drop-shadow: ;--tw-backdrop-blur: ;--tw-backdrop-brightness: ;--tw-backdrop-contrast: ;--tw-backdrop-grayscale: ;--tw-backdrop-hue-rotate: ;--tw-backdrop-invert: ;--tw-backdrop-opacity: ;--tw-backdrop-saturate: ;--tw-backdrop-sepia: ;--tw-contain-size: ;--tw-contain-layout: ;--tw-contain-paint: ;--tw-contain-style: }::backdrop{--tw-border-spacing-x:0;--tw-border-spacing-y:0;--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;--tw-pan-x: ;--tw-pan-y: ;--tw-pinch-zoom: ;--tw-scroll-snap-strictness:proximity;--tw-gradient-from-position: ;--tw-gradient-via-position: ;--tw-gradient-to-position: ;--tw-ordinal: ;--tw-slashed-zero: ;--tw-numeric-figure: ;--tw-numeric-spacing: ;--tw-numeric-fraction: ;--tw-ring-inset: ;--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:rgb(59 130 246 / 0.5);--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000;--tw-blur: ;--tw-brightness: ;--tw-contrast: ;--tw-grayscale: ;--tw-hue-rotate: ;--tw-invert: ;--tw-saturate: ;--tw-sepia: ;--tw-drop-shadow: ;--tw-backdrop-blur: ;--tw-backdrop-brightness: ;--tw-backdrop-contrast: ;--tw-backdrop-grayscale: ;--tw-backdrop-hue-rotate: ;--tw-backdrop-invert: ;--tw-backdrop-opacity: ;--tw-backdrop-saturate: ;--tw-backdrop-sepia: ;--tw-contain-size: ;--tw-contain-layout: ;--tw-contain-paint: ;--tw-contain-style: }/* ! tailwindcss v3.4.17 | MIT License | https://tailwindcss.com */*,::after,::before{box-sizing:border-box;border-width:0;border-style:solid;border-color:#e5e7eb}::after,::before{--tw-content:''}:host,html{line-height:1.5;-webkit-text-size-adjust:100%;-moz-tab-size:4;tab-size:4;font-family:Inter, sans-serif;font-feature-settings:normal;font-variation-settings:normal;-webkit-tap-highlight-color:transparent}body{margin:0;line-height:inherit}hr{height:0;color:inherit;border-top-width:1px}abbr:where([title]){-webkit-text-decoration:underline dotted;text-decoration:underline dotted}h1,h2,h3,h4,h5,h6{font-size:inherit;font-weight:inherit}a{color:inherit;text-decoration:inherit}b,strong{font-weight:bolder}code,kbd,pre,samp{font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;font-feature-settings:normal;font-variation-settings:normal;font-size:1em}small{font-size:80%}sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}sub{bottom:-.25em}sup{top:-.5em}table{text-indent:0;border-color:inherit;border-collapse:collapse}button,input,optgroup,select,textarea{font-family:inherit;font-feature-settings:inherit;font-variation-settings:inherit;font-size:100%;font-weight:inherit;line-height:inherit;letter-spacing:inherit;color:inherit;margin:0;padding:0}button,select{text-transform:none}button,input:where([type=button]),input:where([type=reset]),input:where([type=submit]){-webkit-appearance:button;background-color:transparent;background-image:none}:-moz-focusring{outline:auto}:-moz-ui-invalid{box-shadow:none}progress{vertical-align:baseline}::-webkit-inner-spin-button,::-webkit-outer-spin-button{height:auto}[type=search]{-webkit-appearance:textfield;outline-offset:-2px}::-webkit-search-decoration{-webkit-appearance:none}::-webkit-file-upload-button{-webkit-appearance:button;font:inherit}summary{display:list-item}blockquote,dd,dl,figure,h1,h2,h3,h4,h5,h6,hr,p,pre{margin:0}fieldset{margin:0;padding:0}legend{padding:0}menu,ol,ul{list-style:none;margin:0;padding:0}dialog{padding:0}textarea{resize:vertical}input::placeholder,textarea::placeholder{opacity:1;color:#9ca3af}[role=button],button{cursor:pointer}:disabled{cursor:default}audio,canvas,embed,iframe,img,object,svg,video{display:block;vertical-align:middle}img,video{max-width:100%;height:auto}[hidden]:where(:not([hidden=until-found])){display:none}.visible{visibility:visible}.fixed{position:fixed}.left-0{left:0px}.right-0{right:0px}.top-0{top:0px}.z-50{z-index:50}.hidden{display:none}.items-center{align-items:center}.gap-8{gap:2rem}@media (min-width: 640px){.sm\:block{display:block}.sm\:inline-block{display:inline-block}}@media (min-width: 1024px){.lg\:flex{display:flex}}</style>
   <!-- Section styles, moved here from the page body (6.2). Same order and same cascade position as before:
        after every other stylesheet. -->
-  <style>@media(max-width:900px){.about-grid{grid-template-columns:1fr!important;row-gap:48px!important}.about-grid>div:first-child{overflow:hidden}}
-  @media(max-width:600px){#hero{min-height:auto!important;background-position:60% 5%!important}.hero-content{padding:140px 24px 120px!important}}
-  /* Phones: the header uses the hero's 24px side margins; the eyebrow is 3 clean lines with the gold dash on the first */
-  @media(max-width:600px){#nav>div{padding:0 24px!important}.hero-eyebrow{align-items:flex-start!important}.hero-eyebrow-rule{flex-shrink:0;width:24px!important;margin-top:8px}.hero-eyebrow-text{letter-spacing:0.18em!important}.eyebrow-sep{display:none}.eyebrow-line{display:block}}
-  @media(max-width:359px){.hero-eyebrow-text{font-size:10px!important;letter-spacing:0.12em!important}}</style>
+  <style>@media(max-width:900px){.about-grid{grid-template-columns:1fr!important;row-gap:48px!important}.about-grid>div:first-child{width:100%;max-width:440px;justify-self:center;margin-bottom:calc(30.5% + 4px)}.about-photo-main{height:auto!important;aspect-ratio:630/818}.about-inset{width:min(52%,210px)!important;right:-16px!important;bottom:0!important;transform:translateY(60%)}.about-inset .photo-treatment{height:auto!important;aspect-ratio:1284/1256;border-width:3px!important}}
+  /* Phones: the hero photo is drawn at 76% of the hero's height (not full cover) so Villa's face and the GEORGE 22 jersey both fit
+     across a 360-430px screen; the gradient layer fades the photo's bottom edge into the page black.
+     The headline starts 238px down so the faces at the top of the photo (Villa, the referee) show above it. */
+  /* Desktop: photo pinned to its left edge and drawn ~10% larger than a plain cover (1780px wide on a typical
+     1280-1440px screen), which pushes the players ~60px right so the referee's and Villa's faces clear "ELEVATE".
+     max() keeps it covering wider or taller screens; the page black behind it hides any sliver below. */
+  @media(min-width:901px){#hero{background-size:max(100%,1780px,165vh) auto!important;background-position:0% 20%!important;background-color:#0A0A0A!important}}
+  @media(max-width:600px){#hero{min-height:auto!important;background:linear-gradient(to top,#0A0A0A 24%,rgba(10,10,10,0) 40%),url('CG3%20Assets/Pictures/IMG_9896.JPG') 51% 0/auto 76% no-repeat,#0A0A0A!important}.hero-content{padding:238px 24px 120px!important}}
+  /* Phones: the header uses the hero's 24px side margins */
+  @media(max-width:600px){#nav>div{padding:0 24px!important}}</style>
   <style>@media(max-width:600px){.photo-strip{grid-template-columns:1fr 1fr!important;height:auto!important}.strip-cell{height:220px!important}}</style>
   <style>@media(max-width:900px){.training-grid{grid-template-columns:1fr!important}#panel-solo,#panel-group{grid-template-columns:1fr!important}}</style>
   <style>@media(max-width:900px){.testi-grid{grid-template-columns:1fr!important}.trust-grid{grid-template-columns:1fr!important}}</style>
+  <style>
+    /* Google rating link (hero, Results heading, booking intro). Swap GOOGLE_REVIEWS_URL in all three hrefs together. */
+    .g-rating { display: inline-flex; align-items: center; gap: 10px; min-height: 44px; text-decoration: none; font-family: 'Inter', sans-serif; font-size: 13px; font-weight: 500; color: rgba(245,245,243,0.75); }
+    .g-rating-stars { color: #C9A24A; font-size: 15px; letter-spacing: 2px; line-height: 1; }
+    .g-rating strong { color: #F5F5F3; font-weight: 700; }
+    .g-rating-more { color: #C9A24A; border-bottom: 1px solid rgba(201,162,74,0.4); }
+    @media (hover: hover) { .g-rating:hover .g-rating-more { border-bottom-color: #C9A24A; } }
+
+    /* Results: "From parents" / "From players" sub-labels and the parent review cards */
+    .testi-label { display: flex; align-items: center; gap: 16px; margin: 0 0 20px; font-family: 'Inter', sans-serif; font-size: 11px; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: #C9A24A; }
+    .testi-label::after { content: ''; flex: 1; height: 1px; background: rgba(245,245,243,0.08); }
+    .review-stars { color: #C9A24A; font-size: 15px; letter-spacing: 3px; line-height: 1; margin-bottom: 20px; }
+    .review-avatar { width: 48px; height: 48px; border-radius: 50%; flex-shrink: 0; display: flex; align-items: center; justify-content: center; border: 1px solid rgba(201,162,74,0.45); background: rgba(201,162,74,0.08); font-family: 'Fraunces', serif; font-weight: 900; font-size: 20px; color: #C9A24A; }
+
+    /* Phones and tablets: each row becomes a swipeable strip, the next card peeking in from the right.
+       Cards are forced visible here because off-screen (sideways) cards would never trigger the scroll reveal. */
+    @media (max-width: 900px) {
+      /* Bleeds to the screen edges (the section keeps 40px side padding at every width) */
+      .testi-grid { display: flex !important; gap: 12px !important; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; margin: 0 -40px; padding: 0 40px 4px; scroll-padding-left: 40px; }
+      .testi-grid::-webkit-scrollbar { display: none; }
+      .testi-grid > .testi-card { flex: 0 0 min(calc(100vw - 96px), 420px); scroll-snap-align: start; padding: 32px 24px 24px !important; opacity: 1 !important; transform: none !important; }
+      .testi-grid > .testi-card:hover { transform: none; }
+    }
+  </style>
   <style>
     /* Booking grid — desktop: 2 cols, form spans both rows */
     .booking-grid {
@@ -595,10 +621,6 @@
     </script>
 
     <div class="hero-content" style="position:relative;z-index:10;width:100%;max-width:1280px;margin:0 auto;padding:160px 40px 100px;">
-      <div class="fade-up hero-eyebrow" style="display:flex;align-items:center;gap:12px;margin-bottom:32px;">
-        <div class="hero-eyebrow-rule" style="width:32px;height:1px;background:#C9A24A;"></div>
-        <span class="hero-eyebrow-text" style="font-family:'Inter',sans-serif;font-size:11px;font-weight:600;letter-spacing:0.22em;text-transform:uppercase;color:#C9A24A;">Private 1-on-1 Coaching<span class="eyebrow-sep"> · </span><span class="eyebrow-line">Carrollwood · Northdale · Lutz</span><span class="eyebrow-sep"> · </span><span class="eyebrow-line">Land&nbsp;O'&nbsp;Lakes · Citrus Park</span><span class="eyebrow-sep"> · </span><span class="eyebrow-line">Westchase · Odessa</span></span>
-      </div>
 
       <h1 class="fade-up" data-delay="100" style="font-family:'Fraunces',serif;font-weight:900;font-size:clamp(56px,9vw,120px);line-height:0.9;letter-spacing:-0.03em;color:#F5F5F3;max-width:900px;margin-bottom:32px;">
         ELEVATE<br/>
@@ -611,8 +633,9 @@
       </p>
 
 
-      <div class="fade-up" data-delay="300" style="display:flex;flex-wrap:wrap;gap:16px;margin-bottom:80px;">
+      <div class="fade-up" data-delay="300" style="display:flex;flex-wrap:wrap;align-items:center;gap:16px 28px;margin-bottom:80px;">
         <a href="#booking"  class="btn-primary">Book Your Session</a>
+        <a href="https://g.page/r/CQS8h49asTErEAI/review" class="g-rating" target="_blank" rel="noopener" aria-label="Rated 5.0 out of 5 from 7 Google reviews (opens in a new tab)"><span class="g-rating-stars" aria-hidden="true">★★★★★</span><span><strong>5.0</strong> on Google · <span class="g-rating-more">7 reviews</span></span></a>
       </div>
 
       <div class="fade-up" data-delay="400" style="display:grid;grid-template-columns:repeat(3,1fr);gap:24px;padding-top:32px;border-top:1px solid rgba(245,245,243,0.08);max-width:640px;">
@@ -672,14 +695,15 @@
 
         <!-- Images: headshot + action -->
         <div class="fade-right" style="position:relative;">
-          <!-- Main action photo -->
-          <div class="photo-treatment" style="height:560px;">
-            <img src="CG3%20Assets/Pictures/IMG_3879.jpg" alt="Caleb George in action" style="object-position:38% 40%;" />
+          <!-- Main photo: Caleb with two young players (parents' first impression of the coach) -->
+          <div class="photo-treatment about-photo-main" style="height:560px;">
+            <img src="CG3%20Assets/Pictures/coaching-session.jpg" alt="Caleb with two young players after a training session" style="object-position:center 40%;" />
           </div>
-          <!-- Inset: current photo -->
-          <div style="position:absolute;bottom:-28px;right:-36px;width:210px;">
-            <div class="photo-treatment" style="height:240px;border:4px solid #0A0A0A;box-shadow:0 8px 40px rgba(0,0,0,0.7);">
-              <img src="CG3%20Assets/Pictures/coaching-session.jpg" alt="Caleb with two young players after a training session" style="object-position:center 40%;filter:grayscale(20%) contrast(1.05);" />
+          <!-- Inset: Caleb kicking, bottom-right corner. Overlaps the corner on desktop; on phones and tablets it hangs
+               below the main photo's corner so it doesn't cover the group. See .about-inset -->
+          <div class="about-inset" style="position:absolute;bottom:-28px;right:-36px;width:170px;">
+            <div class="photo-treatment" style="height:166px;border:4px solid #0A0A0A;box-shadow:0 8px 40px rgba(0,0,0,0.7);">
+              <img src="CG3%20Assets/Pictures/IMG_3879.jpg" alt="Caleb George in action" style="object-position:30% 50%;" />
             </div>
           </div>
           <!-- Badge -->
@@ -712,11 +736,11 @@
             </div>
             <div style="display:flex;align-items:flex-start;gap:12px;">
               <div style="width:6px;height:6px;background:#C9A24A;margin-top:7px;flex-shrink:0;border-radius:50%;"></div>
-              <span style="font-family:'Inter',sans-serif;font-size:14px;color:rgba(245,245,243,0.7);">Kaw Valley FC — Sporting Kansas City Affiliate (2018)</span>
+              <span style="font-family:'Inter',sans-serif;font-size:14px;color:rgba(245,245,243,0.7);">Kaw Valley FC · Sporting Kansas City Affiliate (2018)</span>
             </div>
             <div style="display:flex;align-items:flex-start;gap:12px;">
               <div style="width:6px;height:6px;background:#C9A24A;margin-top:7px;flex-shrink:0;border-radius:50%;"></div>
-              <span style="font-family:'Inter',sans-serif;font-size:14px;color:rgba(245,245,243,0.7);">Lakeland Tropics — USL League Two (2019)</span>
+              <span style="font-family:'Inter',sans-serif;font-size:14px;color:rgba(245,245,243,0.7);">Lakeland Tropics · USL League Two (2019)</span>
             </div>
             <div style="display:flex;align-items:flex-start;gap:12px;">
               <div style="width:6px;height:6px;background:#C9A24A;margin-top:7px;flex-shrink:0;border-radius:50%;"></div>
@@ -878,7 +902,7 @@
             <div style="font-family:'Inter',sans-serif;font-size:12px;color:rgba(245,245,243,0.55);margin-bottom:4px;">total for 2 players</div>
             <div style="font-family:'Inter',sans-serif;font-size:12px;color:rgba(245,245,243,0.55);text-decoration:line-through;margin-bottom:8px;">$440 regular</div>
             <div style="display:inline-block;background:rgba(201,162,74,0.15);border:1px solid rgba(201,162,74,0.35);padding:3px 10px;font-family:'Inter',sans-serif;font-size:10px;font-weight:700;letter-spacing:0.12em;color:#C9A24A;text-transform:uppercase;margin-bottom:16px;">Save $100 total</div>
-            <p style="font-family:'Inter',sans-serif;font-size:13px;line-height:1.6;color:rgba(245,245,243,0.55);margin-bottom:20px;">The easy way to try group training — bring a sibling or friend for 4 sessions together. Elite coaching, shared cost, zero commitment.</p>
+            <p style="font-family:'Inter',sans-serif;font-size:13px;line-height:1.6;color:rgba(245,245,243,0.55);margin-bottom:20px;">The easy way to try group training. Bring a sibling or friend for 4 sessions together. Elite coaching, shared cost, zero commitment.</p>
             <a href="#book-form" data-pick="group-family" class="btn-primary" style="width:100%;text-align:center;display:block;font-size:11px;line-height:20px;padding:12px;">Select Pack</a>
           </div>
           <!-- Group monthly -->
@@ -912,12 +936,59 @@
   <section id="testimonials" style="background:#141414;padding:120px 0;">
     <div style="max-width:1280px;margin:0 auto;padding:0 40px;">
 
-      <div class="fade-up" style="text-align:center;max-width:560px;margin:0 auto 64px;">
+      <div class="fade-up" style="text-align:center;max-width:640px;margin:0 auto 64px;">
         <div class="gold-rule" style="margin:0 auto 20px;"></div>
-        <div style="font-family:'Inter',sans-serif;font-size:11px;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;color:#939393;margin-bottom:16px;">Player Results</div>
-        <h2 style="font-family:'Fraunces',serif;font-weight:900;font-size:clamp(32px,4vw,48px);line-height:1.0;letter-spacing:-0.02em;color:#F5F5F3;">What players are saying.</h2>
+        <div style="font-family:'Inter',sans-serif;font-size:11px;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;color:#939393;margin-bottom:16px;">Results</div>
+        <h2 style="font-family:'Fraunces',serif;font-weight:900;font-size:clamp(32px,4vw,48px);line-height:1.0;letter-spacing:-0.02em;color:#F5F5F3;margin-bottom:20px;">What parents and players are saying.</h2>
+        <a href="https://g.page/r/CQS8h49asTErEAI/review" class="g-rating" target="_blank" rel="noopener" aria-label="Rated 5.0 out of 5 from 7 Google reviews (opens in a new tab)"><span class="g-rating-stars" aria-hidden="true">★★★★★</span><span><strong>5.0</strong> on Google · <span class="g-rating-more">Read all 7 reviews</span></span></a>
       </div>
 
+      <!-- Parent reviews: trimmed from Google reviews (first name + last initial; no children's names) -->
+      <div class="testi-label fade-up">From parents</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;margin-bottom:56px;" class="testi-grid">
+
+        <!-- Steffani C. -->
+        <div class="testi-card scale-in" style="padding:40px 36px 32px;display:flex;flex-direction:column;">
+          <div class="review-stars" role="img" aria-label="5 out of 5 stars">★★★★★</div>
+          <p style="font-family:'Inter',sans-serif;font-size:15px;line-height:1.75;color:rgba(245,245,243,0.75);margin-bottom:28px;">"All three of my kids train with him, and the improvement we've seen in their skills, confidence, and love for the game has been incredible. Caleb is patient, encouraging, knowledgeable, and truly invested in their development."</p>
+          <div style="border-top:1px solid rgba(245,245,243,0.08);padding-top:20px;display:flex;align-items:center;gap:14px;margin-top:auto;">
+            <div class="review-avatar" aria-hidden="true">S</div>
+            <div>
+              <div style="font-family:'Inter',sans-serif;font-weight:600;font-size:14px;color:#F5F5F3;">Steffani C.</div>
+              <div style="font-family:'Inter',sans-serif;font-size:12px;color:#939393;margin-top:3px;">Mom of three players · Google review</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Marianne A. -->
+        <div class="testi-card scale-in" style="padding:40px 36px 32px;display:flex;flex-direction:column;" data-delay="100">
+          <div class="review-stars" role="img" aria-label="5 out of 5 stars">★★★★★</div>
+          <p style="font-family:'Inter',sans-serif;font-size:15px;line-height:1.75;color:rgba(245,245,243,0.75);margin-bottom:28px;">"We looked long and hard for a coach for our U10 son. We were lucky enough to find Coach Caleb. What a blessing! He is so patient with my son, and the drills he has set up address everything we wanted."</p>
+          <div style="border-top:1px solid rgba(245,245,243,0.08);padding-top:20px;display:flex;align-items:center;gap:14px;margin-top:auto;">
+            <div class="review-avatar" aria-hidden="true">M</div>
+            <div>
+              <div style="font-family:'Inter',sans-serif;font-weight:600;font-size:14px;color:#F5F5F3;">Marianne A.</div>
+              <div style="font-family:'Inter',sans-serif;font-size:12px;color:#939393;margin-top:3px;">Parent of a U10 player · Google review</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Monica I. -->
+        <div class="testi-card scale-in" style="padding:40px 36px 32px;display:flex;flex-direction:column;" data-delay="200">
+          <div class="review-stars" role="img" aria-label="5 out of 5 stars">★★★★★</div>
+          <p style="font-family:'Inter',sans-serif;font-size:15px;line-height:1.75;color:rgba(245,245,243,0.75);margin-bottom:28px;">"My son absolutely adores him, and so do all of his friends! He is patient, kind, knowledgeable, supportive, encouraging, and always uplifting. We feel so fortunate to have him as a coach."</p>
+          <div style="border-top:1px solid rgba(245,245,243,0.08);padding-top:20px;display:flex;align-items:center;gap:14px;margin-top:auto;">
+            <div class="review-avatar" aria-hidden="true">M</div>
+            <div>
+              <div style="font-family:'Inter',sans-serif;font-weight:600;font-size:14px;color:#F5F5F3;">Monica I.</div>
+              <div style="font-family:'Inter',sans-serif;font-size:12px;color:#939393;margin-top:3px;">Parent · Google review</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="testi-label fade-up">From players</div>
       <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;" class="testi-grid">
 
         <!-- Chris C. -->
@@ -929,7 +1000,7 @@
             </div>
             <div>
               <div style="font-family:'Inter',sans-serif;font-weight:600;font-size:14px;color:#F5F5F3;">Chris C.</div>
-              <div style="font-family:'Inter',sans-serif;font-size:12px;color:#939393;margin-top:3px;">Right Back, FGCU — Semi-Pro</div>
+              <div style="font-family:'Inter',sans-serif;font-size:12px;color:#939393;margin-top:3px;">Right Back, FGCU · Semi-Pro</div>
             </div>
           </div>
         </div>
@@ -943,7 +1014,7 @@
             </div>
             <div>
               <div style="font-family:'Inter',sans-serif;font-weight:600;font-size:14px;color:#F5F5F3;">Blake M.</div>
-              <div style="font-family:'Inter',sans-serif;font-size:12px;color:#939393;margin-top:3px;">Berkeley Prep — Babson College</div>
+              <div style="font-family:'Inter',sans-serif;font-size:12px;color:#939393;margin-top:3px;">Berkeley Prep · Babson College</div>
             </div>
           </div>
         </div>
@@ -1000,6 +1071,7 @@
           <p style="font-family:'Inter',sans-serif;font-size:16px;line-height:1.75;color:rgba(245,245,243,0.5);margin-bottom:0;">
             Whether you're looking for private sessions or group training, reach out and we'll find the right fit for your goals.
           </p>
+          <a href="https://g.page/r/CQS8h49asTErEAI/review" class="g-rating" target="_blank" rel="noopener" style="margin-top:16px;" aria-label="Rated 5.0 out of 5 from 7 Google reviews (opens in a new tab)"><span class="g-rating-stars" aria-hidden="true">★★★★★</span><span><strong>5.0</strong> on Google · <span class="g-rating-more">Read reviews</span></span></a>
         </div>
 
         <!-- 3: Details (location/urgency/photo) — order 3 on mobile -->
@@ -1078,17 +1150,17 @@
                     <option value="1on1-single">Single Session, 60 min: $85</option>
                     <option value="1on1-single-45">Single Session, 45 min (ages 4 to 8): $65</option>
                     <option value="1on1-single-30">Single Session, 30 min (ages 4 to 6): $50</option>
-                    <option value="1on1-4pack">4-Session Pack — $306 (save $34)</option>
-                    <option value="1on1-8pack">8-Session Pack — $578 (save $102)</option>
-                    <option value="1on1-12pack">12-Session Pack — $850 (save $170)</option>
+                    <option value="1on1-4pack">4-Session Pack: $306 (save $34)</option>
+                    <option value="1on1-8pack">8-Session Pack: $578 (save $102)</option>
+                    <option value="1on1-12pack">12-Session Pack: $850 (save $170)</option>
                   </optgroup>
                   <optgroup label="Group Training">
                     <option value="group-2">Group Session, 2 players: $55/player</option>
                     <option value="group-3-4">Group Session, 3 to 4 players: $45/player</option>
                     <option value="group-5plus">Mini Clinic, 5 or more players: $35/player</option>
                     <option value="group-4pack">Group 4-Pack, 2-player rate: $198/player (save $22)</option>
-                    <option value="group-family">Family Starter Pack (2 kids) — $340 total (save $100)</option>
-                    <option value="group-monthly">Group Monthly — $370/player (save $70)</option>
+                    <option value="group-family">Family Starter Pack (2 kids): $340 total (save $100)</option>
+                    <option value="group-monthly">Group Monthly: $370/player (save $70)</option>
                   </optgroup>
                 </select>
               </div>
@@ -1130,7 +1202,7 @@
               <div style="font-family:'Inter',sans-serif;font-size:9px;font-weight:600;letter-spacing:0.2em;color:#939393;text-transform:uppercase;">Private Soccer Coaching</div>
             </div>
           </div>
-          <p style="font-family:'Inter',sans-serif;font-size:14px;line-height:1.7;color:rgba(245,245,243,0.5);max-width:240px;">From beginner to pro, every player deserves elite coaching. Based in Tampa Bay — training players who want more.</p>
+          <p style="font-family:'Inter',sans-serif;font-size:14px;line-height:1.7;color:rgba(245,245,243,0.5);max-width:240px;">From beginner to pro, every player deserves elite coaching. Based in Tampa Bay, training players who want more.</p>
         </div>
         <div>
           <div style="font-family:'Inter',sans-serif;font-size:10px;font-weight:700;letter-spacing:0.2em;color:#939393;text-transform:uppercase;margin-bottom:20px;">Navigate</div>
