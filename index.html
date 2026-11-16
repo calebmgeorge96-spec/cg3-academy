@@ -8,7 +8,7 @@
   <link rel="canonical" href="https://cg3academy.com/" />
 
   <!-- Favicons / Browser tab icons -->
-  <link rel="icon" type="image/svg+xml" href="Brand_assets/cg3_logo_mark.svg" />
+  <link rel="icon" type="image/png" sizes="48x48" href="Brand_assets/favicon-48.png" />
   <link rel="icon" type="image/png" sizes="192x192" href="Brand_assets/icon-192.png" />
   <link rel="icon" type="image/png" sizes="512x512" href="Brand_assets/icon-512.png" />
   <!-- Apple touch icon (Add to Home Screen on iOS) -->
@@ -317,6 +317,17 @@
     @media (min-width: 640px) and (hover: hover) {
       .nav-phone-text:hover { background: rgba(201,162,74,0.12); }
     }
+    /* Phones (below 640px): the CG3 Academy wordmark on the left; on the right two 44px square buttons,
+       a gold-outlined call icon and a gold text (chat) icon. The number and the word TEXT show from 640px up. */
+    .nav-text-icon { display: none; }
+    @media (max-width: 639px) {
+      .nav-phone { border: none; gap: 10px; }
+      .nav-phone a { width: 44px; height: 44px; justify-content: center; padding: 0 !important; }
+      .nav-phone-call { border: 1px solid #C9A24A; }
+      .nav-phone-call svg { width: 18px; height: 18px; }
+      .nav-phone-num, .nav-text-label { display: none; }
+      .nav-text-icon { display: block; }
+    }
     /* Header "Book Session" stays hidden below 640px (the floating BOOK NOW button covers mobile).
        Pinned here because .btn-primary's display rule otherwise competes with Tailwind's "hidden". */
     @media (max-width: 639px) { #nav .nav-book { display: none; } }
@@ -557,12 +568,9 @@
     <div style="max-width:1280px;margin:0 auto;padding:0 40px;">
       <div class="nav-bar" style="display:flex;align-items:center;justify-content:space-between;height:80px;">
 
-        <a href="#hero" style="display:flex;align-items:center;gap:12px;text-decoration:none;">
-          <img src="Brand_assets/cg3_logo_mark.svg" alt="CG3 Academy" width="46" height="55" style="flex-shrink:0;display:block;" />
-          <div class="hidden sm:block">
-            <div style="font-family:'Fraunces',serif;font-weight:900;font-size:17px;color:#F5F5F3;line-height:1.1;letter-spacing:-0.01em;">CG3</div>
-            <div style="font-family:'Inter',sans-serif;font-size:9px;font-weight:600;letter-spacing:0.22em;color:#939393;text-transform:uppercase;">Academy</div>
-          </div>
+        <a href="#hero" class="nav-logo" style="display:block;text-decoration:none;">
+          <div style="font-family:'Fraunces',serif;font-weight:900;font-size:30px;line-height:1;letter-spacing:-0.02em;color:#F5F5F3;">CG<span style="color:#C9A24A;">3</span></div>
+          <div style="font-family:'Inter',sans-serif;font-size:9px;font-weight:600;letter-spacing:0.32em;color:#939393;text-transform:uppercase;margin-top:5px;">Academy</div>
         </a>
 
         <div class="hidden lg:flex items-center gap-8">
@@ -573,8 +581,8 @@
 
         <div style="display:flex;align-items:center;gap:16px;">
           <div class="nav-phone">
-            <a href="tel:+18133510034" class="nav-phone-call" aria-label="Call (813) 351-0034"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#C9A24A" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg><span>(813) 351-0034</span></a>
-            <a href="sms:+18133510034" class="nav-phone-text" aria-label="Text (813) 351-0034">Text</a>
+            <a href="tel:+18133510034" class="nav-phone-call" aria-label="Call (813) 351-0034"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#C9A24A" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg><span class="nav-phone-num">(813) 351-0034</span></a>
+            <a href="sms:+18133510034" class="nav-phone-text" aria-label="Text (813) 351-0034"><svg class="nav-text-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg><span class="nav-text-label">Text</span></a>
           </div>
           <a href="#booking" class="btn-primary nav-book hidden sm:inline-block" style="padding:0 24px;font-size:11px;line-height:44px;border:1px solid #C9A24A;box-shadow:none;">Book Session</a>
         </div>
@@ -1203,12 +1211,10 @@
     <div style="max-width:1280px;margin:0 auto;padding:0 40px;">
       <div style="display:grid;grid-template-columns:1.2fr 1fr 1fr;gap:48px;margin-bottom:48px;" class="footer-grid">
         <div>
-          <div style="display:flex;align-items:center;gap:12px;margin-bottom:16px;">
-            <img src="Brand_assets/cg3_logo_mark.svg" alt="CG3 Academy" width="40" height="48" style="display:block;" />
-            <div>
-              <div style="font-family:'Fraunces',serif;font-weight:900;font-size:16px;color:#F5F5F3;">CG3 Academy</div>
-              <div style="font-family:'Inter',sans-serif;font-size:9px;font-weight:600;letter-spacing:0.2em;color:#939393;text-transform:uppercase;">Private Soccer Coaching</div>
-            </div>
+          <div style="margin-bottom:16px;">
+            <div style="font-family:'Fraunces',serif;font-weight:900;font-size:30px;line-height:1;letter-spacing:-0.02em;color:#F5F5F3;">CG<span style="color:#C9A24A;">3</span></div>
+            <div style="font-family:'Inter',sans-serif;font-size:9px;font-weight:600;letter-spacing:0.32em;color:#939393;text-transform:uppercase;margin-top:5px;">Academy</div>
+            <div style="font-family:'Inter',sans-serif;font-size:9px;font-weight:600;letter-spacing:0.2em;color:#C9A24A;text-transform:uppercase;margin-top:14px;">Private Soccer Coaching</div>
           </div>
           <p style="font-family:'Inter',sans-serif;font-size:14px;line-height:1.7;color:rgba(245,245,243,0.5);max-width:240px;">From beginner to pro, every player deserves elite coaching. Based in Tampa Bay, training players who want more.</p>
         </div>
