@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>CG3 Academy | Private Soccer Coaching</title>
-  <meta name="description" content="Private and small group soccer training in Carrollwood, Northdale, Lutz, Land O' Lakes, Citrus Park, Westchase and Odessa. NCAA Division I and Tampa Bay Rowdies U-23 experience. Ages 4 and up, all skill levels." />
+  <meta name="description" content="Private and small group soccer training in Carrollwood, Northdale, Lutz, Land O' Lakes, Citrus Park, Westchase and Odessa. NCAA Division I and Tampa Bay Rowdies U-23 experience. Ages 4 and up, all skill levels. Approved Step Up For Students provider." />
   <link rel="canonical" href="https://cg3academy.com/" />
 
   <!-- Favicons / Browser tab icons -->
@@ -21,7 +21,7 @@
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://cg3academy.com/" />
   <meta property="og:title" content="CG3 Academy | Private Soccer Coaching" />
-  <meta property="og:description" content="Private and small group soccer training in Carrollwood, Northdale, Lutz, Land O' Lakes, Citrus Park, Westchase and Odessa. NCAA Division I and Tampa Bay Rowdies U-23 experience. Ages 4 and up, all skill levels." />
+  <meta property="og:description" content="Private and small group soccer training in Carrollwood, Northdale, Lutz, Land O' Lakes, Citrus Park, Westchase and Odessa. NCAA Division I and Tampa Bay Rowdies U-23 experience. Ages 4 and up, all skill levels. Approved Step Up For Students provider." />
   <meta property="og:image" content="https://cg3academy.com/Brand_assets/og-image.png" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="1200" />
@@ -30,7 +30,7 @@
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="CG3 Academy | Private Soccer Coaching" />
-  <meta name="twitter:description" content="Private and small group soccer training in Carrollwood, Northdale, Lutz, Land O' Lakes, Citrus Park, Westchase and Odessa. NCAA Division I and Tampa Bay Rowdies U-23 experience. Ages 4 and up, all skill levels." />
+  <meta name="twitter:description" content="Private and small group soccer training in Carrollwood, Northdale, Lutz, Land O' Lakes, Citrus Park, Westchase and Odessa. NCAA Division I and Tampa Bay Rowdies U-23 experience. Ages 4 and up, all skill levels. Approved Step Up For Students provider." />
   <meta name="twitter:image" content="https://cg3academy.com/Brand_assets/og-image.png" />
   <!-- LocalBusiness structured data: must match the Google Business Profile exactly (no email, no street address) -->
   <script type="application/ld+json">
@@ -502,6 +502,22 @@
     .g-rating-more { color: #C9A24A; border-bottom: 1px solid rgba(201,162,74,0.4); }
     @media (hover: hover) { .g-rating:hover .g-rating-more { border-bottom-color: #C9A24A; } }
 
+    /* Step Up For Students: hero badge, Training callout, booking-form checkbox */
+    .stepup-badge { display: inline-flex; align-items: center; gap: 10px; min-height: 44px; text-decoration: none; font-family: 'Inter', sans-serif; font-size: 13px; font-weight: 500; color: rgba(245,245,243,0.75); }
+    .stepup-badge strong { color: #F5F5F3; font-weight: 700; }
+    .stepup-check { width: 20px; height: 20px; border-radius: 50%; background: #C9A24A; display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    @media (hover: hover) { .stepup-badge:hover strong { color: #C9A24A; } }
+    .stepup-card { display: grid; grid-template-columns: 1.1fr 1fr; gap: 40px; align-items: center; margin-top: 56px; padding: 40px 44px; background: linear-gradient(135deg, rgba(201,162,74,0.10), rgba(201,162,74,0.03)); border: 1px solid rgba(201,162,74,0.3); scroll-margin-top: 96px; }
+    .stepup-rates { display: grid; grid-template-columns: 1fr 1fr; gap: 20px 28px; }
+    .stepup-rates h4 { font-family: 'Inter', sans-serif; font-size: 10px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: #939393; margin-bottom: 10px; }
+    .stepup-rates ul { display: flex; flex-direction: column; gap: 6px; font-family: 'Inter', sans-serif; font-size: 14px; color: rgba(245,245,243,0.7); }
+    .stepup-rates li strong { color: #F5F5F3; font-weight: 700; display: inline-block; min-width: 44px; }
+    @media (max-width: 900px) { .stepup-card { grid-template-columns: 1fr; gap: 28px; padding: 32px 24px; margin-top: 40px; } }
+    @media (max-width: 480px) { .stepup-rates { grid-template-columns: 1fr; } }
+    .form-check { display: flex; align-items: flex-start; gap: 12px; cursor: pointer; font-family: 'Inter', sans-serif; font-size: 14px; line-height: 1.5; color: rgba(245,245,243,0.8); padding: 14px 16px; border: 1px solid rgba(201,162,74,0.25); background: rgba(201,162,74,0.05); }
+    .form-check input { width: 18px; height: 18px; margin-top: 2px; accent-color: #C9A24A; flex-shrink: 0; cursor: pointer; }
+    .form-check span span { display: block; font-size: 12px; color: rgba(245,245,243,0.5); margin-top: 2px; }
+
     /* Results: "From parents" / "From players" sub-labels and the parent review cards */
     .testi-label { display: flex; align-items: center; gap: 16px; margin: 0 0 20px; font-family: 'Inter', sans-serif; font-size: 11px; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: #C9A24A; }
     .testi-label::after { content: ''; flex: 1; height: 1px; background: rgba(245,245,243,0.08); }
@@ -652,6 +668,7 @@
       <div class="fade-up" data-delay="300" style="display:flex;flex-wrap:wrap;align-items:center;gap:16px 28px;margin-bottom:80px;">
         <a href="#booking"  class="btn-primary">Book Your Session</a>
         <a href="https://g.page/r/CQS8h49asTErEAI/review" class="g-rating" target="_blank" rel="noopener" aria-label="Rated 5.0 out of 5 from 7 Google reviews (opens in a new tab)"><span class="g-rating-stars" aria-hidden="true">★★★★★</span><span><strong>5.0</strong> on Google · <span class="g-rating-more">7 reviews</span></span></a>
+        <a href="#step-up" class="stepup-badge"><span class="stepup-check" aria-hidden="true"><svg width="11" height="11" viewBox="0 0 12 12" fill="none" stroke="#0A0A0A" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="2.5,6.5 5,9 9.5,3.5"/></svg></span><span><strong>Step Up For Students</strong> approved provider</span></a>
       </div>
 
       <div class="fade-up" data-delay="400" style="display:grid;grid-template-columns:repeat(3,1fr);gap:24px;padding-top:32px;border-top:1px solid rgba(245,245,243,0.08);max-width:640px;">
@@ -934,6 +951,37 @@
         </div>
       </div>
 
+      <!-- ── STEP UP FOR STUDENTS ── approved catalog items = the six single-session rates below (not packages) -->
+      <div id="step-up" class="stepup-card fade-up">
+        <div>
+          <div style="font-family:'Inter',sans-serif;font-size:11px;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;color:#C9A24A;margin-bottom:14px;">Scholarship Families</div>
+          <h3 style="font-family:'Fraunces',serif;font-weight:900;font-size:clamp(26px,3vw,34px);line-height:1.08;letter-spacing:-0.02em;color:#F5F5F3;margin-bottom:16px;">Approved Step Up For Students provider.</h3>
+          <p style="font-family:'Inter',sans-serif;font-size:15px;line-height:1.7;color:rgba(245,245,243,0.6);margin-bottom:24px;">Florida families with a Step Up For Students scholarship can use their scholarship funds to pay for training. Just let me know when you book and I'll handle the invoicing through Step Up.</p>
+          <a href="#book-form" data-stepup="1" class="btn-primary">Book with Step Up</a>
+        </div>
+        <div>
+          <div class="stepup-rates">
+            <div>
+              <h4>1-on-1</h4>
+              <ul>
+                <li><strong>$85</strong> 60 min</li>
+                <li><strong>$65</strong> 45 min</li>
+                <li><strong>$50</strong> 30 min</li>
+              </ul>
+            </div>
+            <div>
+              <h4>Small Group</h4>
+              <ul>
+                <li><strong>$55</strong> 2 players</li>
+                <li><strong>$45</strong> 3 to 4 players</li>
+                <li><strong>$35</strong> 5 or more</li>
+              </ul>
+            </div>
+          </div>
+          <p style="font-family:'Inter',sans-serif;font-size:12px;line-height:1.6;color:rgba(245,245,243,0.45);margin-top:20px;">Scholarship sessions are billed per session at these rates (group rates are per player). Check your Step Up account for what your scholarship covers.</p>
+        </div>
+      </div>
+
       <p class="fade-up" style="text-align:center;margin:28px auto 0;max-width:720px;line-height:1.7;font-family:'Inter',sans-serif;font-size:13px;color:#939393;">
         <span style="display:block;">Sessions are 60 minutes unless noted. Ages 4 and up, all skill levels. Younger players (4 to 7) train in short, game-based sessions.</span>
         <span style="display:block;margin-top:12px;">Carrollwood · Northdale · Lutz · Land&nbsp;O'&nbsp;Lakes · Citrus Park · Westchase · Odessa</span>
@@ -1184,6 +1232,10 @@
                 <label for="cf-phone" style="display:block;font-family:'Inter',sans-serif;font-size:10px;font-weight:700;letter-spacing:0.14em;color:#939393;text-transform:uppercase;margin-bottom:8px;">Phone <span style="color:rgba(245,245,243,0.5);font-weight:500;">Optional</span></label>
                 <input id="cf-phone" type="tel" name="phone" placeholder="Best number to reach you" class="form-input" autocomplete="tel" maxlength="30" />
               </div>
+              <label class="form-check" for="cf-stepup">
+                <input id="cf-stepup" type="checkbox" name="step_up_scholarship" value="Yes" />
+                <span>I'm paying with a Step Up For Students scholarship<span>I'll invoice Step Up directly.</span></span>
+              </label>
               <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px;opacity:0;height:0;width:0;" aria-hidden="true" />
               <div style="display:flex;flex-direction:column;flex:1;">
                 <label for="cf-message" style="display:block;font-family:'Inter',sans-serif;font-size:10px;font-weight:700;letter-spacing:0.14em;color:#939393;text-transform:uppercase;margin-bottom:8px;">Message</label>
@@ -1298,6 +1350,9 @@
           interest.value = link.dataset.pick;
           interest.dispatchEvent(new Event('change', { bubbles: true }));
         }
+        // "Book with Step Up" ticks the scholarship checkbox
+        const stepUp = $('#cf-stepup');
+        if (link.dataset.stepup && stepUp) stepUp.checked = true;
         // Layout position (offsetTop ignores the fade-in slide, which would otherwise shift the landing spot by 40px)
         let y = 0;
         for (let el = target; el; el = el.offsetParent) y += el.offsetTop;
